@@ -26,8 +26,8 @@ export default function Login() {
       <h1>Log in to your account</h1>
       <form action={onLogin}>
         <label>
-          Username
-          <input type="username" name="username" required />
+          Email
+          <input type="email" name="email" required />
         </label>
         <label>
           Password

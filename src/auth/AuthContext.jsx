@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
-const API = import.meta.env.VITE_API;
+import { API } from "../api/apiContext";
 
 const AuthContext = createContext();
 
@@ -8,7 +7,15 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(sessionStorage.getItem("token"));
 
   useEffect(() => {
-    if (token) sessionStorage.setItem("token", token);
+    try {
+      if (token) {
+        sessionStorage.setItem("token", token);
+      } else {
+        sessionStorage.removeItem("token");
+      }
+    } catch (e) {
+      console.error("Token does not exist", e);
+    }
   }, [token]);
 
   const register = async (credentials) => {
