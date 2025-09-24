@@ -1,0 +1,18 @@
+body a {
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-middle {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-right {
+  display: flex;
+  gap: 1rem;
+}

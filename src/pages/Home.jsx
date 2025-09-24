@@ -19,7 +19,7 @@ const HomePage = () => {
         </p>
       ) : (
         <p>
-          Head over to your <Link to="/dashboard">Dashboard</Link> to see your
+          Head over to your <Link to="/orders">Dashboard</Link> to see your
           orders
         </p>
       )}

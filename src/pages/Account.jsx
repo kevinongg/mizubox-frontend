@@ -7,7 +7,7 @@ const Profile = () => {
     <div>
       <h1>Profile</h1>
       <h2>
-        <NavLink to="/" onClick={logout}>
+        <NavLink to="/" onClick={() => logout()}>
           Logout
         </NavLink>
       </h2>

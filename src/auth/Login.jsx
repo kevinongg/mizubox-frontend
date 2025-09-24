@@ -15,7 +15,7 @@ export default function Login() {
     const password = formData.get("password");
     try {
       await login({ email, password });
-      navigate("/dashboard");
+      navigate("/orders", { replace: true });
     } catch (e) {
       setError(e.message);
     }
