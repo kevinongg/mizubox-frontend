@@ -11,10 +11,11 @@ export default function Register() {
   const [error, setError] = useState(null);
 
   const onRegister = async (formData) => {
-    const username = formData.get("username");
+    const name = formData.get("name");
+    const email = formData.get("email");
     const password = formData.get("password");
     try {
-      await register({ username, password });
+      await register({ name, email, password });
       navigate("/");
     } catch (e) {
       setError(e.message);
