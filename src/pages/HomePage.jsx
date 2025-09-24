@@ -1,5 +1,30 @@
+import { useAuth } from "../auth/AuthContext";
+import { Link } from "react-router";
+
 const HomePage = () => {
-  return <div>HomePage</div>;
+  const { token } = useAuth();
+
+  return (
+    <div>
+      <h1>Welcome to Mizubox</h1>
+      <p>
+        Your personalized Omakase box experience, crafted from the freshest
+        ingredients
+      </p>
+
+      {!token ? (
+        <p>
+          Please <Link to="/login">login</Link> or{" "}
+          <Link to="/register">create an account</Link> to get started
+        </p>
+      ) : (
+        <p>
+          Head over to your <Link to="/dashboard">Dashboard</Link> to see your
+          orders
+        </p>
+      )}
+    </div>
+  );
 };
 
 export default HomePage;
