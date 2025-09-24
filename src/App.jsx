@@ -8,11 +8,13 @@ import ProtectedRoutes from "./auth/ProtectedRoutes";
 
 // Public pages
 import HomePage from "./pages/HomePage";
-import Error404 from "./pages/Error404";
+import Error404 from "./Error404";
 
 // Protected pages
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
+import Orders from "./pages/Orders";
+import Account from "./pages/Account";
+import Menu from "./pages/Menu/Menu";
+import Cart from "./pages/Cart";
 
 export default function App() {
   return (
@@ -21,10 +23,12 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/menu" element={<Menu />} />
 
         <Route element={<ProtectedRoutes />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
 
         <Route path="*" element={<Error404 />} />

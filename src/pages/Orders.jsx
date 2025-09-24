@@ -9,7 +9,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1>Orders</h1>
       <p>Welcome to your dashboard! Here are your current orders:</p>
 
       {!orders || !orders.length === 0 ? (
@@ -23,7 +23,6 @@ const Dashboard = () => {
                 <div>{order.created_at}</div>
                 <div>{order.total_price}</div>
                 <div>{order.status}</div>
-                <strong>{order.box_type}</strong> × {order.quantity}
               </li>
             );
           })}
