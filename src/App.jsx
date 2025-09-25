@@ -18,7 +18,7 @@ import Error404 from "./Error404";
 // Protected pages
 import Orders from "./pages/Orders";
 import Account from "./pages/Account";
-import Cart from "./pages/Cart";
+import Cart from "./pages/cart/Cart";
 import BuildYourOwn from "./pages/Menu/BuildYourOwn";
 
 export default function App() {
