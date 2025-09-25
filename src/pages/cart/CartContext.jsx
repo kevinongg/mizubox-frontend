@@ -1,44 +1,65 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
+import { useApi } from "../../api/apiContext";
+import useQuery from "../../api/useQuery";
+import useMutation from "../../api/useMutation";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(() => {
-    // get localstorage, json.parse the string so the savedCart initializes as objects in state
-    try {
-      const savedCart = localStorage.getItem("cart");
-      return savedCart ? JSON.parse(savedCart) : [];
-    } catch {
-      return [];
-    }
-  });
+  const { request, provideTag, invalidateTags } = useApi();
+  // 1. load cart with usequery
+  const {
+    data: cart,
+    loading,
+    error,
+    query: refreshCart,
+  } = useQuery("/cart", "cart");
 
-  // useEffect, json.stringify to turn cart into a string
-  useEffect(() => {
-    try {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    } catch (error) {
-      console.error("Cart does not exist", error);
-    }
-  }, [cart]);
+  // provideTag("cart", refreshCart);
 
-  //addToCart function
-  const addToCart = (item) => {
-    setCart((prev) => [...prev, item]);
-  };
-  //removeFromCart function
-  const removeFromCart = (id) => {
-    setCart((prev) => {
-      return prev.filter((i) => i.id !== id);
+  // 2. add to cart -> usemutation invalidatetag
+  const {
+    mutate: addToCart,
+    loading: adding,
+    error: addingError,
+  } = useMutation("POST", "/cart/items", ["cart"]);
+
+  // 3 create function to update item updateCartItem
+  const updateCartItem = async ({ cartItemId, quantity }) => {
+    await request(`/cart/items/${cartItemId}`, {
+      method: "PUT",
+      body: JSON.stringify({ quantity }),
     });
+    invalidateTags(["cart"]);
+  };
+  // 4. create function to removeFromCart
+  const removeFromCart = async (cartItemId) => {
+    await request(`/cart/items/${cartItemId}`, {
+      method: "DELETE",
+    });
+    invalidateTags(["cart"]);
   };
 
-  //clearCart function
-  const clearCart = () => {
-    setCart([]);
+  //5. clear cart
+  const clearCart = async () => {
+    await request("/cart/items", {
+      method: "DELETE",
+    });
+    invalidateTags(["cart"]);
   };
 
-  const value = { cart, addToCart, removeFromCart, clearCart };
+  const value = {
+    cart,
+    addToCart,
+    updateCartItem,
+    removeFromCart,
+    clearCart,
+    refreshCart,
+    loading,
+    adding,
+    error,
+    addingError,
+  };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
@@ -47,3 +68,7 @@ export const useCart = () => {
   if (!context) throw Error("useCart must be used within an AuthProvider");
   return context;
 };
+
+// addtocart call with {boxType, boxId, quantity?}
+// updatecartitem call with {cartItemId, quantity}
+// removefromcart call with {cartItemId}
