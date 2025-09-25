@@ -5,17 +5,19 @@ const Dashboard = () => {
   console.log(orders);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>No orders found</p>;
+  if (error) return <p>Failed to load orders</p>;
+
+  const emptyOrder = !orders || !orders.length === 0;
 
   return (
     <div>
       <h1>Orders</h1>
       <p>Welcome to your dashboard! Here are your current orders:</p>
 
-      {!orders || !orders.length === 0 ? (
+      {emptyOrder ? (
         <p>You do not have any orders placed yet.</p>
       ) : (
-        <div>
+        <ul>
           {orders.map((order) => {
             return (
               <li key={order.id}>
@@ -26,7 +28,7 @@ const Dashboard = () => {
               </li>
             );
           })}
-        </div>
+        </ul>
       )}
     </div>
   );
