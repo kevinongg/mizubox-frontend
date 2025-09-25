@@ -15,7 +15,14 @@ const BuildYourOwn = () => {
       <p>Select at least 14 nigiris to continue</p>
       <>
         {nigiris?.map((nigiri) => {
-          return <li key={nigiri.id}></li>;
+          return (
+            <div key={nigiri.id}>
+              <li>{nigiri.name}</li>
+              <li>
+                <img src={nigiri.image_url} alt={nigiri.name} />
+              </li>
+            </div>
+          );
         })}
       </>
     </div>
