@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Route, Router, Routes } from "react-router";
 import Layout from "./layout/Layout";
 import "./index.css";
 
@@ -20,11 +20,18 @@ import Orders from "./pages/Orders";
 import Account from "./pages/Account";
 import Cart from "./pages/cart/Cart";
 import BuildYourOwn from "./pages/Menu/BuildYourOwn";
+import { AuthProvider } from "./auth/AuthContext";
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
+    <Router>
+      <AuthProvider>
+        <div className="App">
+       <Headers />
+
+        <main className="main-content">
+      <Routes>
+      <Route element={<Layout />}/>
         <Route index element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -34,14 +41,45 @@ export default function App() {
         <Route path="/extra" element={<Extra />} />
 
         <Route element={<ProtectedRoutes />}>
+
           <Route path="/buildyourown" element={<BuildYourOwn />} />
+
           <Route path="/account" element={<Account />} />
+
           <Route path="/orders" element={<Orders />} />
+
           <Route path="/cart" element={<Cart />} />
         </Route>
 
         <Route path="*" element={<Error404 />} />
-      </Route>
-    </Routes>
+      </Routes>
+        </main>
+
+        <footer  className = "footer">
+           <div className="footer-content">
+             <div className="footer-section">
+                  <h3> MizuBox</h3>
+                  <p>Premium Omakase Sushi Delivery</p>
+                </div>
+                <div className="footer-section">
+                  <h4>Quick Links</h4>
+                  <a href="/">Home</a>
+                  <a href="/custom-box">BuildYourOwn</a>
+                
+                </div>
+                <div className="footer-section">
+                  <h4>Contact</h4>
+                  <p>📧 hello@mizubox.com</p>
+                  <p>📞 (555) 123-4567</p>
+                  <p>📍 San Jose, CA</p>
+                </div>
+              </div>
+              <div className="footer-bottom">
+                <p>&copy; 2024 MizuBox. All rights reserved.</p>
+              </div>
+            </footer>
+      </div>
+      </AuthProvider>
+    </Router>
   );
 }
