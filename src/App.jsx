@@ -16,7 +16,6 @@ import Extra from "./pages/Menu/Extra";
 import Searchbar from "./pages/Searchbar";
 import Error404 from "./Error404";
 import Profile from "./pages/Profile";
-
 // Protected pages
 import Orders from "./pages/Orders";
 import Account from "./pages/Account";
