@@ -48,6 +48,14 @@ export const CartProvider = ({ children }) => {
     invalidateTags(["cart"]);
   };
 
+  //6. checkout
+  const checkout = async () => {
+    await request("/orders/checkout", {
+      method: "POST",
+    });
+    invalidateTags(["cart"]);
+  };
+
   const value = {
     cart,
     addToCart,
@@ -55,6 +63,7 @@ export const CartProvider = ({ children }) => {
     removeFromCart,
     clearCart,
     refreshCart,
+    checkout,
     loading,
     adding,
     error,
@@ -68,7 +77,3 @@ export const useCart = () => {
   if (!context) throw Error("useCart must be used within an AuthProvider");
   return context;
 };
-
-// addtocart call with {boxType, boxId, quantity?}
-// updatecartitem call with {cartItemId, quantity}
-// removefromcart call with {cartItemId}

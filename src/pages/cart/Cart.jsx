@@ -1,37 +1,60 @@
+import { useState } from "react";
 import { useCart } from "./CartContext";
 
 const Cart = () => {
   const {
     cart,
-    addToCart,
     updateCartItem,
     removeFromCart,
     clearCart,
+    checkout,
     refreshCart,
     loading,
-    adding,
     error,
-    addingError,
   } = useCart();
-
   console.log(cart);
+
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   // ******* event handlers
 
   // increase quantity
-  const handleIncreaseQuantity = () => {};
+  const handleIncreaseQuantity = (cartItem) => {
+    updateCartItem({
+      cartItem: cartItem.cart_item_id,
+      quantity: cartItem.quantity + 1,
+    });
+  };
 
   // decrease quantity
-  const handleDecreaseQuantity = () => {};
+  const handleDecreaseQuantity = (cartItem) => {
+    updateCartItem({
+      cartItem: cartItem.cart_item_id,
+      quantity: Math.max(1, cartItem.quantity - 1),
+    });
+  };
 
   // remove item
-  const handleRemoveItem = () => {};
+  const handleRemoveItem = (cartItem) => {
+    removeFromCart(cartItem.cart_item_id);
+  };
 
   // clear cart
-  const handleClearCart = () => {};
+  const handleClearCart = () => {
+    clearCart();
+  };
 
   // checkout
-  const handleCheckout = () => {};
+  const handleCheckout = () => {
+    try {
+      setIsCheckingOut(true);
+      checkout();
+    } catch (error) {
+      console.error("Failed to check out", error);
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   // ******** render premade box
   const preMadeBoxDetails = () => {};
@@ -45,10 +68,10 @@ const Cart = () => {
   return (
     <div>
       <h1>Your Cart</h1>
-      <div>Cart total: ${cart.cart_total}</div>
+      <div>Cart total: ${cart?.cart_total}</div>
       <div>
-        <button>Clear Cart</button>
-        <button>Check Out</button>
+        <button onClick={handleClearCart}>Clear Cart</button>
+        <button onClick={handleCheckout}>Check Out</button>
       </div>
     </div>
   );
