@@ -6,7 +6,7 @@ import useMutation from "../../api/useMutation";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const { request, provideTag, invalidateTags } = useApi();
+  const { request, invalidateTags } = useApi();
   // 1. load cart with usequery
   const {
     data: cart,
