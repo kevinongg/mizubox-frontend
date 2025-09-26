@@ -57,17 +57,23 @@ export const CartProvider = ({ children }) => {
   };
 
   const value = {
+    // state
     cart,
-    addToCart,
-    updateCartItem,
-    removeFromCart,
-    clearCart,
-    refreshCart,
-    checkout,
     loading,
     adding,
     error,
     addingError,
+
+    // mutations
+    addToCart,
+    updateCartItem,
+    removeFromCart,
+    clearCart,
+
+    refreshCart,
+
+    // checkout
+    checkout,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

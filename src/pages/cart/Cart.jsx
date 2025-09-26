@@ -1,22 +1,28 @@
 import { useState } from "react";
 import { useCart } from "./CartContext";
+import CartList from "./CartList";
 
 const Cart = () => {
   const {
     cart,
+    loading,
+    error,
+
     updateCartItem,
     removeFromCart,
     clearCart,
+
     checkout,
     refreshCart,
-    loading,
-    error,
   } = useCart();
   console.log(cart);
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
-  // ******* event handlers
+  // const cartItems = cart.items;
+  // console.log(cartItems);
+
+  // ****** Cart Handlers ******//
 
   // increase quantity
   const handleIncreaseQuantity = (cartItem) => {
@@ -56,24 +62,53 @@ const Cart = () => {
     }
   };
 
-  // ******** render premade box
-  const preMadeBoxDetails = () => {};
+  // loading / error state returns
+  if (loading) {
+    return (
+      <div>
+        <h1>Your Cart</h1>
+        <p>Loading cart...</p>
+      </div>
+    );
+  }
 
-  // ******** render custom box
-  const customBoxDetails = () => {};
+  if (error) {
+    return (
+      <div>
+        <h1>Your Cart</h1>
+        <p>Failed to load cart...</p>
+      </div>
+    );
+  }
 
-  // ******** combine both premade box + custom box and render cart items
-  const cartItem = () => {};
+  if (!cart || !cart.items || cart.items.length === 0) {
+    return (
+      <div>
+        <h1>Your Cart</h1>
+        <p>Your cart is empty</p>
+      </div>
+    );
+  }
 
   return (
-    <div>
+    <>
       <h1>Your Cart</h1>
-      <div>Cart total: ${cart?.cart_total}</div>
+
+      <CartList
+        cartItems={cart.items}
+        increaseQuantity={handleIncreaseQuantity}
+        decreaseQuantity={handleDecreaseQuantity}
+        removeItem={handleRemoveItem}
+      />
+
       <div>
-        <button onClick={handleClearCart}>Clear Cart</button>
-        <button onClick={handleCheckout}>Check Out</button>
+        <div>Cart total: ${cart?.cart_total}</div>
+        <div>
+          <button onClick={handleClearCart}>Clear Cart</button>
+          <button onClick={handleCheckout}>Check Out</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
