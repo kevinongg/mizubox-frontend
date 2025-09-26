@@ -13,14 +13,10 @@ const Cart = () => {
     clearCart,
 
     checkout,
-    refreshCart,
   } = useCart();
   console.log(cart);
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-
-  // const cartItems = cart.items;
-  // console.log(cartItems);
 
   // ****** Cart Handlers ******//
 
@@ -62,7 +58,7 @@ const Cart = () => {
     }
   };
 
-  // loading / error state returns
+  //****** Loading / Error state returns ******//
   if (loading) {
     return (
       <div>
@@ -105,7 +101,9 @@ const Cart = () => {
         <div>Cart total: ${cart?.cart_total}</div>
         <div>
           <button onClick={handleClearCart}>Clear Cart</button>
-          <button onClick={handleCheckout}>Check Out</button>
+          <button onClick={handleCheckout} disabled={isCheckingOut}>
+            Check Out
+          </button>
         </div>
       </div>
     </>
@@ -113,6 +111,3 @@ const Cart = () => {
 };
 
 export default Cart;
-// addtocart call with {boxType, boxId, quantity?}
-// updatecartitem call with {cartItemId, quantity}
-// removefromcart call with {cartItemId}
