@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
-
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 /** A form that allows users to log into an existing account. */
@@ -10,11 +9,15 @@ export default function Login() {
 
   const [error, setError] = useState(null);
 
-  const onLogin = async (formData) => {
+  const onLogin = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
     const email = formData.get("email");
     const password = formData.get("password");
+
     try {
-      await login({ email, password });
+      const user = await login({ email, password });
       navigate("/orders", { replace: true });
     } catch (e) {
       setError(e.message);
@@ -24,7 +27,7 @@ export default function Login() {
   return (
     <>
       <h1>Log in to your account</h1>
-      <form action={onLogin}>
+      <form onSubmit={onLogin}>
         <label>
           Email
           <input type="email" name="email" required />
@@ -33,7 +36,7 @@ export default function Login() {
           Password
           <input type="password" name="password" required />
         </label>
-        <button>Login</button>
+        <button type="submit">Login</button>
         {error && <output>{error}</output>}
       </form>
       <Link to="/register">Need an account? Register here.</Link>

@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import { ApiProvider } from "./api/apiContext.jsx";
 import { CartProvider } from "./pages/cart/CartContext.jsx";

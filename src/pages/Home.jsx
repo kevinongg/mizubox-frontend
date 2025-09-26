@@ -1,5 +1,6 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
-import { Link } from "react-router";
 
 const HomePage = () => {
   const { token } = useAuth();
@@ -26,5 +27,4 @@ const HomePage = () => {
     </div>
   );
 };
-
 export default HomePage;

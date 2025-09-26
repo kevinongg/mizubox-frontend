@@ -5,6 +5,9 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [user, setUser] = useState(
+    JSON.parse(sessionStorage.getItem("user")) || null
+  );
 
   useEffect(() => {
     try {
@@ -13,10 +16,16 @@ export function AuthProvider({ children }) {
       } else {
         sessionStorage.removeItem("token");
       }
+
+      if (user) {
+        sessionStorage.setItem("user", JSON.stringify(user));
+      } else {
+        sessionStorage.removeItem("user");
+      }
     } catch (e) {
-      console.error("Token does not exist", e);
+      console.error("Session storage error:", e);
     }
-  }, [token]);
+  }, [token, user]);
 
   const register = async (credentials) => {
     const response = await fetch(API + "/users/register", {
@@ -24,9 +33,11 @@ export function AuthProvider({ children }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     });
-    const result = await response.text();
-    if (!response.ok) throw Error(result);
-    setToken(result);
+    const result = await response.json();
+    if (!response.ok) throw Error(result.message || "Registration failed");
+
+    setToken(result.token);
+    setUser(result.user);
   };
 
   const login = async (credentials) => {
@@ -35,17 +46,31 @@ export function AuthProvider({ children }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     });
-    const result = await response.text();
-    if (!response.ok) throw Error(result);
-    setToken(result);
+
+    const token = await response.text();
+    if (!response.ok) throw Error(token);
+
+    setToken(token);
+
+    // now fetch user profile using token
+    const profileRes = await fetch(API + "/users/me", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (!profileRes.ok) throw Error("Failed to load user profile");
+
+    const userData = await profileRes.json();
+    setUser(userData);
   };
 
   const logout = () => {
     setToken(null);
+    setUser(null);
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
   };
 
-  const value = { token, register, login, logout };
+  const value = { token, user, register, login, logout };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
