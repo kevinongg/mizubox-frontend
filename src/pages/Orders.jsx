@@ -7,7 +7,7 @@ const Dashboard = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Failed to load orders</p>;
 
-  const emptyOrder = !orders || !orders.length === 0;
+  const emptyOrder = !orders || orders.length === 0;
 
   return (
     <div>

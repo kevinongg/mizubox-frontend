@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import TrashIcon from "../../components/icons/TrashIcon";
 
 const CartList = ({
@@ -8,12 +7,6 @@ const CartList = ({
   removeItem,
 }) => {
   console.log(cartItems);
-
-  const mountCount = useRef(0);
-  useEffect(() => {
-    mountCount.current += 1;
-    console.log("Cart mounted", mountCount.current, "times");
-  }, []);
 
   return (
     <ul>
@@ -112,11 +105,7 @@ const CartList = ({
               {quantity > 1 ? (
                 <button
                   type="button"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    decreaseQuantity(cartItemId, quantity);
-                  }}
+                  onClick={() => decreaseQuantity(cartItemId, quantity)}
                 >
                   -
                 </button>
@@ -135,7 +124,9 @@ const CartList = ({
                 +
               </button>
 
-              <button>Delete</button>
+              <button type="button" onClick={() => removeItem(cartItemId)}>
+                Delete
+              </button>
 
               <div>Box total: ${boxTotal}</div>
             </div>
@@ -147,5 +138,3 @@ const CartList = ({
 };
 
 export default CartList;
-
-// fix PUTS

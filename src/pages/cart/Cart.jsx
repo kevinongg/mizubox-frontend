@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useCart } from "./CartContext";
 import CartList from "./CartList";
 
 const Cart = () => {
   const {
     cart,
-    loading,
+    // loading,
     error,
 
     updateCartItem,
@@ -18,26 +18,18 @@ const Cart = () => {
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
-  const mountCount = useRef(0);
-  useEffect(() => {
-    mountCount.current += 1;
-    console.log("Cart mounted", mountCount.current, "times");
-  }, []);
-
   // ****** Cart Handlers ******//
 
   // increase quantity
   const handleIncreaseQuantity = (cartItemId, currentQuantity) => {
-    const nextQuantity = currentQuantity + 1;
-    updateCartItem({ cartItemId, quantity: nextQuantity });
+    updateCartItem({ cartItemId, quantity: currentQuantity + 1 });
   };
 
   // decrease quantity
   const handleDecreaseQuantity = (cartItemId, currentQuantity) => {
-    const nextQuantity = currentQuantity - 1;
     updateCartItem({
       cartItemId,
-      quantity: Math.max(1, nextQuantity),
+      quantity: Math.max(1, currentQuantity - 1),
     });
   };
 
@@ -64,14 +56,14 @@ const Cart = () => {
   };
 
   //****** Loading / Error state returns ******//
-  if (loading) {
-    return (
-      <div>
-        <h1>Your Cart</h1>
-        <p>Loading cart...</p>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div>
+  //       <h1>Your Cart</h1>
+  //       <p>Loading cart...</p>
+  //     </div>
+  //   );
+  // }
 
   if (error) {
     return (
