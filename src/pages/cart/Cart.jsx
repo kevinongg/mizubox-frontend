@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "./CartContext";
 import CartList from "./CartList";
 
@@ -18,27 +18,32 @@ const Cart = () => {
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
+  const mountCount = useRef(0);
+  useEffect(() => {
+    mountCount.current += 1;
+    console.log("Cart mounted", mountCount.current, "times");
+  }, []);
+
   // ****** Cart Handlers ******//
 
   // increase quantity
-  const handleIncreaseQuantity = (cartItem) => {
-    updateCartItem({
-      cartItem: cartItem.cart_item_id,
-      quantity: cartItem.quantity + 1,
-    });
+  const handleIncreaseQuantity = (cartItemId, currentQuantity) => {
+    const nextQuantity = currentQuantity + 1;
+    updateCartItem({ cartItemId, quantity: nextQuantity });
   };
 
   // decrease quantity
-  const handleDecreaseQuantity = (cartItem) => {
+  const handleDecreaseQuantity = (cartItemId, currentQuantity) => {
+    const nextQuantity = currentQuantity - 1;
     updateCartItem({
-      cartItem: cartItem.cart_item_id,
-      quantity: Math.max(1, cartItem.quantity - 1),
+      cartItemId,
+      quantity: Math.max(1, nextQuantity),
     });
   };
 
   // remove item
-  const handleRemoveItem = (cartItem) => {
-    removeFromCart(cartItem.cart_item_id);
+  const handleRemoveItem = (cartItemId) => {
+    removeFromCart(cartItemId);
   };
 
   // clear cart
@@ -102,7 +107,7 @@ const Cart = () => {
         <div>
           <button onClick={handleClearCart}>Clear Cart</button>
           <button onClick={handleCheckout} disabled={isCheckingOut}>
-            Check Out
+            {isCheckingOut ? "Placing order" : "Check Out"}
           </button>
         </div>
       </div>

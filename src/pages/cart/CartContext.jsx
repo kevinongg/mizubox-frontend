@@ -32,6 +32,7 @@ export const CartProvider = ({ children }) => {
     });
     invalidateTags(["cart"]);
   };
+
   // 4. create function to removeFromCart
   const removeFromCart = async (cartItemId) => {
     await request(`/cart/items/${cartItemId}`, {

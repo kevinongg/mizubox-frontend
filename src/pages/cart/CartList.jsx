@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import TrashIcon from "../../components/icons/TrashIcon";
+
 const CartList = ({
   cartItems,
   increaseQuantity,
@@ -5,6 +8,13 @@ const CartList = ({
   removeItem,
 }) => {
   console.log(cartItems);
+
+  const mountCount = useRef(0);
+  useEffect(() => {
+    mountCount.current += 1;
+    console.log("Cart mounted", mountCount.current, "times");
+  }, []);
+
   return (
     <ul>
       {cartItems.map((cartItem) => {
@@ -99,13 +109,33 @@ const CartList = ({
             ) : null}
 
             <div>
-              <button onClick={() => decreaseQuantity(cartItemId)}>-</button>
+              {quantity > 1 ? (
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    decreaseQuantity(cartItemId, quantity);
+                  }}
+                >
+                  -
+                </button>
+              ) : (
+                <button type="button" onClick={() => removeItem(cartItemId)}>
+                  <TrashIcon size={20} color="black" />
+                </button>
+              )}
 
               <div>{quantity}</div>
 
-              <button onClick={() => increaseQuantity(cartItemId)}>+</button>
+              <button
+                type="button"
+                onClick={() => increaseQuantity(cartItemId, quantity)}
+              >
+                +
+              </button>
 
-              <button>🗑️</button>
+              <button>Delete</button>
 
               <div>Box total: ${boxTotal}</div>
             </div>
@@ -117,3 +147,5 @@ const CartList = ({
 };
 
 export default CartList;
+
+// fix PUTS
