@@ -17,11 +17,12 @@ export const CartProvider = ({ children }) => {
 
   // provideTag("cart", refreshCart);
 
+  // ------------- Box items -------------
   // 2. add to cart -> usemutation invalidatetag
   const {
-    mutate: addToCart,
-    loading: adding,
-    error: addingError,
+    mutate: addCartItemToCart,
+    loading: addingCartItem,
+    error: addingCartItemError,
   } = useMutation("POST", "/cart/items", ["cart"]);
 
   // 3 create function to update item updateCartItem
@@ -34,7 +35,7 @@ export const CartProvider = ({ children }) => {
   };
 
   // 4. create function to removeFromCart
-  const removeFromCart = async (cartItemId) => {
+  const removeCartItemFromCart = async (cartItemId) => {
     await request(`/cart/items/${cartItemId}`, {
       method: "DELETE",
     });
@@ -57,21 +58,77 @@ export const CartProvider = ({ children }) => {
     invalidateTags(["cart"]);
   };
 
+  // ------------- Sauces -------------
+
+  const {
+    mutate: addCartItemSauceToCart,
+    loading: addingCartItemSauce,
+    error: addingCartItemSauceError,
+  } = useMutation("POST", "/cart/sauces", ["cart"]);
+
+  const updateCartItemSauce = async ({ cartItemSauceId, quantity }) => {
+    await request(`/cart/sauces/${cartItemSauceId}`, {
+      method: "PUT",
+      body: JSON.stringify({ quantity }),
+    });
+    invalidateTags(["cart"]);
+  };
+
+  const removeCartItemSauceFromCart = async (cartItemSauceId) => {
+    await request(`/cart/sauces/${cartItemSauceId}`, {
+      method: "DELETE",
+    });
+    invalidateTags(["cart"]);
+  };
+
+  // ------------- Extras -------------
+
+  const {
+    mutate: addCartItemExtraToCart,
+    loading: addingCartItemExtra,
+    error: addingCartItemExtraError,
+  } = useMutation("POST", "/cart/extras", ["cart"]);
+
+  const updateCartItemExtra = async ({ cartItemExtraId, quantity }) => {
+    await request(`/cart/extras/${cartItemExtraId}`, {
+      method: "PUT",
+      body: JSON.stringify({ quantity }),
+    });
+    invalidateTags(["cart"]);
+  };
+
+  const removeCartItemExtraFromCart = async (cartItemExtraId) => {
+    await request(`/cart/extras/${cartItemExtraId}`, {
+      method: "DELETE",
+    });
+    invalidateTags(["cart"]);
+  };
+
   const value = {
-    // state
+    // cart state and mutation to clear cart
     cart,
     loading,
-    adding,
     error,
-    addingError,
-
-    // mutations
-    addToCart,
-    updateCartItem,
-    removeFromCart,
     clearCart,
-
     refreshCart,
+    // boxes mutation and loading/error check state
+    addCartItemToCart,
+    updateCartItem,
+    removeCartItemFromCart,
+    addingCartItem,
+    addingCartItemError,
+    // sauces mutation and loading/error check state
+    addCartItemSauceToCart,
+    updateCartItemSauce,
+    removeCartItemSauceFromCart,
+    addingCartItemSauce,
+    addingCartItemSauceError,
+    // extras mutation and loading/error check state
+    addCartItemExtraToCart,
+    updateCartItemExtra,
+    removeCartItemExtraFromCart,
+    addingCartItemExtra,
+    addingCartItemExtraError,
 
     // checkout
     checkout,

@@ -1,10 +1,14 @@
 import TrashIcon from "../../components/icons/TrashIcon";
 
 const CartList = ({
+  // cart item handlers
   cartItems,
-  increaseQuantity,
-  decreaseQuantity,
-  removeItem,
+  increaseCartItemQuantity,
+  decreaseCartItemQuantity,
+  removeCartItem,
+  // sauces handlers
+
+  // extras handlers
 }) => {
   console.log(cartItems);
 
@@ -105,12 +109,15 @@ const CartList = ({
               {quantity > 1 ? (
                 <button
                   type="button"
-                  onClick={() => decreaseQuantity(cartItemId, quantity)}
+                  onClick={() => decreaseCartItemQuantity(cartItemId, quantity)}
                 >
                   -
                 </button>
               ) : (
-                <button type="button" onClick={() => removeItem(cartItemId)}>
+                <button
+                  type="button"
+                  onClick={() => removeCartItem(cartItemId)}
+                >
                   <TrashIcon size={20} color="black" />
                 </button>
               )}
@@ -119,12 +126,12 @@ const CartList = ({
 
               <button
                 type="button"
-                onClick={() => increaseQuantity(cartItemId, quantity)}
+                onClick={() => increaseCartItemQuantity(cartItemId, quantity)}
               >
                 +
               </button>
 
-              <button type="button" onClick={() => removeItem(cartItemId)}>
+              <button type="button" onClick={() => removeCartItem(cartItemId)}>
                 Delete
               </button>
 

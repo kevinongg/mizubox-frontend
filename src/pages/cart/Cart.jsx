@@ -4,13 +4,20 @@ import CartList from "./CartList";
 
 const Cart = () => {
   const {
+    // cart
     cart,
-    // loading,
+    loading,
     error,
-
-    updateCartItem,
-    removeFromCart,
     clearCart,
+    // cart items
+    updateCartItem,
+    removeCartItemFromCart,
+    // sauces
+    updateCartItemSauce,
+    removeCartItemSauceFromCart,
+    // extras
+    updateCartItemExtra,
+    removeCartItemExtraFromCart,
 
     checkout,
   } = useCart();
@@ -18,15 +25,15 @@ const Cart = () => {
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
-  // ****** Cart Handlers ******//
+  // ****** Cart Item Handlers ******//
 
   // increase quantity
-  const handleIncreaseQuantity = (cartItemId, currentQuantity) => {
+  const handleIncreaseCartItemQuantity = (cartItemId, currentQuantity) => {
     updateCartItem({ cartItemId, quantity: currentQuantity + 1 });
   };
 
   // decrease quantity
-  const handleDecreaseQuantity = (cartItemId, currentQuantity) => {
+  const handleDecreaseCartItemQuantity = (cartItemId, currentQuantity) => {
     updateCartItem({
       cartItemId,
       quantity: Math.max(1, currentQuantity - 1),
@@ -34,8 +41,54 @@ const Cart = () => {
   };
 
   // remove item
-  const handleRemoveItem = (cartItemId) => {
-    removeFromCart(cartItemId);
+  const handleRemoveCartItem = (cartItemId) => {
+    removeCartItemFromCart(cartItemId);
+  };
+
+  // ****** Sauce Item Handlers ******//
+
+  const handleIncreaseCartItemSauceQuantity = (
+    cartItemSauceId,
+    currentQuantity
+  ) => {
+    updateCartItemSauce({ cartItemSauceId, quantity: currentQuantity + 1 });
+  };
+
+  const handleDecreaseCartItemSauceQuantity = (
+    cartItemSauceId,
+    currentQuantity
+  ) => {
+    updateCartItemSauce({
+      cartItemSauceId,
+      quantity: Math.max(1, currentQuantity - 1),
+    });
+  };
+
+  const handleRemoveCartItemSauce = (cartItemSauceId) => {
+    removeCartItemSauceFromCart(cartItemSauceId);
+  };
+
+  // ****** Extra Item Handlers ******//
+
+  const handleIncreaseCartItemExtraQuantity = (
+    cartItemExtraId,
+    currentQuantity
+  ) => {
+    updateCartItemExtra({ cartItemExtraId, quantity: currentQuantity + 1 });
+  };
+
+  const handleDecreaseCartItemExtraQuantity = (
+    cartItemExtraId,
+    currentQuantity
+  ) => {
+    updateCartItemExtra({
+      cartItemExtraId,
+      quantity: Math.max(1, currentQuantity - 1),
+    });
+  };
+
+  const handleRemoveCartItemExtra = (cartItemExtraId) => {
+    removeCartItemExtraFromCart(cartItemExtraId);
   };
 
   // clear cart
@@ -89,16 +142,31 @@ const Cart = () => {
 
       <CartList
         cartItems={cart.items}
-        increaseQuantity={handleIncreaseQuantity}
-        decreaseQuantity={handleDecreaseQuantity}
-        removeItem={handleRemoveItem}
+        // cart items
+        increaseCartItemQuantity={handleIncreaseCartItemQuantity}
+        decreaseCartItemQuantity={handleDecreaseCartItemQuantity}
+        removeCartItem={handleRemoveCartItem}
+        // sauce items
+        increaseCartItemSauceQuantity={handleIncreaseCartItemSauceQuantity}
+        decreaseCartItemSauceQuantity={handleDecreaseCartItemSauceQuantity}
+        removeCartItemSauce={handleRemoveCartItemSauce}
+        // extra items
+        increaseCartItemExtraQuantity={handleIncreaseCartItemExtraQuantity}
+        decreaseCartItemExtraQuantity={handleDecreaseCartItemExtraQuantity}
+        removeCartItemExtra={handleRemoveCartItemExtra}
       />
 
       <div>
         <div>Cart total: ${cart?.cart_total}</div>
         <div>
-          <button onClick={handleClearCart}>Clear Cart</button>
-          <button onClick={handleCheckout} disabled={isCheckingOut}>
+          <button type="button" onClick={handleClearCart}>
+            Clear Cart
+          </button>
+          <button
+            type="button"
+            onClick={handleCheckout}
+            disabled={isCheckingOut}
+          >
             {isCheckingOut ? "Placing order" : "Check Out"}
           </button>
         </div>
