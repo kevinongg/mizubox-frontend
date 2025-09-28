@@ -10,19 +10,27 @@ const OmakaseBox = () => {
     loading,
     error,
   } = useQuery("/pre-made-boxes", "pre-made-boxes");
-  const { addToCart } = useCart();
+  const { addCartItemToCart } = useCart();
   const { token } = useAuth();
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
 
   const handleAddToCart = async (boxId) => {
-    if (!token) {
-      navigate("/login");
-      return;
+    try {
+      if (!token) {
+        navigate("/login");
+        return;
+      }
+      setIsAdding(true);
+      await addCartItemToCart({ boxType: "pre-made", boxId });
+      setMessage("Added to cart!");
+      setTimeout(() => setMessage(""), 2000);
+    } catch (error) {
+      console.error("error adding to cart", error);
+    } finally {
+      setIsAdding(false);
     }
-    await addToCart({ boxType: "pre-made", boxId });
-    setMessage("Added to cart!");
-    setTimeout(() => setMessage(""), 2000);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -44,7 +52,9 @@ const OmakaseBox = () => {
             <h2>{box.name}</h2>
             <p>{box.description}</p>
             <p>${box.price}</p>
-            <button onClick={() => handleAddToCart(box.id)}>Add to Cart</button>
+            <button onClick={() => handleAddToCart(box.id)}>
+              {isAdding ? "Adding to cart!" : "Add To Cart"}
+            </button>
           </div>
         ))}
       </div>
