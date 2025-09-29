@@ -5,7 +5,7 @@ const HomePage = () => {
   const { token } = useAuth();
 
   return (
-    <div>
+    <div className="home-container">
       <h1>Welcome to Mizubox</h1>
       <p>
         Your personalized Omakase box experience, crafted from the freshest
