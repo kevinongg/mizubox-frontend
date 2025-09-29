@@ -144,3 +144,184 @@ main a:hover {
     padding: 1rem;
   }
 }
+
+/* Home Page Styles */
+.home-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.home-container h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.home-container p {
+  color: #666;
+  margin: 10px 0;
+}
+
+/* Menu Pages (OmakaseBox, Sauce, Extra) Common Styles */
+.menu-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.menu-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.menu-container > p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* Success Message */
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px;
+  text-align: center;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+/* Menu Grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Menu Card */
+.menu-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+}
+
+.menu-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.menu-card h2 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.menu-card p {
+  color: #666;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.menu-card .price {
+  font-size: 20px;
+  color: #28a745;
+  font-weight: bold;
+  margin: 10px 0;
+  display: block;
+}
+
+.menu-card button {
+  width: 100%;
+  padding: 10px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.menu-card button:hover {
+  background: #218838;
+}
+
+.menu-card button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Build Your Own Page */
+.build-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.build-container h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.build-container > p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.nigiri-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.nigiri-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 5px;
+}
+
+.nigiri-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+.nigiri-info {
+  flex-grow: 1;
+}
+
+.nigiri-info h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.nigiri-info p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nigiri-grid {
+    grid-template-columns: 1fr;
+  }
+}
