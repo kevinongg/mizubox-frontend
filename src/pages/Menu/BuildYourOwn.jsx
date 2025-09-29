@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import useQuery from "../../api/useQuery";
+import React, { useState } from 'react';
 
 const BuildYourOwn = () => {
   const { data: nigiris, loading, error } = useQuery("/nigiris", "nigiris");
@@ -10,31 +11,27 @@ const BuildYourOwn = () => {
   if (error) return <p>Failed to load nigiris</p>;
 
   return (
-    <div className="build-container">
+    <div>
       <h1>Build Your Own Omakase Box</h1>
       <p>Select at least 14 nigiris to continue</p>
-<<<<<<< Updated upstream
-      <></>
-=======
 
-      <div className="nigiri-grid">
-        {nigiris?.map((nigiri) => {
-          return (
-            <div key={nigiri.id}>
-              <li>
-                <img src={nigiri.image_url} alt={nigiri.name} />
-              </li>
-              <div className="nigiri-info">
-                <h3>{nigiri.name}</h3>
-                <p>${nigiri.price}</p>
-              </div>
-            </div>
-          );
-        })}
+<div>
+  <h1>Build Your Own</h1>
+  <p>Select nigiris</p>
+  
+  <div >
+    {nigiris?.map((nigiri) => (
+      <div key={nigiri.id} >
+        <img src={nigiri.image_url} alt={nigiri.name} />
+        <div>
+          <h3>{nigiri.name}</h3>
+          <p>${nigiri.price}</p>
+        </div>
       </div>
->>>>>>> Stashed changes
-    </div>
-  );
+    ))}
+  </div>
+</div>
+    </div>);
 };
 
 export default BuildYourOwn;
