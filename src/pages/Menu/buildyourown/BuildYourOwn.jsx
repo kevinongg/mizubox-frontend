@@ -1,10 +1,7 @@
-import { useState } from "react";
-import useQuery from "../../api/useQuery";
+import useQuery from "../../../api/useQuery";
 
 const BuildYourOwn = () => {
   const { data: nigiris, loading, error } = useQuery("/nigiris", "nigiris");
-  const [selection, setSelection] = useState();
-  console.log(nigiris);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Failed to load nigiris</p>;

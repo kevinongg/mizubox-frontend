@@ -19,7 +19,7 @@ import Error404 from "./Error404";
 import Orders from "./pages/Orders";
 import Account from "./pages/Account";
 import Cart from "./pages/cart/Cart";
-import BuildYourOwn from "./pages/Menu/BuildYourOwn";
+import BuildYourOwn from "./pages/Menu/buildyourown/BuildYourOwn";
 
 export default function App() {
   return (
