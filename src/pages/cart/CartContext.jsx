@@ -138,6 +138,6 @@ export const CartProvider = ({ children }) => {
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) throw Error("useCart must be used within an AuthProvider");
+  if (!context) throw Error("useCart must be used within an CartProvider");
   return context;
 };

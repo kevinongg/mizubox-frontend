@@ -23,7 +23,7 @@ const OmakaseBox = () => {
         return;
       }
       setIsAdding(true);
-      await addCartItemToCart({ boxType: "pre-made", boxId });
+      await addCartItemToCart({ boxType: "pre-made", preMadeBoxId: boxId });
       setMessage("Added to cart!");
       setTimeout(() => setMessage(""), 2000);
     } catch (error) {

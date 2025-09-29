@@ -126,7 +126,10 @@ const Cart = () => {
     );
   }
 
-  if (!cart || !cart.items || cart.items.length === 0) {
+  const noBoxes = !cart?.items || cart.items.length === 0;
+  const noSauces = !cart?.sauces || cart.sauces.length === 0;
+  const noExtras = !cart?.extras || cart.extras.length === 0;
+  if (!cart || (noBoxes && noSauces && noExtras)) {
     return (
       <div>
         <h1>Your Cart</h1>
