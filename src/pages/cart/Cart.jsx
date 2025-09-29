@@ -6,7 +6,7 @@ const Cart = () => {
   const {
     // cart
     cart,
-    loading,
+    // loading,
     error,
     clearCart,
     // cart items
@@ -21,7 +21,6 @@ const Cart = () => {
 
     checkout,
   } = useCart();
-  console.log(cart);
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
@@ -142,15 +141,17 @@ const Cart = () => {
 
       <CartList
         cartItems={cart.items}
-        // cart items
+        cartItemSauces={cart.sauces}
+        cartItemExtras={cart.extras}
+        // cart item handlers
         increaseCartItemQuantity={handleIncreaseCartItemQuantity}
         decreaseCartItemQuantity={handleDecreaseCartItemQuantity}
         removeCartItem={handleRemoveCartItem}
-        // sauce items
+        // sauce item handlers
         increaseCartItemSauceQuantity={handleIncreaseCartItemSauceQuantity}
         decreaseCartItemSauceQuantity={handleDecreaseCartItemSauceQuantity}
         removeCartItemSauce={handleRemoveCartItemSauce}
-        // extra items
+        // extra item handlers
         increaseCartItemExtraQuantity={handleIncreaseCartItemExtraQuantity}
         decreaseCartItemExtraQuantity={handleDecreaseCartItemExtraQuantity}
         removeCartItemExtra={handleRemoveCartItemExtra}
