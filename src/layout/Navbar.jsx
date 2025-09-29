@@ -69,7 +69,14 @@ const Navbar = () => {
             </>
           )}
         </div>
-      </div>
+
+        <div className="nav-right">
+          <NavLink to="/searchbar">Make searchbar here</NavLink>
+          <NavLink to="/orders">Orders</NavLink>
+          <NavLink to="/account">Account</NavLink>
+          <NavLink to="/cart">Cart</NavLink>
+        </div>
+      </nav>
     </header>
   );
 };

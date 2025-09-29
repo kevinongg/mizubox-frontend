@@ -1,7 +1,10 @@
+import { useState } from "react";
+import useQuery from "../../api/useQuery";
+import { useCart } from "../cart/CartContext";
+import { useAuth } from "../../auth/AuthContext";
+import { useNavigate } from "react-router";
+
 const OmakaseBox = () => {
-<<<<<<< Updated upstream
-  return <div>Menu</div>;
-=======
   const {
     data: preMadeBoxes,
     loading,
@@ -20,7 +23,7 @@ const OmakaseBox = () => {
         return;
       }
       setIsAdding(true);
-      await addCartItemToCart({ boxType: "pre-made", boxId });
+      await addCartItemToCart({ boxType: "pre-made", preMadeBoxId: boxId });
       setMessage("Added to cart!");
       setTimeout(() => setMessage(""), 2000);
     } catch (error) {
@@ -34,7 +37,7 @@ const OmakaseBox = () => {
   if (error) return <p>Failed to load menu</p>;
 
   return (
-    <div className="menu-container">
+    <div>
       <h1>Omakase Box Menu</h1>
       <p>Choose from our pre-made boxes</p>
 
@@ -42,13 +45,13 @@ const OmakaseBox = () => {
         <div style={{ background: "#d4edda", padding: "10px" }}>{message}</div>
       )}
 
-      <div className="menu-grid">
+      <div>
         {preMadeBoxes?.map((box) => (
-          <div key={box.id} className="menu-card">
+          <div key={box.id}>
             <img src={box.image_url} alt={box.name} />
             <h2>{box.name}</h2>
             <p>{box.description}</p>
-            <span className="price">${box.price}</span>
+            <p>${box.price}</p>
             <button onClick={() => handleAddToCart(box.id)}>
               {isAdding ? "Adding to cart!" : "Add To Cart"}
             </button>
@@ -57,7 +60,6 @@ const OmakaseBox = () => {
       </div>
     </div>
   );
->>>>>>> Stashed changes
 };
 
 export default OmakaseBox;
