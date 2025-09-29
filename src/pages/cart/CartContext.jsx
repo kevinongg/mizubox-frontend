@@ -44,7 +44,7 @@ export const CartProvider = ({ children }) => {
 
   //5. clear cart
   const clearCart = async () => {
-    await request("/cart/items", {
+    await request("/cart", {
       method: "DELETE",
     });
     invalidateTags(["cart"]);
