@@ -10,9 +10,6 @@ const HomePage = () => {
     <div className="home-wrapper">
       <div className=" hero-section">
         <h1>Welcome to Mizubox</h1>
-        <img 
-        src = "https://media.giphy.com/media/l0HlQ6eSN1JVRnqMw/giphy.gif" alt="Sushi prepration" 
-        className="hero-gif" />
         <div className="hero-overlay">
           <div className="hero-content">
             <h1 className="hero-title">FRESS SUSHI <br/>DELIVERED</h1>
