@@ -1,12 +1,35 @@
+
 import { useAuth } from "../auth/AuthContext";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const HomePage = () => {
   const { token } = useAuth();
+  const navigate = useNavigate();
 
   return (
-    <div className="home-container">
-      <h1>Welcome to Mizubox</h1>
+    <div className="home-wrapper">
+      <div className=" hero-section">
+        <h1>Welcome to Mizubox</h1>
+        <img 
+        src = "https://media.giphy.com/media/l0HlQ6eSN1JVRnqMw/giphy.gif" alt="Sushi prepration" 
+        className="hero-gif" />
+        <div className="hero-overlay">
+          <div className="hero-content">
+            <h1 className="hero-title">FRESS SUSHI <br/>DELIVERED</h1>
+            <p className="hero-subtitle">Experience the art of Omakase at home <br/>Try it with<br/>
+              $0 Delivery Fee.
+              </p>
+              <button className="hero-button" onClick={() => navigate('/omakase-box')}>Order Now</button>
+            <p className="hero-disclaimer">
+              *First-time customers only. $15 min/$200 max order. Valid for a limited time
+            </p>
+          </div>
+        </div>
+      </div>
+
+     
+      <div className="home-container">
+      
       <p>
         Your personalized Omakase box experience, crafted from the freshest
         ingredients
@@ -23,6 +46,7 @@ const HomePage = () => {
           orders
         </p>
       )}
+    </div>
     </div>
   );
 };
