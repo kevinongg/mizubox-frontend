@@ -9,7 +9,7 @@ body {
   font-family: "Segoe UI", sans-serif;
   line-height: 1.6;
   color: #333;
-  background-color: #f8f9fa;
+  background-color: white;
 }
 
 a {
@@ -17,17 +17,18 @@ a {
   color: inherit;
 }
 
-/* Layout */
+/*------------------------ Layout--------------------------- */
 main {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Navigation */
+/* ---------------------Navigation -------------------------*/
 header {
-  background: rgb(243, 163, 163);
+  background: rgb(230, 190, 163);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
 }
 
 nav {
@@ -43,6 +44,12 @@ nav {
 .nav-right {
   display: flex;
   gap: 1.5rem;
+  font-weight: bold ;  
+}
+.nav-left{
+  font-weight: bold;
+  color: rgb(203, 28, 28); 
+
 }
 
 nav a {
@@ -145,7 +152,7 @@ main a:hover {
   }
 }
 
-/* Home Page Styles */
+/*---------------------------- Home Page Styles ------------------------------------------- */
 .home-container {
   text-align: center;
   padding: 40px;
@@ -161,7 +168,7 @@ main a:hover {
   margin: 10px 0;
 }
 
-/* Menu Pages (OmakaseBox, Sauce, Extra) Common Styles */
+/*----------------------- Menu Pages (OmakaseBox, Sauce, Extra) Common Styles -------------------*/
 .menu-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -325,3 +332,82 @@ main a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------------------------Search Container--------------------------- */
+
+.search-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Search Input */
+.search-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #28a745;
+}
+
+/* Search Results */
+.search-results {
+  margin-top: 20px;
+}
+
+.search-item {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background: white;
+}
+
+.search-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.search-item h3 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.search-item p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.item-type {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.item-price {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/*--------------------------- Home Page Wrapper -----------------------*/
+
