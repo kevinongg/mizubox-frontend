@@ -10,8 +10,9 @@ const Dashboard = () => {
   const emptyOrder = !orders || orders.length === 0;
 
   return (
-    <div>
+    <div className="orders-container">
       <h1>Orders</h1>
+      <ul className="orders-list">
       <p>Welcome to your dashboard! Here are your current orders:</p>
 
       {emptyOrder ? (
@@ -20,16 +21,19 @@ const Dashboard = () => {
         <ul>
           {orders.map((order) => {
             return (
-              <li key={order.id}>
-                <div>{order.id}</div>
-                <div>{order.created_at}</div>
-                <div>{order.total_price}</div>
-                <div>{order.status}</div>
+      <li key={order.id} className="order-item">
+        <div className="order-details"> 
+                <span className="order-id">{order.id}</span>
+               <span className="order-date">{order.created_at}</span>
+          <span className="order-status">{order.status}</span>
+        </div>
+         <span className="order-total">{order.total_price}</span>    
               </li>
             );
           })}
         </ul>
       )}
+      </ul>
     </div>
   );
 };

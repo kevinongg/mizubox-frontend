@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 
 const Profile = () => {
@@ -11,18 +11,18 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      <h1>Profile</h1>
-      <h2>
-        <Link to="/" onClick={() => handleLogout()}>
-          Logout
-        </Link>
-      </h2>
-      <p>
-        Welcome to your profile. Here you will be able to view all your personal
-        details
-      </p>
+    <div className="account-container">
+  <h1>My Account</h1>
+  <div className="profile-card">
+    <h2>Profile</h2>
+    <div className="profile-info">
+      <p>Welcome to your account</p>
     </div>
+    <button className="logout-btn" onClick={handleLogout}>
+      Logout
+    </button>
+  </div>
+</div>
   );
 };
 

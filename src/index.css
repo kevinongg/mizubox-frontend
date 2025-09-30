@@ -411,7 +411,8 @@ main a:hover {
 
 /*--------------------------- Home Page Wrapper -----------------------*/
 .home-wrapper {
-  margin-top: -2rem; /* Pull up to connect with navbar */
+  margin-top: 2rem; /* Pull up to connect with navbar */
+  
 }
 
 /* Hero Section with GIF */
@@ -497,6 +498,11 @@ main a:hover {
   max-width: 800px;
   margin: 0 auto;
 }
+.home-container h1 {
+  font-size: 70px;
+  margin-bottom: 20px;
+  color: chocolate;
+}
 
 .home-container h2 {
   font-size: 36px;
@@ -521,4 +527,180 @@ main a:hover {
     padding: 12px 30px;
     font-size: 16px;
   }
+}
+
+/*------------------------- common css for cart ,order and account--------------------------- */
+
+/* ========== CART PAGE STYLES ========== */
+.cart-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cart-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.cart-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart-container li {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.cart-container li div {
+  margin: 5px 0;
+}
+
+.cart-container button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cart-container button:hover {
+  background: #218838;
+}
+
+.cart-container button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Clear Cart Button */
+.clear-cart-btn {
+  background: #dc3545 !important;
+}
+
+.clear-cart-btn:hover {
+  background: #c82333 !important;
+}
+
+/* Cart Total */
+.cart-summary {
+  background: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.cart-total {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* Empty Cart */
+.empty-cart {
+  text-align: center;
+  padding: 40px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+/* ========== ORDERS PAGE STYLES ========== */
+.orders-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.orders-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.orders-container p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Orders List */
+.orders-list {
+  list-style: none;
+  padding: 0;
+}
+
+.order-item {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.order-id {
+  font-weight: bold;
+  color: #333;
+}
+
+.order-date {
+  color: #666;
+  font-size: 14px;
+}
+
+.order-status {
+  background: #ffc107;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.order-total {
+  font-size: 20px;
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* Empty Orders */
+.empty-orders {
+  text-align: center;
+  padding: 40px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  color: #666;
+}
+
+/* ========== ACCOUNT PAGE STYLES ========== */
+.account-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.account-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
 }

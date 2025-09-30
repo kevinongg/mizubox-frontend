@@ -140,6 +140,7 @@ const Cart = () => {
 
   return (
     <>
+      <div className="cart-container">
       <h1>Your Cart</h1>
 
       <CartList
@@ -159,11 +160,9 @@ const Cart = () => {
         decreaseCartItemExtraQuantity={handleDecreaseCartItemExtraQuantity}
         removeCartItemExtra={handleRemoveCartItemExtra}
       />
-
-      <div>
-        <div>Cart total: ${cart?.cart_total}</div>
-        <div>
-          <button type="button" onClick={handleClearCart}>
+        <div className="cart-total">Cart total: ${cart?.cart_total}</div>
+        <div className="cart-actions">
+          <button type="button" className="clear-cart-btn" onClick={handleClearCart}>
             Clear Cart
           </button>
           <button
