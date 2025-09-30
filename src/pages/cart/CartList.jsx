@@ -17,6 +17,7 @@ const CartList = ({
   decreaseCartItemExtraQuantity,
   removeCartItemExtra,
 }) => {
+  console.log(cartItems);
   return (
     <div>
       {cartItems.length !== 0 && (
@@ -46,7 +47,7 @@ const CartList = ({
                           return (
                             <li key={nigiri.nigiri_id}>
                               <div>
-                                {nigiri.name} × {nigiri.quantity}
+                                {nigiri.name} (×{nigiri.quantity})
                               </div>
                             </li>
                           );
@@ -65,7 +66,7 @@ const CartList = ({
                               return (
                                 <li key={nigiri.nigiri_id}>
                                   <div>
-                                    {nigiri.name} × Quantity: {nigiri.quantity}
+                                    {nigiri.name} (×{nigiri.quantity})
                                   </div>
                                   <div>${nigiri.price} per piece</div>
                                 </li>
@@ -83,7 +84,7 @@ const CartList = ({
                               return (
                                 <li key={sauce.sauce_id}>
                                   <div>
-                                    {sauce.name} × Quantity: {sauce.quantity}
+                                    {sauce.name} (×{sauce.quantity})
                                   </div>
                                   <div>${sauce.price} per piece</div>
                                 </li>
@@ -101,7 +102,7 @@ const CartList = ({
                               return (
                                 <li key={extra.extra_id}>
                                   <div>
-                                    {extra.name} × Quantity: {extra.quantity}
+                                    {extra.name} (×{extra.quantity})
                                   </div>
                                   <div>${extra.price} per piece</div>
                                 </li>

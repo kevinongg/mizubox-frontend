@@ -1,28 +1,37 @@
-import useQuery from "../../../api/useQuery";
+import { useCustomBox } from "./CustomBoxContext";
+import CustomBoxList from "./CustomBoxList";
+import ExtraPicker from "./ExtraPicker";
+import NigiriPicker from "./NigiriPicker";
+import SaucePicker from "./SaucePicker";
 
 const BuildYourOwn = () => {
-  const { data: nigiris, loading, error } = useQuery("/nigiris", "nigiris");
-  console.log(nigiris);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Failed to load nigiris</p>;
-
+  const { customBox, addCustomBoxToCart, currentTotalNigiri } = useCustomBox();
+  console.log(currentTotalNigiri);
   return (
-    <div className="build-container">
-      <h1>Build Your Own</h1>
-      <p>Select nigiris</p>
-      
-      <div className="nigiri-grid">
-        {nigiris?.map((nigiri) => (
-          <div key={nigiri.id} className="nigiri-item">
-            <img src={nigiri.image_url} alt={nigiri.name} />
-            <div className="nigiri-info">
-              <h3>{nigiri.name}</h3>
-              <p>${nigiri.price}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div>
+      <h1>Build Your Own Omakase Box</h1>
+      <p>Select at least 14 nigiris to continue</p>
+      <p>Nigiris selected: {currentTotalNigiri}</p>
+
+      <CustomBoxList />
+
+      <h2>Pick Nigiris</h2>
+      <NigiriPicker />
+
+      <h2>Pick Sauces</h2>
+      <SaucePicker />
+
+      <h2>Pick Extras</h2>
+      <ExtraPicker />
+      <button
+        type="button"
+        onClick={() =>
+          addCustomBoxToCart({ customBoxId: customBox.user_custom_box_id })
+        }
+        disabled={currentTotalNigiri < 14}
+      >
+        Add Box To Cart
+      </button>
     </div>
   );
 };
