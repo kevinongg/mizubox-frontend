@@ -3,20 +3,20 @@ import { BrowserRouter } from "react-router";
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import { ApiProvider } from "./api/apiContext.jsx";
 import { CartProvider } from "./pages/cart/CartContext.jsx";
-import { BYOProvider } from "./pages/Menu/buildyourown/BYOContext.jsx";
+import { CustomBoxProvider } from "./pages/Menu/buildyourown/CustomBoxContext.jsx";
 import App from "./App.jsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <ApiProvider>
-      <BYOProvider>
-        <CartProvider>
+      <CartProvider>
+        <CustomBoxProvider>
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        </CartProvider>
-      </BYOProvider>
+        </CustomBoxProvider>
+      </CartProvider>
     </ApiProvider>
   </AuthProvider>
 );
