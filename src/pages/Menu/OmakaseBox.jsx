@@ -37,21 +37,18 @@ const OmakaseBox = () => {
   if (error) return <p>Failed to load menu</p>;
 
   return (
-    <div>
+    <div className="menu-container">
       <h1>Omakase Box Menu</h1>
       <p>Choose from our pre-made boxes</p>
 
-      {message && (
-        <div style={{ background: "#d4edda", padding: "10px" }}>{message}</div>
-      )}
-
-      <div>
+      {message && <div className="success-message">{message}</div>}
+        <div className="menu-grid">
         {preMadeBoxes?.map((box) => (
-          <div key={box.id}>
+          <div key={box.id} className="menu-card">
             <img src={box.image_url} alt={box.name} />
             <h2>{box.name}</h2>
             <p>{box.description}</p>
-            <p>${box.price}</p>
+            <span className="price">${box.price}</span>
             <button onClick={() => handleAddToCart(box.id)}>
               {isAdding ? "Adding to cart!" : "Add To Cart"}
             </button>

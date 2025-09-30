@@ -1,4 +1,4 @@
-import useQuery from "../../api/useQuery";
+import useQuery from "../../../api/useQuery";
 
 const BuildYourOwn = () => {
   const { data: nigiris, loading, error } = useQuery("/nigiris", "nigiris");
