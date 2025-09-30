@@ -6,11 +6,12 @@ import SaucePicker from "./SaucePicker";
 
 const BuildYourOwn = () => {
   const { customBox, addCustomBoxToCart, currentTotalNigiri } = useCustomBox();
-
+  console.log(currentTotalNigiri);
   return (
     <div>
       <h1>Build Your Own Omakase Box</h1>
       <p>Select at least 14 nigiris to continue</p>
+      <p>Nigiris selected: {currentTotalNigiri}</p>
 
       <CustomBoxList />
 

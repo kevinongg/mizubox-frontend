@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
 import useQuery from "../../../api/useQuery";
-import useMutation from "../../../api/useMutation";
 import { useApi } from "../../../api/apiContext";
 
 const CustomBoxContext = createContext();
@@ -23,72 +22,94 @@ export const CustomBoxProvider = ({ children }) => {
 
   /////***** Mutations *****/////
   // Nigiri mutations
-  const addNigiriToCustomBox = async ({ customBoxId, nigiriId }) => {
-    await request(`/user-custom-boxes/${customBoxId}/nigiris`, {
-      method: "POST",
-      body: JSON.stringify({ nigiriId }),
-    });
+  const addNigiriToCustomBox = async ({ nigiriId }) => {
+    await request(
+      `/user-custom-boxes/${customBox.user_custom_box_id}/nigiris`,
+      {
+        method: "POST",
+        body: JSON.stringify({ nigiriId }),
+      }
+    );
     invalidateTags(["customBox"]);
   };
-  const updateNigiriQuantity = async ({ customBoxId, nigiriId, quantity }) => {
-    await request(`/user-custom-boxes/${customBoxId}/nigiris/${nigiriId}`, {
-      method: "PUT",
-      body: JSON.stringify({ quantity }),
-    });
+  const updateNigiriQuantity = async ({ nigiriId, quantity }) => {
+    await request(
+      `/user-custom-boxes/${customBox.user_custom_box_id}/nigiris/${nigiriId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ quantity }),
+      }
+    );
     invalidateTags(["customBox"]);
   };
-  const deleteNigiriFromCustomBox = async ({ customBoxId, nigiriId }) => {
-    await request(`/user-custom-boxes/${customBoxId}/nigiris/${nigiriId}`, {
-      method: "DELETE",
-    });
+  const deleteNigiriFromCustomBox = async ({ nigiriId }) => {
+    await request(
+      `/user-custom-boxes/${customBox.user_custom_box_id}/nigiris/${nigiriId}`,
+      {
+        method: "DELETE",
+      }
+    );
     invalidateTags(["customBox"]);
   };
 
   // Sauce mutations
-  const addSauceToCustomBox = async ({ customBoxId, sauceId }) => {
-    await request(`/user-custom-boxes/${customBoxId}/sauces`, {
+  const addSauceToCustomBox = async ({ sauceId }) => {
+    await request(`/user-custom-boxes/${customBox.user_custom_box_id}/sauces`, {
       method: "POST",
       body: JSON.stringify({ sauceId }),
     });
     invalidateTags(["customBox"]);
   };
-  const updateSauceQuantity = async ({ customBoxId, sauceId, quantity }) => {
-    await request(`/user-custom-boxes/${customBoxId}/sauces/${sauceId}`, {
-      method: "PUT",
-      body: JSON.stringify({ quantity }),
-    });
+  const updateSauceQuantity = async ({ sauceId, quantity }) => {
+    await request(
+      `/user-custom-boxes/${customBox.user_custom_box_id}/sauces/${sauceId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ quantity }),
+      }
+    );
     invalidateTags(["customBox"]);
   };
-  const deleteSauceFromCustomBox = async ({ customBoxId, sauceId }) => {
-    await request(`/user-custom-boxes/${customBoxId}/sauces/${sauceId}`, {
-      method: "DELETE",
-    });
+  const deleteSauceFromCustomBox = async ({ sauceId }) => {
+    await request(
+      `/user-custom-boxes/${customBox.user_custom_box_id}/sauces/${sauceId}`,
+      {
+        method: "DELETE",
+      }
+    );
     invalidateTags(["customBox"]);
   };
 
   // Extra mutations
-  const addExtraToCustomBox = async ({ customBoxId, extraId }) => {
-    await request(`/user-custom-boxes/${customBoxId}/extras`, {
+  const addExtraToCustomBox = async ({ extraId }) => {
+    await request(`/user-custom-boxes/${customBox.user_custom_box_id}/extras`, {
       method: "POST",
       body: JSON.stringify({ extraId }),
     });
     invalidateTags(["customBox"]);
   };
-  const updateExtraQuantity = async ({ customBoxId, extraId, quantity }) => {
-    await request(`/user-custom-boxes/${customBoxId}/extras/${extraId}`, {
-      method: "PUT",
-      body: JSON.stringify({ quantity }),
-    });
+  const updateExtraQuantity = async ({ extraId, quantity }) => {
+    await request(
+      `/user-custom-boxes/${customBox.user_custom_box_id}/extras/${extraId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({ quantity }),
+      }
+    );
     invalidateTags(["customBox"]);
   };
-  const deleteExtraFromCustomBox = async ({ customBoxId, extraId }) => {
-    await request(`/user-custom-boxes/${customBoxId}/extras/${extraId}`, {
-      method: "DELETE",
-    });
+  const deleteExtraFromCustomBox = async ({ extraId }) => {
+    await request(
+      `/user-custom-boxes/${customBox.user_custom_box_id}/extras/${extraId}`,
+      {
+        method: "DELETE",
+      }
+    );
     invalidateTags(["customBox"]);
   };
 
   // 14 Minimum nigiri rule
+  // for (const item of customBox) {
   const currentTotalNigiri = customBox?.contents.reduce((sum, nigiri) => {
     return sum + nigiri.quantity;
   }, 0);

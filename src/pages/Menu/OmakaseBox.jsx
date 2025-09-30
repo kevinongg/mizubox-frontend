@@ -23,7 +23,7 @@ const OmakaseBox = () => {
         return;
       }
       setIsAdding(true);
-      await addCartItemToCart({ boxType: "pre-made", preMadeBoxId: boxId });
+      await addCartItemToCart({ boxType: "pre-made", boxId });
       setMessage("Added to cart!");
       setTimeout(() => setMessage(""), 2000);
     } catch (error) {
@@ -42,7 +42,7 @@ const OmakaseBox = () => {
       <p>Choose from our pre-made boxes</p>
 
       {message && <div className="success-message">{message}</div>}
-        <div className="menu-grid">
+      <div className="menu-grid">
         {preMadeBoxes?.map((box) => (
           <div key={box.id} className="menu-card">
             <img src={box.image_url} alt={box.name} />
