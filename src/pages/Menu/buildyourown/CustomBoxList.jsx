@@ -4,7 +4,7 @@ import { useCustomBox } from "./CustomBoxContext";
 const CustomBoxList = () => {
   const {
     customBox,
-    customBoxLoading,
+    // customBoxLoading,
     customBoxError,
     updateNigiriQuantity,
     deleteNigiriFromCustomBox,
@@ -13,8 +13,6 @@ const CustomBoxList = () => {
     updateExtraQuantity,
     deleteExtraFromCustomBox,
   } = useCustomBox();
-  console.log(customBox);
-  // console.log(customBox?.contents);
 
   // if (customBoxLoading) return <p>Loading custom box...</p>;
   if (!customBox) return <p>You have not started creating the box!</p>;

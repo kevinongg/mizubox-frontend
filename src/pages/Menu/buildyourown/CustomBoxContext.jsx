@@ -109,7 +109,6 @@ export const CustomBoxProvider = ({ children }) => {
   };
 
   // 14 Minimum nigiri rule
-  // for (const item of customBox) {
   const currentTotalNigiri = customBox?.contents.reduce((sum, nigiri) => {
     return sum + nigiri.quantity;
   }, 0);
