@@ -15,7 +15,8 @@ const CustomBoxList = () => {
   } = useCustomBox();
 
   // if (customBoxLoading) return <p>Loading custom box...</p>;
-  if (!customBox) return <p>You have not started creating the box!</p>;
+  if (!customBox || customBox.length === 0)
+    return <p>You have not started creating the box!</p>;
   if (customBoxError) return <p>Failed to load custom box</p>;
 
   return (
