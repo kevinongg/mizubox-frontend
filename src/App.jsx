@@ -16,10 +16,12 @@ import Searchbar from "./pages/Searchbar";
 import Error404 from "./Error404";
 
 // Protected pages
-import Orders from "./pages/Orders";
+
 import Account from "./pages/Account";
 import Cart from "./pages/cart/Cart";
 import BuildYourOwn from "./pages/Menu/buildyourown/BuildYourOwn";
+import OrderDetails from "./pages/orders/OrderDetails";
+import Orders from "./pages/Orders/Orders";
 
 export default function App() {
   return (
@@ -37,6 +39,7 @@ export default function App() {
           <Route path="/buildyourown" element={<BuildYourOwn />} />
           <Route path="/account" element={<Account />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/orderDetails" element={<OrderDetails />} />
           <Route path="/cart" element={<Cart />} />
         </Route>
 
