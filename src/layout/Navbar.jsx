@@ -5,13 +5,14 @@ const Navbar = () => {
     <header>
       <nav>
         <div className="nav-left">
+          <NavLink to="/">
           <img src="/Mizubox-Logo.png" alt="Mizubox" className="logo" />
-         
+         </NavLink>
         </div>
 
         <div className="nav-container">
           <div className="nav-middle">
-             <NavLink to="/">HOME</NavLink>
+             
             <NavLink to="/omakasebox">OMKASE BOX</NavLink>
             <NavLink to="/buildyourown">BUILD YOUR OWN</NavLink>
             <NavLink to="/sauce">SAUCE</NavLink>
