@@ -27,13 +27,16 @@ const HomePage = () => {
             </p>
             <button
               className="hero-button"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/omakasebox")}
             >
               Order Now
             </button>
             <p className="hero-disclaimer">
-             <b> *First-time customers only. $15 min/$200 max order. Valid for a
-              limited time</b>
+              <b>
+                {" "}
+                *First-time customers only. $15 min/$200 max order. Valid for a
+                limited time
+              </b>
             </p>
           </div>
         </div>

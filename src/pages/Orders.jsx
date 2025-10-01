@@ -1,4 +1,5 @@
 import useQuery from "../api/useQuery";
+import { Link } from "react-router";
 
 const Dashboard = () => {
   const { data: orders, loading, error } = useQuery("/orders", "orders");
@@ -12,27 +13,30 @@ const Dashboard = () => {
   return (
     <div className="orders-container">
       <h1>Orders</h1>
+      <p>
+        <Link to="/account">Click here</Link> to edit your account profile
+      </p>
       <ul className="orders-list">
-      <p>Welcome to your dashboard! Here are your current orders:</p>
+        <p>Welcome to your dashboard! Here are your current orders:</p>
 
-      {emptyOrder ? (
-        <p>You do not have any orders placed yet.</p>
-      ) : (
-        <ul>
-          {orders.map((order) => {
-            return (
-      <li key={order.id} className="order-item">
-        <div className="order-details"> 
-                <span className="order-id">{order.id}</span>
-               <span className="order-date">{order.created_at}</span>
-          <span className="order-status">{order.status}</span>
-        </div>
-         <span className="order-total">{order.total_price}</span>    
-              </li>
-            );
-          })}
-        </ul>
-      )}
+        {emptyOrder ? (
+          <p>You do not have any orders placed yet.</p>
+        ) : (
+          <ul>
+            {orders.map((order) => {
+              return (
+                <li key={order.id} className="order-item">
+                  <div className="order-details">
+                    <span className="order-id">{order.id}</span>
+                    <span className="order-date">{order.created_at}</span>
+                    <span className="order-status">{order.status}</span>
+                  </div>
+                  <span className="order-total">{order.total_price}</span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </ul>
     </div>
   );
