@@ -9,7 +9,7 @@ const BuildYourOwn = () => {
   console.log(customBox);
 
   return (
-    <div>
+    <div className="build-your-own">
       <h1>Build Your Own Omakase Box</h1>
       <p>Select at least 14 nigiris to continue</p>
       <p>Omakase Box Total: ${customBox?.box_total}</p>

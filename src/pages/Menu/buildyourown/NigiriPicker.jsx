@@ -6,10 +6,10 @@ const NigiriPicker = () => {
   if (!nigiris) return <p>Nigiris not in stock</p>;
 
   return (
-    <div>
+    <div className="picker-container">
       {nigiris.map((nigiri) => {
         return (
-          <div key={nigiri.id}>
+          <div key={nigiri.id} className="picker-item">
             <img src={nigiri.image_url} alt={nigiri.name}></img>
             <button
               type="button"

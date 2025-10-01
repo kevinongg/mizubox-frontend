@@ -6,10 +6,10 @@ const SaucePicker = () => {
   if (!sauces) return <p>Sauces not in stock</p>;
 
   return (
-    <div>
+    <div className="picker-container">
       {sauces?.map((sauce) => {
         return (
-          <div key={sauce.id}>
+          <div key={sauce.id} className="picker-item">
             <img src={sauce.image_url} alt={sauce.name}></img>
             <button
               type="button"
