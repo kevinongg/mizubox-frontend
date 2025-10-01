@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 
 const Extra = () => {
   const { data: extras, loading, error } = useQuery("/extras", "extras");
-  const { addToCart } = useCart();
+  const { addCartItemExtraToCart } = useCart();
   const { token } = useAuth();
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -19,7 +19,7 @@ const Extra = () => {
         return;
       }
       setAddingExtraId(extraId);
-      await addToCart({ extraId });
+      await addCartItemExtraToCart({ extraId });
       setMessage("Extra added to cart!");
       setTimeout(() => setMessage(""), 2000);
     } catch (error) {
