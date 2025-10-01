@@ -6,7 +6,7 @@ const Navbar = () => {
       <nav>
         <div className="nav-left">
           <NavLink to="/">
-          <img src="/Mizubox-Logo.png" alt="Mizubox" className="logo" />
+          <img src="/image.png" alt="Mizubox" className="logo" />
          </NavLink>
         </div>
 
