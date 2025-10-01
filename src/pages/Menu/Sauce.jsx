@@ -10,7 +10,7 @@ const Sauce = () => {
     loading,
     error,
   } = useQuery("/sauces", "sauces");
-  const { addToCart } = useCart();
+  const { addCartItemSauceToCart } = useCart();
   const { token } = useAuth();
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -23,7 +23,7 @@ const Sauce = () => {
         return;
       }
       setAddingSauceId(sauceId);
-      await addToCart({ sauceId });
+      await addCartItemSauceToCart({ sauceId });
       setMessage("Sauce added to cart!");
       setTimeout(() => setMessage(""), 2000);
     } catch (error) {
