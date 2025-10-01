@@ -9,7 +9,7 @@ const HomePage = () => {
     <div className="home-wrapper">
       <div className=" hero-section">
         <img
-          src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWgybG5oeWllYWw0N2ZtMGdrYWdmaWQ4dWNxeWEzZGE0Yjhic3JyZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NVMeGBYDhyo/giphy.gif"
+          src="../../../public/nigiris.png"
           alt="Sushi prepration"
           className="hero-gif"
         />
@@ -27,7 +27,7 @@ const HomePage = () => {
             </p>
             <button
               className="hero-button"
-              onClick={() => navigate("/omakase-box")}
+              onClick={() => navigate("/login")}
             >
               Order Now
             </button>
