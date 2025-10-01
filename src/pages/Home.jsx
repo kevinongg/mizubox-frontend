@@ -32,8 +32,8 @@ const HomePage = () => {
               Order Now
             </button>
             <p className="hero-disclaimer">
-              *First-time customers only. $15 min/$200 max order. Valid for a
-              limited time
+             <b> *First-time customers only. $15 min/$200 max order. Valid for a
+              limited time</b>
             </p>
           </div>
         </div>
