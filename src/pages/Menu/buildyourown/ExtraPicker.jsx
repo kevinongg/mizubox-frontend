@@ -2,7 +2,6 @@ import { useCustomBox } from "./CustomBoxContext";
 
 const ExtraPicker = () => {
   const { extras, addExtraToCustomBox } = useCustomBox();
-  console.log(extras);
 
   if (!extras) return <p>Extras not in stock</p>;
 

@@ -119,7 +119,13 @@ export const CustomBoxProvider = ({ children }) => {
       method: "POST",
       body: JSON.stringify({ boxType: "custom", boxId: customBoxId }),
     });
+    // refetch BYO ui or cart
     invalidateTags(["cart"]);
+    // ccreate a new BYO empty box
+    await request("/user-custom-boxes/active/new", {
+      method: "POST",
+    });
+    invalidateTags(["customBox"]);
   };
 
   const value = {
