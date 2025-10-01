@@ -31,7 +31,7 @@ const Dashboard = () => {
                     <span className="order-date">{order.created_at}</span>
                     <span className="order-status">{order.status}</span>
                   </div>
-                  <span className="order-total">{order.total_price}</span>
+                  <span className="order-total">${order.total_price}</span>
                 </li>
               );
             })}

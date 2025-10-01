@@ -12,7 +12,7 @@ const BuildYourOwn = () => {
     <div>
       <h1>Build Your Own Omakase Box</h1>
       <p>Select at least 14 nigiris to continue</p>
-      <p>Omakase Box Total: ${customBox.box_total}</p>
+      <p>Omakase Box Total: ${customBox?.box_total}</p>
       <p>Nigiris selected: {currentTotalNigiri}</p>
 
       <CustomBoxList />

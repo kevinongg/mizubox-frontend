@@ -6,14 +6,13 @@ const Navbar = () => {
       <nav>
         <div className="nav-left">
           <NavLink to="/">
-          <img src="/image.png" alt="Mizubox" className="logo" />
-         </NavLink>
+            <img src="/image.png" alt="Mizubox" className="logo" />
+          </NavLink>
         </div>
 
         <div className="nav-container">
           <div className="nav-middle">
-             
-            <NavLink to="/omakasebox">OMKASE BOX</NavLink>
+            <NavLink to="/omakasebox">OMAKASE BOX</NavLink>
             <NavLink to="/buildyourown">BUILD YOUR OWN</NavLink>
             <NavLink to="/sauce">SAUCE</NavLink>
             <NavLink to="/extra">EXTRA</NavLink>

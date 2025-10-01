@@ -101,7 +101,7 @@ const Cart = () => {
       setIsCheckingOut(true);
       checkout();
     } catch (error) {
-      console.error("Failed to check out", error);
+      console.error(`Failed to check out: ${error.message} `);
     } finally {
       setIsCheckingOut(false);
     }
@@ -141,28 +141,32 @@ const Cart = () => {
   return (
     <>
       <div className="cart-container">
-      <h1>Your Cart</h1>
+        <h1>Your Cart</h1>
 
-      <CartList
-        cartItems={cart.items}
-        cartItemSauces={cart.sauces}
-        cartItemExtras={cart.extras}
-        // cart item handlers
-        increaseCartItemQuantity={handleIncreaseCartItemQuantity}
-        decreaseCartItemQuantity={handleDecreaseCartItemQuantity}
-        removeCartItem={handleRemoveCartItem}
-        // sauce item handlers
-        increaseCartItemSauceQuantity={handleIncreaseCartItemSauceQuantity}
-        decreaseCartItemSauceQuantity={handleDecreaseCartItemSauceQuantity}
-        removeCartItemSauce={handleRemoveCartItemSauce}
-        // extra item handlers
-        increaseCartItemExtraQuantity={handleIncreaseCartItemExtraQuantity}
-        decreaseCartItemExtraQuantity={handleDecreaseCartItemExtraQuantity}
-        removeCartItemExtra={handleRemoveCartItemExtra}
-      />
+        <CartList
+          cartItems={cart.items}
+          cartItemSauces={cart.sauces}
+          cartItemExtras={cart.extras}
+          // cart item handlers
+          increaseCartItemQuantity={handleIncreaseCartItemQuantity}
+          decreaseCartItemQuantity={handleDecreaseCartItemQuantity}
+          removeCartItem={handleRemoveCartItem}
+          // sauce item handlers
+          increaseCartItemSauceQuantity={handleIncreaseCartItemSauceQuantity}
+          decreaseCartItemSauceQuantity={handleDecreaseCartItemSauceQuantity}
+          removeCartItemSauce={handleRemoveCartItemSauce}
+          // extra item handlers
+          increaseCartItemExtraQuantity={handleIncreaseCartItemExtraQuantity}
+          decreaseCartItemExtraQuantity={handleDecreaseCartItemExtraQuantity}
+          removeCartItemExtra={handleRemoveCartItemExtra}
+        />
         <div className="cart-total">Cart total: ${cart?.cart_total}</div>
         <div className="cart-actions">
-          <button type="button" className="clear-cart-btn" onClick={handleClearCart}>
+          <button
+            type="button"
+            className="clear-cart-btn"
+            onClick={handleClearCart}
+          >
             Clear Cart
           </button>
           <button
