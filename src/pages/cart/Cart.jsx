@@ -144,9 +144,9 @@ const Cart = () => {
         <h1>Your Cart</h1>
 
         <CartList
-          cartItems={cart.items}
-          cartItemSauces={cart.sauces}
-          cartItemExtras={cart.extras}
+          cartItems={cart?.items}
+          cartItemSauces={cart?.sauces}
+          cartItemExtras={cart?.extras}
           // cart item handlers
           increaseCartItemQuantity={handleIncreaseCartItemQuantity}
           decreaseCartItemQuantity={handleDecreaseCartItemQuantity}

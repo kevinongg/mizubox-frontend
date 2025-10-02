@@ -18,6 +18,7 @@ const CartList = ({
   removeCartItemExtra,
 }) => {
   console.log(cartItems);
+
   return (
     <div>
       {cartItems.length !== 0 && (
