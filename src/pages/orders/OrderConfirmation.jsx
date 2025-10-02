@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import useQuery from "../../api/useQuery";
 import formatDate from "../../utils/formatDate";
 
@@ -6,7 +6,7 @@ const OrderConfirmation = () => {
   const { publicOrderId } = useParams();
   const {
     data: order,
-    loading,
+    // loading,
     error,
   } = useQuery(`/orders/${publicOrderId}`, "");
   console.log(order);
@@ -26,7 +26,7 @@ const OrderConfirmation = () => {
       </h2>
       <ul>
         {order?.items.map((item) => {
-          const orderId = item.order_item_id;
+          // const orderId = item.order_item_id;
           const isPreMadeBox = item.boxType === "pre-made";
           const isCustomBox = item.boxType === "custom";
           const boxQuantity = item.quantity;
@@ -117,35 +117,19 @@ const OrderConfirmation = () => {
           </li>
         )}
       </ul>
+
+      <p>We are preparing your order now.</p>
+      <p>You will receive an email confirmation shortly.</p>
+
+      <div>
+        <Link to="/orders">Back to Orders</Link>
+        <Link to={`/orders/${order.public_order_id}`}>
+          View Full Order Details
+        </Link>
+        <Link to="/omakasebox">Continue Shopping</Link>
+      </div>
     </div>
   );
 };
 
 export default OrderConfirmation;
-
-//  Thank you for your order, Kevin!
-
-// Your order number is: MZ-3FA9C2D1
-// Placed on: Feb 1, 2025
-// Total: $89.95
-
-// ───────────────────────────────
-// Order Summary (3 items)
-
-// - Custom Omakase Box × 1
-//   Nigiris: 14 pcs
-//   Sauces: Wasabi Mayo, Spicy Soy
-//   Extras: None
-
-// - Pre-Made Box: Salmon Lover × 2
-//   Nigiris: Salmon, Salmon Avocado
-//   Sauces: None
-//   Extras: Extra Ginger
-
-// - Extra: Wasabi Mayo × 1
-// ───────────────────────────────
-
-// We’re preparing your order now.
-// You’ll receive an email confirmation shortly.
-
-// [ View Full Order Details ]   [ Continue Shopping ]
