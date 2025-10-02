@@ -1,155 +1,335 @@
-import TrashIcon from "../../../components/icons/TrashIcon";
 import { useCustomBox } from "./CustomBoxContext";
+import useCartMessage from "../../../utils/cusotmMessage";
+import "./CustomBoxList.css";
 
 const CustomBoxList = () => {
-  const {
-    customBox,
-    // customBoxLoading,
-    customBoxError,
-    updateNigiriQuantity,
-    deleteNigiriFromCustomBox,
-    updateSauceQuantity,
-    deleteSauceFromCustomBox,
-    updateExtraQuantity,
-    deleteExtraFromCustomBox,
-  } = useCustomBox();
+  const { customBox, customBoxError, currentTotalNigiri } = useCustomBox();
 
-  // if (customBoxLoading) return <p>Loading custom box...</p>;
+  const {
+    message,
+    isUpdating,
+    updatingItemId,
+    handleUpdateNigiri,
+    handleDeleteNigiri,
+    handleUpdateSauce,
+    handleDeleteSauce,
+    handleUpdateExtra,
+    handleDeleteExtra,
+  } = useCartMessage();
 
   const noNigiris = !customBox?.contents || customBox.contents.length === 0;
   const noSauces = !customBox?.sauces || customBox.sauces.length === 0;
   const noExtras = !customBox?.extras || customBox.extras.length === 0;
 
-  if (!customBox || (noNigiris && noSauces && noExtras))
-    return <p>You have not started creating the box!</p>;
-  if (customBoxError) return <p>Failed to load custom box</p>;
+  // Calculate total from items
+  const calculateTotal = () => {
+    let total = 0;
+
+    // Add nigiri prices
+    if (customBox?.contents) {
+      total += customBox.contents.reduce((sum, item) => {
+        return sum + (item.price || 0) * item.quantity;
+      }, 0);
+    }
+
+    // Add sauce prices
+    if (customBox?.sauces) {
+      total += customBox.sauces.reduce((sum, item) => {
+        return sum + (item.price || 0) * item.quantity;
+      }, 0);
+    }
+
+    // Add extra prices
+    if (customBox?.extras) {
+      total += customBox.extras.reduce((sum, item) => {
+        return sum + (item.price || 0) * item.quantity;
+      }, 0);
+    }
+
+    return total;
+  };
+
+  const boxTotal = calculateTotal();
+
+  // Show loading or empty state
+  if (customBoxError) {
+    return (
+      <div className="custom-box-empty">
+        <p>Failed to load custom box. Please try again.</p>
+      </div>
+    );
+  }
+
+  if (!customBox || (noNigiris && noSauces && noExtras)) {
+    return (
+      <div className="custom-box-empty">
+        <p>Your custom box is empty. Start adding items below!</p>
+      </div>
+    );
+  }
+
+  const renderNigiriItem = (nigiri) => {
+    const nigiriId = nigiri.nigiri_id;
+    const quantity = nigiri.quantity;
+    const isThisItemUpdating = isUpdating && updatingItemId === nigiriId;
+
+    return (
+      <div key={nigiri.user_custom_box_content_id} className="custom-box-item">
+        <input
+          type="checkbox"
+          defaultChecked
+          className="custom-box-item-checkbox"
+        />
+
+        <img
+          src={nigiri.image_url}
+          alt={nigiri.name}
+          className="custom-box-item-image"
+        />
+
+        <div className="custom-box-item-details">
+          <h4 className="custom-box-item-name">{nigiri.name}</h4>
+          <p className="custom-box-item-stock">In stock</p>
+          <p className="custom-box-item-price-container">
+            <span className="custom-box-item-price">
+              ${((nigiri.price || 0) * quantity).toFixed(2)}
+            </span>
+          </p>
+
+          <div className="custom-box-item-actions">
+            <div className="custom-box-quantity-control">
+              <button
+                type="button"
+                onClick={() =>
+                  quantity > 1
+                    ? handleUpdateNigiri(nigiriId, Math.max(1, quantity - 1))
+                    : handleDeleteNigiri(nigiriId)
+                }
+                className="custom-box-quantity-btn"
+                aria-label="Decrease quantity"
+                disabled={isThisItemUpdating}
+              >
+                −
+              </button>
+              <span className="custom-box-quantity-display">{quantity}</span>
+              <button
+                type="button"
+                onClick={() => handleUpdateNigiri(nigiriId, quantity + 1)}
+                className="custom-box-quantity-btn"
+                aria-label="Increase quantity"
+                disabled={isThisItemUpdating}
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleDeleteNigiri(nigiriId)}
+              className="custom-box-delete-btn"
+              disabled={isThisItemUpdating}
+            >
+              {isThisItemUpdating ? "Deleting..." : "Delete"}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderSauceItem = (sauce) => {
+    const sauceId = sauce.sauce_id;
+    const quantity = sauce.quantity;
+    const isThisItemUpdating = isUpdating && updatingItemId === sauceId;
+
+    return (
+      <div key={sauce.user_custom_box_sauce_id} className="custom-box-item">
+        <input
+          type="checkbox"
+          defaultChecked
+          className="custom-box-item-checkbox"
+        />
+
+        <img
+          src={sauce.image_url}
+          alt={sauce.name}
+          className="custom-box-item-image"
+        />
+
+        <div className="custom-box-item-details">
+          <h4 className="custom-box-item-name">{sauce.name}</h4>
+          <p className="custom-box-item-stock">In stock</p>
+          <p className="custom-box-item-price-container">
+            <span className="custom-box-item-price">
+              ${((sauce.price || 0) * quantity).toFixed(2)}
+            </span>
+          </p>
+
+          <div className="custom-box-item-actions">
+            <div className="custom-box-quantity-control">
+              <button
+                type="button"
+                onClick={() =>
+                  quantity > 1
+                    ? handleUpdateSauce(sauceId, Math.max(1, quantity - 1))
+                    : handleDeleteSauce(sauceId)
+                }
+                className="custom-box-quantity-btn"
+                aria-label="Decrease quantity"
+                disabled={isThisItemUpdating}
+              >
+                −
+              </button>
+              <span className="custom-box-quantity-display">{quantity}</span>
+              <button
+                type="button"
+                onClick={() => handleUpdateSauce(sauceId, quantity + 1)}
+                className="custom-box-quantity-btn"
+                aria-label="Increase quantity"
+                disabled={isThisItemUpdating}
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleDeleteSauce(sauceId)}
+              className="custom-box-delete-btn"
+              disabled={isThisItemUpdating}
+            >
+              {isThisItemUpdating ? "Deleting..." : "Delete"}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderExtraItem = (extra) => {
+    const extraId = extra.extra_id;
+    const quantity = extra.quantity;
+    const isThisItemUpdating = isUpdating && updatingItemId === extraId;
+
+    return (
+      <div key={extra.user_custom_box_extra_id} className="custom-box-item">
+        <input
+          type="checkbox"
+          defaultChecked
+          className="custom-box-item-checkbox"
+        />
+
+        <img
+          src={extra.image_url}
+          alt={extra.name}
+          className="custom-box-item-image"
+        />
+
+        <div className="custom-box-item-details">
+          <h4 className="custom-box-item-name">{extra.name}</h4>
+          <p className="custom-box-item-stock">In stock</p>
+          <p className="custom-box-item-price-container">
+            <span className="custom-box-item-price">
+              ${((extra.price || 0) * quantity).toFixed(2)}
+            </span>
+          </p>
+
+          <div className="custom-box-item-actions">
+            <div className="custom-box-quantity-control">
+              <button
+                type="button"
+                onClick={() =>
+                  quantity > 1
+                    ? handleUpdateExtra(extraId, Math.max(1, quantity - 1))
+                    : handleDeleteExtra(extraId)
+                }
+                className="custom-box-quantity-btn"
+                aria-label="Decrease quantity"
+                disabled={isThisItemUpdating}
+              >
+                −
+              </button>
+              <span className="custom-box-quantity-display">{quantity}</span>
+              <button
+                type="button"
+                onClick={() => handleUpdateExtra(extraId, quantity + 1)}
+                className="custom-box-quantity-btn"
+                aria-label="Increase quantity"
+                disabled={isThisItemUpdating}
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleDeleteExtra(extraId)}
+              className="custom-box-delete-btn"
+              disabled={isThisItemUpdating}
+            >
+              {isThisItemUpdating ? "Deleting..." : "Delete"}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <div>
-      <h3>Current Omakase Box</h3>
+    <div className="custom-box-container">
+      {/* Success/Error Message */}
+      {message && <div className="custom-box-message">{message}</div>}
 
-      <h4>Nigiris</h4>
-      <ul>
-        {customBox?.contents.map((nigiri) => {
-          const nigiriId = nigiri.nigiri_id;
-          const quantity = nigiri.quantity;
+      {/* Summary Bar */}
+      <div className="custom-box-summary">
+        <div className="custom-box-summary-left">
+          <span>
+            Nigiris selected: <strong>{currentTotalNigiri}/14</strong>
+          </span>
+          {currentTotalNigiri < 14 && (
+            <span className="custom-box-summary-warning">
+              ⚠️ Add {14 - currentTotalNigiri} more nigiri(s) to continue
+            </span>
+          )}
+        </div>
+        <div className="custom-box-summary-total">
+          Total: ${boxTotal.toFixed(2)}
+        </div>
+      </div>
 
-          return (
-            <li key={nigiri.user_custom_box_content_id}>
-              <div>
-                {nigiri.name} (×{quantity})
-                <button
-                  type="button"
-                  onClick={() =>
-                    quantity > 1
-                      ? updateNigiriQuantity({
-                          nigiriId: nigiriId,
-                          quantity: Math.max(1, quantity - 1),
-                        })
-                      : deleteNigiriFromCustomBox({
-                          nigiriId: nigiriId,
-                        })
-                  }
-                >
-                  {quantity > 1 ? "-" : <TrashIcon size={20} color="black" />}
-                </button>{" "}
-                {quantity}
-                <button
-                  type="button"
-                  onClick={() =>
-                    updateNigiriQuantity({
-                      nigiriId: nigiriId,
-                      quantity: quantity + 1,
-                    })
-                  }
-                >
-                  +
-                </button>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="custom-box-content">
+        <h3 className="custom-box-title">Current Omakase Box</h3>
 
-      <h4>Sauces</h4>
-      <ul>
-        {customBox.sauces.map((sauce) => {
-          const sauceId = sauce.sauce_id;
-          const quantity = sauce.quantity;
+        {/* Nigiris Section */}
+        {!noNigiris && (
+          <div className="custom-box-section">
+            <h4 className="custom-box-section-title">
+              Nigiris ({customBox.contents.length})
+            </h4>
+            {customBox.contents.map((nigiri) => renderNigiriItem(nigiri))}
+          </div>
+        )}
 
-          return (
-            <li key={sauce.user_custom_box_sauce_id}>
-              <div>
-                {sauce.name} (×{quantity})
-                <button
-                  type="button"
-                  onClick={() =>
-                    quantity > 1
-                      ? updateSauceQuantity({
-                          sauceId: sauceId,
-                          quantity: Math.max(1, quantity - 1),
-                        })
-                      : deleteSauceFromCustomBox({ sauceId: sauceId })
-                  }
-                >
-                  {quantity > 1 ? "-" : <TrashIcon size={20} color="black" />}
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    updateSauceQuantity({
-                      sauceId: sauceId,
-                      quantity: quantity + 1,
-                    })
-                  }
-                >
-                  +
-                </button>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+        {/* Sauces Section */}
+        {!noSauces && (
+          <div className="custom-box-section">
+            <h4 className="custom-box-section-title">
+              Sauces ({customBox.sauces.length})
+            </h4>
+            {customBox.sauces.map((sauce) => renderSauceItem(sauce))}
+          </div>
+        )}
 
-      <h4>Extras</h4>
-      <ul>
-        {customBox.extras.map((extra) => {
-          const extraId = extra.extra_id;
-          const quantity = extra.quantity;
-
-          return (
-            <li key={extra.user_custom_box_extra_id}>
-              <div>
-                {extra.name} (×{quantity})
-                <button
-                  type="button"
-                  onClick={() =>
-                    quantity > 1
-                      ? updateExtraQuantity({
-                          extraId: extraId,
-                          quantity: Math.max(1, quantity - 1),
-                        })
-                      : deleteExtraFromCustomBox({ extraId: extraId })
-                  }
-                >
-                  {quantity > 1 ? "-" : <TrashIcon size={20} color="black" />}
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    updateExtraQuantity({
-                      extraId: extraId,
-                      quantity: quantity + 1,
-                    })
-                  }
-                >
-                  +
-                </button>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+        {/* Extras Section */}
+        {!noExtras && (
+          <div className="custom-box-section">
+            <h4 className="custom-box-section-title">
+              Extras ({customBox.extras.length})
+            </h4>
+            {customBox.extras.map((extra) => renderExtraItem(extra))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

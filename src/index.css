@@ -350,7 +350,7 @@ main a:hover {
   cursor: not-allowed;
 }
 
-/* Build Your Own Page */
+/*************** Build Your Own Page */
 .build-container {
   max-width: 800px;
   margin: 0 auto;
