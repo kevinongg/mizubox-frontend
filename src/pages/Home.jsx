@@ -8,11 +8,7 @@ const HomePage = () => {
   return (
     <div className="home-wrapper">
       <div className=" hero-section">
-        <img
-          src="../../../public/nigiris.png"
-          alt="Sushi prepration"
-          className="hero-gif"
-        />
+        <img src="/nigiris.png" alt="Sushi prepration" className="hero-gif" />
         <div className="hero-overlay">
           <div className="hero-content">
             <h1 className="hero-title">
