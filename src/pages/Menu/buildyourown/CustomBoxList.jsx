@@ -15,7 +15,12 @@ const CustomBoxList = () => {
   } = useCustomBox();
 
   // if (customBoxLoading) return <p>Loading custom box...</p>;
-  if (!customBox || customBox.length === 0)
+
+  const noNigiris = !customBox?.contents || customBox.contents.length === 0;
+  const noSauces = !customBox?.sauces || customBox.sauces.length === 0;
+  const noExtras = !customBox?.extras || customBox.extras.length === 0;
+
+  if (!customBox || (noNigiris && noSauces && noExtras))
     return <p>You have not started creating the box!</p>;
   if (customBoxError) return <p>Failed to load custom box</p>;
 

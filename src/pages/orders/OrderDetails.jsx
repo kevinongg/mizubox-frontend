@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import useQuery from "../../api/useQuery";
+import formatDate from "../../utils/formatDate";
 
 const OrderDetails = () => {
   const { orderId } = useParams();
@@ -8,10 +9,17 @@ const OrderDetails = () => {
     loading,
     error,
   } = useQuery(`/orders/${orderId}`, "order");
-  console.log(orderId);
+  console.log(order?.created_at);
   console.log(order);
 
-  return <div>OrderDetails</div>;
+  if (error) return <p>Failed to load order details</p>;
+
+  return (
+    <div>
+      <h2>Order Details</h2>
+      <p>Order Placed: {formatDate(order?.created_at)}</p>
+    </div>
+  );
 };
 
 export default OrderDetails;

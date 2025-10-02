@@ -6,7 +6,6 @@ import SaucePicker from "./SaucePicker";
 
 const BuildYourOwn = () => {
   const { customBox, addCustomBoxToCart, currentTotalNigiri } = useCustomBox();
-  console.log(customBox);
 
   return (
     <div className="build-your-own">

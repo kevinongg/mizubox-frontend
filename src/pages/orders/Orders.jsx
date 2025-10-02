@@ -4,12 +4,13 @@ import formatDate from "../../utils/formatDate";
 
 const Orders = () => {
   const { data: orders, loading, error } = useQuery("/orders", "orders");
-  console.log(orders);
+  // console.log(orders);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Failed to load orders</p>;
 
   const emptyOrder = !orders || orders.length === 0;
+  if (emptyOrder) return <p>You have not placed any orders yet!</p>;
 
   console.log(orders);
   return (
@@ -30,7 +31,7 @@ const Orders = () => {
                 <li key={order.order_id} className="order-item">
                   <div className="order-details">
                     <span className="order-id">
-                      ORDER #{order.order_number}
+                      ORDER # {order.order_number}
                     </span>
                     <span>
                       {order.total_item_count}{" "}
