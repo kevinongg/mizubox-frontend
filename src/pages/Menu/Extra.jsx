@@ -1,33 +1,9 @@
-import { useState } from "react";
 import useQuery from "../../api/useQuery";
-import { useCart } from "../cart/CartContext";
-import { useAuth } from "../../auth/AuthContext";
-import { useNavigate } from "react-router";
+import useCartMessage from "../../utils/cusotmMessage";
 
 const Extra = () => {
   const { data: extras, loading, error } = useQuery("/extras", "extras");
-  const { addCartItemExtraToCart } = useCart();
-  const { token } = useAuth();
-  const navigate = useNavigate();
-  const [message, setMessage] = useState("");
-  const [addingExtraId, setAddingExtraId] = useState(null);
-
-  const handleAddExtra = async (extraId) => {
-    try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
-      setAddingExtraId(extraId);
-      await addCartItemExtraToCart({ extraId });
-      setMessage("Extra added to cart!");
-      setTimeout(() => setMessage(""), 2000);
-    } catch (error) {
-      console.error("error adding extra to cart", error);
-    } finally {
-      setAddingExtraId(null);
-    }
-  };
+  const { message, addingItemId, handleAddExtra } = useCartMessage();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Failed to load extras</p>;
@@ -50,9 +26,9 @@ const Extra = () => {
             <span className="price">${extra.price}</span>
             <button
               onClick={() => handleAddExtra(extra.id)}
-              disabled={addingExtraId === extra.id}
+              disabled={addingItemId === extra.id}
             >
-              {addingExtraId === extra.id ? "Adding..." : "Add Extra"}
+              {addingItemId === extra.id ? "Adding..." : "Add Extra"}
             </button>
           </div>
         ))}

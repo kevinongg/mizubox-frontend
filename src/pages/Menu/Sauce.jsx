@@ -1,37 +1,9 @@
-import { useState } from "react";
 import useQuery from "../../api/useQuery";
-import { useCart } from "../cart/CartContext";
-import { useAuth } from "../../auth/AuthContext";
-import { useNavigate } from "react-router";
+import useCartMessage from "../../utils/cusotmMessage";
 
 const Sauce = () => {
-  const {
-    data: sauces,
-    loading,
-    error,
-  } = useQuery("/sauces", "sauces");
-  const { addCartItemSauceToCart } = useCart();
-  const { token } = useAuth();
-  const navigate = useNavigate();
-  const [message, setMessage] = useState("");
-  const [addingSauceId, setAddingSauceId] = useState(null);
-
-  const handleAddSauce = async (sauceId) => {
-    try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
-      setAddingSauceId(sauceId);
-      await addCartItemSauceToCart({ sauceId });
-      setMessage("Sauce added to cart!");
-      setTimeout(() => setMessage(""), 2000);
-    } catch (error) {
-      console.error("error adding sauce to cart", error);
-    } finally {
-      setAddingSauceId(null);
-    }
-  };
+  const { data: sauces, loading, error } = useQuery("/sauces", "sauces");
+  const { message, addingItemId, handleAddSauce } = useCartMessage();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Failed to load sauces</p>;
@@ -41,9 +13,7 @@ const Sauce = () => {
       <h1>Sauces</h1>
       <p>Add premium sauces to your order</p>
 
-      {message && (
-        <div className="success-message">{message}</div>
-      )}
+      {message && <div className="success-message">{message}</div>}
 
       <div className="menu-grid">
         {sauces?.map((sauce) => (
@@ -52,11 +22,11 @@ const Sauce = () => {
             <h2>{sauce.name}</h2>
             <p>{sauce.description}</p>
             <span className="price">${sauce.price}</span>
-            <button 
+            <button
               onClick={() => handleAddSauce(sauce.id)}
-              disabled={addingSauceId === sauce.id}
+              disabled={addingItemId === sauce.id}
             >
-              {addingSauceId === sauce.id ? "Adding..." : "Add Sauce"}
+              {addingItemId === sauce.id ? "Adding..." : "Add Sauce"}
             </button>
           </div>
         ))}

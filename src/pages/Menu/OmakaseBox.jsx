@@ -1,8 +1,5 @@
-import { useState } from "react";
+import useCartMessage from "../../utils/cusotmMessage";
 import useQuery from "../../api/useQuery";
-import { useCart } from "../cart/CartContext";
-import { useAuth } from "../../auth/AuthContext";
-import { useNavigate } from "react-router";
 
 const OmakaseBox = () => {
   const {
@@ -10,28 +7,7 @@ const OmakaseBox = () => {
     loading,
     error,
   } = useQuery("/pre-made-boxes", "pre-made-boxes");
-  const { addCartItemToCart } = useCart();
-  const { token } = useAuth();
-  const navigate = useNavigate();
-  const [message, setMessage] = useState("");
-  const [isAdding, setIsAdding] = useState(false);
-
-  const handleAddToCart = async (boxId) => {
-    try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
-      setIsAdding(true);
-      await addCartItemToCart({ boxType: "pre-made", boxId });
-      setMessage("Added to cart!");
-      setTimeout(() => setMessage(""), 2000);
-    } catch (error) {
-      console.error("error adding to cart", error);
-    } finally {
-      setIsAdding(false);
-    }
-  };
+  const { message, isAdding, handleAddBox } = useCartMessage();
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Failed to load menu</p>;
@@ -49,7 +25,7 @@ const OmakaseBox = () => {
             <h2>{box.name}</h2>
             <p>{box.description}</p>
             <span className="price">${box.price}</span>
-            <button onClick={() => handleAddToCart(box.id)}>
+            <button onClick={() => handleAddBox(box.id)}>
               {isAdding ? "Adding to cart!" : "Add To Cart"}
             </button>
           </div>
