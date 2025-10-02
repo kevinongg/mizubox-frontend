@@ -71,13 +71,17 @@ nav {
 .logo {
   size: 400px;
 }
+
 .nav-middle {
   display: flex;
   align-items: center;
   gap: 1rem;
   font-weight: bold;
-  color: rgb(216, 214, 213);
+  color: rgb(210, 153, 96);
   margin-left: 4.5rem;
+}
+
+.nav-middle a {
   font-size: 20px;
 }
 
@@ -97,6 +101,12 @@ nav {
 .nav-left {
   flex: 1;
 }
+
+.nav-left a {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
 .logo-link {
   display: flex;
   align-items: center;
@@ -104,16 +114,6 @@ nav {
   color: white;
   text-decoration: none;
   transition: opacity 0.3s ease;
-}
-
-.logo-link:hover {
-  opacity: 0.9;
-}
-
-.logo-link span {
-  font-size: 1.25rem;
-  letter-spacing: 0.5px;
-  color: #e94560;
 }
 
 .logo {
@@ -126,11 +126,11 @@ nav a {
   transition: all 0.3s ease;
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  font-size: 0.95rem;
+  background-color: transparent;
 }
 
 nav a:hover {
-  background-color: rgba(233, 69, 96, 0.1);
+  background-color: transparent;
   color: #e94560;
 }
 
@@ -168,7 +168,7 @@ nav a.active {
   justify-content: center;
 }
 
-/* Forms */
+/*********************************** Forms ***************************/
 form {
   max-width: 400px;
   margin: 2rem auto;
