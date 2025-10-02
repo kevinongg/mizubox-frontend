@@ -1,5 +1,6 @@
-import useQuery from "../../api/useQuery";
 import { Link } from "react-router";
+import useQuery from "../../api/useQuery";
+import formatDate from "../../utils/formatDate";
 
 const Orders = () => {
   const { data: orders, loading, error } = useQuery("/orders", "orders");
@@ -10,14 +11,7 @@ const Orders = () => {
 
   const emptyOrder = !orders || orders.length === 0;
 
-  const formatDateLocal = (isoString) => {
-    // took from AI, have 0 clue what the code is doing
-    // Uses the browser's locale + timezone automatically
-    return new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(
-      new Date(isoString)
-    );
-  };
-
+  console.log(orders);
   return (
     <div className="orders-container">
       <h1>Orders</h1>
@@ -43,10 +37,13 @@ const Orders = () => {
                       {order.total_item_count > 1 ? "items" : "item"}
                     </span>
                     <span className="order-date">
-                      {formatDateLocal(order.created_at)}
+                      {formatDate(order.created_at)}
+                      {/* {new Date(order.created_at).toLocaleDateString()} */}
                     </span>
                     <span className="order-status">{order.status}</span>
-                    <Link to="/orderDetails">View order for details</Link>
+                    <Link to={`/orders/${order.public_order_id}`}>
+                      View order for details
+                    </Link>
                   </div>
                   <span className="order-total">${order.order_total}</span>
                 </li>
