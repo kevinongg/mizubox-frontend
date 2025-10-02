@@ -22,6 +22,7 @@ import Cart from "./pages/cart/Cart";
 import BuildYourOwn from "./pages/Menu/buildyourown/BuildYourOwn";
 import OrderDetails from "./pages/orders/OrderDetails";
 import Orders from "./pages/Orders/Orders";
+import OrderConfirmation from "./pages/orders/OrderConfirmation";
 
 export default function App() {
   return (
@@ -39,7 +40,11 @@ export default function App() {
           <Route path="/buildyourown" element={<BuildYourOwn />} />
           <Route path="/account" element={<Account />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/orders/:orderId" element={<OrderDetails />} />
+          <Route path="/orders/:publicOrderId" element={<OrderDetails />} />
+          <Route
+            path="/order-confirmation/:publicOrderId"
+            element={<OrderConfirmation />}
+          />
           <Route path="/cart" element={<Cart />} />
         </Route>
 

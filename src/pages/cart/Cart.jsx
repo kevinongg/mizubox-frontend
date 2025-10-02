@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCart } from "./CartContext";
+import { useNavigate } from "react-router";
 import CartList from "./CartList";
 
 const Cart = () => {
@@ -23,6 +24,7 @@ const Cart = () => {
   } = useCart();
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const navigate = useNavigate();
 
   // ****** Cart Item Handlers ******//
 
@@ -96,10 +98,11 @@ const Cart = () => {
   };
 
   // checkout
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     try {
       setIsCheckingOut(true);
-      checkout();
+      const order = await checkout();
+      navigate(`/order-confirmation/${order.public_order_id}`);
     } catch (error) {
       console.error(`Failed to check out: ${error.message} `);
     } finally {

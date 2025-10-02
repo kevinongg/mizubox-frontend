@@ -3,20 +3,20 @@ import useQuery from "../../api/useQuery";
 import formatDate from "../../utils/formatDate";
 
 const OrderDetails = () => {
-  const { orderId } = useParams();
-  const { data: order, error } = useQuery(`/orders/${orderId}`, "order");
+  const { publicOrderId } = useParams();
+  const { data: order, error } = useQuery(`/orders/${publicOrderId}`, "order");
   console.log(order);
 
   if (error) return <p>Failed to load order details</p>;
 
   return (
     <div>
-      <h2>Order Details</h2>
-      <p>Order Placed: {formatDate(order?.created_at)}</p>
+      <h1>Order Details</h1>
       <p>Order # {order?.order_number}</p>
-      <p>Order Total: ${order?.total_price}</p>
-      <p>{order?.status}</p>
+      <p>Placed on: {formatDate(order?.created_at)}</p>
+      <p>Total: ${order?.total_price}</p>
 
+      <h2>Items in this Order</h2>
       <ul>
         {order?.items.map((item) => {
           const orderId = item.order_item_id;
@@ -33,7 +33,6 @@ const OrderDetails = () => {
                 {isPreMadeBox ? item.box_details.name : "Custom Box"} (×
                 {boxQuantity})
               </h3>
-              <p>Quantity: {boxQuantity}</p>
 
               {isPreMadeBox && (
                 <div>
