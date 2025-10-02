@@ -1,4 +1,4 @@
-import useCartMessage from "../../utils/cusotmMessage";
+import useCartMessage from "../../utils/customMessage";
 import useQuery from "../../api/useQuery";
 
 const OmakaseBox = () => {

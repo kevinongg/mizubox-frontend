@@ -1,5 +1,5 @@
 import { useCustomBox } from "./CustomBoxContext";
-import useCartMessage from "../../../utils/cusotmMessage";
+import useCartMessage from "../../../utils/customMessage";
 import "./CustomBoxList.css";
 
 const CustomBoxList = () => {

@@ -1,5 +1,5 @@
 import useQuery from "../../api/useQuery";
-import useCartMessage from "../../utils/cusotmMessage";
+import useCartMessage from "../../utils/customMessage";
 
 const Extra = () => {
   const { data: extras, loading, error } = useQuery("/extras", "extras");
