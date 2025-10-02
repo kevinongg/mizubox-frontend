@@ -10,12 +10,13 @@ const OrderDetails = () => {
   if (error) return <p>Failed to load order details</p>;
 
   return (
-    <div>
+    <div className="order-details">
       <h1>Order Details</h1>
-      <p>Order # {order?.order_number}</p>
-      <p>Placed on: {formatDate(order?.created_at)}</p>
-      <p>Total: ${order?.total_price}</p>
-
+      <div className="order-meta">
+        <p>Order # {order?.order_number}</p>
+        <p>Placed on: {formatDate(order?.created_at)}</p>
+        <p>Total: ${order?.total_price}</p>
+      </div>
       <h2>Items in this Order</h2>
       <ul>
         {order?.items.map((item) => {

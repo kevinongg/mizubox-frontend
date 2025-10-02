@@ -42,7 +42,7 @@ export default function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:publicOrderId" element={<OrderDetails />} />
           <Route
-            path="/order-confirmation/:publicOrderId"
+            path="/orders/:publicOrderId"
             element={<OrderConfirmation />}
           />
           <Route path="/cart" element={<Cart />} />
