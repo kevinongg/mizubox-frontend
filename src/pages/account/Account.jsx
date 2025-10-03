@@ -1,22 +1,14 @@
 import { useAccount } from "./AccountContext";
 import AccountEdit from "./AccountEdit";
+import PasswordEdit from "./PasswordEdit";
 
 const Account = () => {
-  const {
-    user,
-    userLoading,
-    userError,
-    updateUser,
-    updateLoading,
-    updateError,
-  } = useAccount();
+  const { user, userLoading, userError } = useAccount();
   console.log(user);
 
   if (userLoading) return <p>Loading your account...</p>;
   if (userError) return <p>Failed to load your account</p>;
   if (!user) return <p>No user found</p>;
-
-  // const onUpdate = () => {};
 
   return (
     <div className="account-container">
@@ -30,6 +22,8 @@ const Account = () => {
         value={user.email}
         type="email"
       />
+
+      <PasswordEdit />
 
       <AccountEdit
         label="Address"
