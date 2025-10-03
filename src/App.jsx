@@ -17,7 +17,7 @@ import Error404 from "./Error404";
 
 // Protected pages
 
-import Account from "./pages/Account";
+import Account from "./pages/account/Account";
 import Cart from "./pages/cart/Cart";
 import BuildYourOwn from "./pages/Menu/buildyourown/BuildYourOwn";
 import OrderDetails from "./pages/orders/OrderDetails";
