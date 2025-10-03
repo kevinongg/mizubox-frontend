@@ -102,7 +102,7 @@ const Cart = () => {
     try {
       setIsCheckingOut(true);
       const order = await checkout();
-      navigate(`/orders/${order.public_order_id}`);
+      navigate(`/order-confirmation/${order.public_order_id}`);
     } catch (error) {
       console.error(`Failed to check out: ${error.message} `);
     } finally {
