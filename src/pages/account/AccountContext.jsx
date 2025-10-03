@@ -17,13 +17,25 @@ export const AccountProvider = ({ children }) => {
     error: updateError,
   } = useMutation("PATCH", "/users/me", ["user"]);
 
+  const {
+    mutate: updateUserPassword,
+    loading: updateUserPasswordLoading,
+    error: updateUserPasswordError,
+  } = useMutation("PATCH", "/users/me/password", ["user"]);
+
   const value = {
+    // query user
     user,
     userLoading,
     userError,
+    // update user details mutation
     updateUser,
     updateLoading,
     updateError,
+    // update user password mutation
+    updateUserPassword,
+    updateUserPasswordLoading,
+    updateUserPasswordError,
   };
   return (
     <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
