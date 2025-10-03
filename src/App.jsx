@@ -39,7 +39,10 @@ export default function App() {
           <Route path="/buildyourown" element={<BuildYourOwn />} />
           <Route path="/account" element={<Account />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/orders/:orderId" element={<OrderDetails />} />
+          <Route
+            path="/order-confirmation/:orderId"
+            element={<OrderDetails />}
+          />
           <Route path="/cart" element={<Cart />} />
         </Route>
 
