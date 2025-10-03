@@ -39,7 +39,7 @@ const Orders = () => {
                     </span>
                     <span className="order-date">
                       {formatDate(order.created_at)}
-                      {/* {new Date(order.created_at).toLocaleDateString()} */}
+                      {new Date(order.created_at).toLocaleDateString()}
                     </span>
                     <span className="order-status">{order.status}</span>
                     <Link to={`/orders/${order.public_order_id}`}>
