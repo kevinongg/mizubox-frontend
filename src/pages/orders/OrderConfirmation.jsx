@@ -123,7 +123,7 @@ const OrderConfirmation = () => {
 
       <div>
         <Link to="/orders">Back to Orders</Link>
-        <Link to={`/orders/${order.public_order_id}`}>
+        <Link to={`/orders/${order?.public_order_id}`}>
           View Full Order Details
         </Link>
         <Link to="/omakasebox">Continue Shopping</Link>
