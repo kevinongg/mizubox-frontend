@@ -3,6 +3,7 @@ import useQuery from "../../api/useQuery";
 import { useCart } from "../cart/CartContext";
 import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router";
+import { checkAuth, showMessage} from "../../utils/menuHelpers";
 
 const Sauce = () => {
   const { data: sauces, loading, error } = useQuery("/sauces", "sauces");
@@ -14,14 +15,10 @@ const Sauce = () => {
 
   const handleAddSauce = async (sauceId) => {
     try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
+      if (!checkAuth(token, navigate)) return;
       setAddingSauceId(sauceId);
       await addCartItemSauceToCart({ sauceId });
-      setMessage("Sauce added to cart!");
-      setTimeout(() => setMessage(""), 2000);
+      showMessage(setMessage, "Sauce added to cart!");
     } catch (error) {
       console.error("error adding sauce to cart", error);
     } finally {

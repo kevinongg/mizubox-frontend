@@ -3,6 +3,9 @@ import useQuery from "../../api/useQuery";
 import { useCart } from "../cart/CartContext";
 import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router";
+import { checkAuth, showMessage } from "../../utils/menuHelpers";
+
+
 
 const OmakaseBox = () => {
   const {
@@ -18,14 +21,10 @@ const OmakaseBox = () => {
 
   const handleAddToCart = async (boxId) => {
     try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
+       if (!checkAuth(token, navigate)) return;
       setIsAdding(true);
       await addCartItemToCart({ boxType: "pre-made", boxId });
-      setMessage("Added to cart!");
-      setTimeout(() => setMessage(""), 2000);
+      showMessage(setMessage, "Added to cart!");
     } catch (error) {
       console.error("error adding to cart", error);
     } finally {

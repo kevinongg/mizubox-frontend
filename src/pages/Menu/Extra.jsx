@@ -3,6 +3,7 @@ import useQuery from "../../api/useQuery";
 import { useCart } from "../cart/CartContext";
 import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router";
+import { checkAuth, showMessage } from "../../utils/menuHelpers";
 
 const Extra = () => {
   const { data: extras, loading, error } = useQuery("/extras", "extras");
@@ -14,14 +15,10 @@ const Extra = () => {
 
   const handleAddExtra = async (extraId) => {
     try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
+      if (!checkAuth(token, navigate)) return;
       setAddingExtraId(extraId);
       await addCartItemExtraToCart({ extraId });
-      setMessage("Extra added to cart!");
-      setTimeout(() => setMessage(""), 2000);
+      showMessage(setMessage, "Extra added to cart!");
     } catch (error) {
       console.error("error adding extra to cart", error);
     } finally {
