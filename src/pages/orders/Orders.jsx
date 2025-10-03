@@ -10,18 +10,26 @@ const Orders = () => {
   if (error) return <p>Failed to load orders</p>;
 
   const emptyOrder = !orders || orders.length === 0;
-  if (emptyOrder) return <p>You have not placed any orders yet!</p>;
+  if (emptyOrder) {
+    return (
+      <div>
+        <h1>Orders</h1>
+        <p>You have not placed any orders yet!</p>
+        <p>
+          <Link to="/account">Click here</Link> to edit your account profile
+        </p>
+      </div>
+    );
+  }
 
-  console.log(orders);
   return (
     <div className="orders-container">
       <h1>Orders</h1>
-      <p>
-        <Link to="/account">Click here</Link> to edit your account profile
-      </p>
       <ul className="orders-list">
         <p>Welcome to your dashboard! Here are your current orders:</p>
-
+        <p>
+          <Link to="/account">Click here</Link> to edit your account profile
+        </p>
         {emptyOrder ? (
           <p>You do not have any orders placed yet.</p>
         ) : (

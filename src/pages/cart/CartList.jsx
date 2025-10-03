@@ -17,11 +17,9 @@ const CartList = ({
   decreaseCartItemExtraQuantity,
   removeCartItemExtra,
 }) => {
-  console.log(cartItems);
-
   return (
     <div>
-      {cartItems.length !== 0 && (
+      {cartItems.length > 0 && (
         <div>
           <h3>Omakase Boxes</h3>
           <ul>

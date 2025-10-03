@@ -1031,3 +1031,79 @@ main a:hover {
     height: 160px;
   }
 }
+
+/* --------------------------------------------------Style for Order detail-------------------------------------------------------- */
+
+.order-details {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fdfdfd;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Roboto, sans-serif;
+  color: #222;
+}
+
+/* Main Header */
+.order-details h1 {
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #1a73e8;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+/* Meta Info (order number, date, total) */
+.order-meta {
+  margin-bottom: 20px;
+}
+.order-meta p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #555;
+}
+
+/* Section Headings */
+.order-details h2 {
+  font-size: 20px;
+  margin: 20px 0 10px;
+  color: #333;
+  border-left: 4px solid #1a73e8;
+  padding-left: 8px;
+}
+
+.order-details h3 {
+  font-size: 18px;
+  margin: 15px 0 8px;
+  color: #444;
+}
+
+.order-details h5 {
+  font-size: 15px;
+  margin: 10px 0 5px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Card-style lists */
+.order-details ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 15px;
+}
+
+.order-details li {
+  background: #f7faff;
+  margin: 6px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e0e7ff;
+  font-size: 14px;
+}
+
+/* Small text */
+.order-details p {
+  margin: 3px 0;
+}

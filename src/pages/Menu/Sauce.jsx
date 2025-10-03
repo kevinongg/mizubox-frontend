@@ -14,6 +14,7 @@ const Sauce = () => {
       <p>Add premium sauces to your order</p>
 
       {message && <div className="success-message">{message}</div>}
+      {message && <div className="success-message">{message}</div>}
 
       <div className="menu-grid">
         {sauces?.map((sauce) => (
@@ -22,6 +23,7 @@ const Sauce = () => {
             <h2>{sauce.name}</h2>
             <p>{sauce.description}</p>
             <span className="price">${sauce.price}</span>
+            <button
             <button
               onClick={() => handleAddSauce(sauce.id)}
               disabled={addingItemId === sauce.id}
@@ -42,3 +44,4 @@ const Sauce = () => {
 };
 
 export default Sauce;
+

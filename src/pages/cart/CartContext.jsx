@@ -7,6 +7,7 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const { request, invalidateTags } = useApi();
+
   // 1. load cart with usequery
   const {
     data: cart,
@@ -52,10 +53,11 @@ export const CartProvider = ({ children }) => {
 
   //6. checkout
   const checkout = async () => {
-    await request("/orders/checkout", {
+    const order = await request("/orders/checkout", {
       method: "POST",
     });
-    invalidateTags(["cart"]);
+    return order;
+    // invalidateTags(["cart"]);
   };
 
   // ------------- Sauces -------------
