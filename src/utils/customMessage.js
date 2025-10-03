@@ -64,10 +64,10 @@ const useCartMessage = () => {
       setIsUpdating(true);
       setUpdatingItemId(itemId);
       await operation(params);
-      showMessage(successMsg, 1500);
+      // showMessage(successMsg, 1500);
     } catch (error) {
       console.error(`error with ${itemType} operation`, error);
-      showMessage(`Failed to update ${itemType}`);
+      // showMessage(`Failed to update ${itemType}`);
     } finally {
       setIsUpdating(false);
       setUpdatingItemId(null);

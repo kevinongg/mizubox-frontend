@@ -24,7 +24,6 @@ const Sauce = () => {
             <p>{sauce.description}</p>
             <span className="price">${sauce.price}</span>
             <button
-            <button
               onClick={() => handleAddSauce(sauce.id)}
               disabled={addingItemId === sauce.id}
             >
@@ -44,4 +43,3 @@ const Sauce = () => {
 };
 
 export default Sauce;
-
