@@ -1,10 +1,12 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import useQuery from "../../api/useQuery";
 import useMutation from "../../api/useMutation";
 
 const AccountContext = createContext();
 
 export const AccountProvider = ({ children }) => {
+  const [toast, setToast] = useState({ message: "", result: "" });
+
   const {
     data: user,
     loading: userLoading,
@@ -23,10 +25,10 @@ export const AccountProvider = ({ children }) => {
     error: updateUserPasswordError,
   } = useMutation("PATCH", "/users/me/password", ["user"]);
 
-  // const normalizedUpdateUserPasswordError =
-  //   typeof updateUserPasswordError === "string"
-  //     ? updateUserPasswordError
-  //     : updateUserPasswordError.message || null;
+  const toastMessage = (message, result) => {
+    setToast({ message, result });
+    setTimeout(() => setToast({ message: "", result: "" }), 3000);
+  };
 
   const value = {
     // query user
@@ -41,10 +43,16 @@ export const AccountProvider = ({ children }) => {
     updateUserPassword,
     updateUserPasswordLoading,
     updateUserPasswordError,
-    // normalizedUpdateUserPasswordError,
+    // toast
+    toastMessage,
   };
   return (
-    <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
+    <AccountContext.Provider value={value}>
+      {children}{" "}
+      {toast.message && (
+        <div className={`toast toast-${toast.result}`}>{toast.message}</div>
+      )}
+    </AccountContext.Provider>
   );
 };
 

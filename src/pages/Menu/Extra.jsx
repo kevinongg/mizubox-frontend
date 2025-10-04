@@ -34,9 +34,7 @@ const Extra = () => {
       <h1>Extras</h1>
       <p>Add premium extras to your order</p>
 
-      {message && (
-        <div style={{ background: "#d4edda", padding: "10px" }}>{message}</div>
-      )}
+      {message && <div className="success-message">{message}</div>}
 
       <div className="menu-grid">
         {extras?.map((extra) => (

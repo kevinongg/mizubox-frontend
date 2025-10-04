@@ -1107,3 +1107,56 @@ main a:hover {
 .order-details p {
   margin: 3px 0;
 }
+
+/* --------------------------------------------------Account Toast -------------------------------------------------------- */
+
+.toast {
+  position: fixed;
+  top: 250px;
+  left: 50%; /* center horizontally */
+  transform: translateX(-50%);
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  animation: fadeDown 3s ease-in-out forwards;
+  z-index: 9999;
+}
+
+/* Success toast */
+.toast-success {
+  background-color: #28a745;
+}
+
+/* Error toast */
+.toast-error {
+  background-color: #dc3545;
+}
+
+/* Optional info toast */
+.toast-info {
+  background-color: #007bff;
+}
+
+/* Fade from top animation */
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+}

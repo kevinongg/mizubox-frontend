@@ -3,7 +3,8 @@ import { useAccount } from "./AccountContext";
 import RedPencil from "../../components/icons/RedPencil";
 
 const PasswordEdit = () => {
-  const { updateUserPassword, updateUserPasswordError } = useAccount();
+  const { updateUserPassword, updateUserPasswordError, toastMessage } =
+    useAccount();
   const [editing, setEditing] = useState(false);
 
   const onSave = async (event) => {
@@ -12,31 +13,17 @@ const PasswordEdit = () => {
     const currentPassword = formData.get("currentPassword");
     const newPassword = formData.get("newPassword");
 
-    //   const [visibleError, setVisibleError] = useState("");
-    // const [successMessage, setSuccessMessage] = useState("");
-
-    // // Fade error in/out
-    // useEffect(() => {
-    //   if (updateUserPasswordError) {
-    //     setVisibleError(updateUserPasswordError);
-    //     const timer = setTimeout(() => setVisibleError(""), 4000);
-    //     return () => clearTimeout(timer);
-    //   }
-    // }, [updateUserPasswordError]);
-
-    // // Fade success in/out
-    // useEffect(() => {
-    //   if (successMessage) {
-    //     const timer = setTimeout(() => setSuccessMessage(""), 4000);
-    //     return () => clearTimeout(timer);
-    //   }
-    // }, [successMessage]);
-
-    await updateUserPassword({
-      currentPassword,
-      newPassword,
-    });
-    if (!updateUserPasswordError) setEditing(false);
+    try {
+      await updateUserPassword({
+        currentPassword,
+        newPassword,
+      });
+      toastMessage("Password updated successfully!", "success");
+      setEditing(false);
+    } catch (error) {
+      toastMessage("Incorrect password", "error");
+      console.error(error);
+    }
   };
 
   return (
