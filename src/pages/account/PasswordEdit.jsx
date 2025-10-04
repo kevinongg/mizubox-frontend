@@ -9,31 +9,34 @@ const PasswordEdit = () => {
   const onSave = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log(formData);
     const currentPassword = formData.get("currentPassword");
     const newPassword = formData.get("newPassword");
 
-    try {
-      if (newPassword && newPassword.length >= 8) {
-        const isPasswordUpdated = await updateUserPassword({
-          currentPassword,
-          newPassword,
-        });
-        if (!isPasswordUpdated) return updateUserPasswordError;
-        setEditing(false);
-      } else {
-        updateUserPasswordError("Password must be at least 8 characters");
-      }
-    } catch (error) {
-      updateUserPasswordError("Current password is incorrect", error);
-    }
+    //   const [visibleError, setVisibleError] = useState("");
+    // const [successMessage, setSuccessMessage] = useState("");
 
-    //   try {
-    //     await updateUser({ [field]: newValue });
-    //     setEditing(false);
-    //   } catch (error) {
-    //     updateError(error.message);
+    // // Fade error in/out
+    // useEffect(() => {
+    //   if (updateUserPasswordError) {
+    //     setVisibleError(updateUserPasswordError);
+    //     const timer = setTimeout(() => setVisibleError(""), 4000);
+    //     return () => clearTimeout(timer);
     //   }
+    // }, [updateUserPasswordError]);
+
+    // // Fade success in/out
+    // useEffect(() => {
+    //   if (successMessage) {
+    //     const timer = setTimeout(() => setSuccessMessage(""), 4000);
+    //     return () => clearTimeout(timer);
+    //   }
+    // }, [successMessage]);
+
+    await updateUserPassword({
+      currentPassword,
+      newPassword,
+    });
+    if (!updateUserPasswordError) setEditing(false);
   };
 
   return (
@@ -67,13 +70,13 @@ const PasswordEdit = () => {
               minLength={8}
             />
           </label>
+          {updateUserPasswordError && (
+            <output>{updateUserPasswordError}</output>
+          )}
           <button type="submit">Save changes</button>
           <button type="button" onClick={() => setEditing(false)}>
             Cancel
           </button>
-          {updateUserPasswordError && (
-            <output>{updateUserPasswordError}</output>
-          )}
         </form>
       )}
     </div>

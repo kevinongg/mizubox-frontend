@@ -23,6 +23,11 @@ export const AccountProvider = ({ children }) => {
     error: updateUserPasswordError,
   } = useMutation("PATCH", "/users/me/password", ["user"]);
 
+  // const normalizedUpdateUserPasswordError =
+  //   typeof updateUserPasswordError === "string"
+  //     ? updateUserPasswordError
+  //     : updateUserPasswordError.message || null;
+
   const value = {
     // query user
     user,
@@ -36,6 +41,7 @@ export const AccountProvider = ({ children }) => {
     updateUserPassword,
     updateUserPasswordLoading,
     updateUserPasswordError,
+    // normalizedUpdateUserPasswordError,
   };
   return (
     <AccountContext.Provider value={value}>{children}</AccountContext.Provider>

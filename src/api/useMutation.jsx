@@ -19,6 +19,7 @@ const useMutation = (method, resource, tagsToInvalidate) => {
       invalidateTags(tagsToInvalidate);
     } catch (e) {
       setError(e.message);
+      console.log(e);
     } finally {
       setLoading(false);
     }
