@@ -13,7 +13,7 @@ const AccountEdit = ({ label, field, value, type }) => {
 
     try {
       await updateUser({ [field]: newValue });
-      toastMessage(`${field} updated successfully!"`, "success");
+      toastMessage(`${label} updated successfully!`, "success");
       setEditing(false);
     } catch (error) {
       console.error(error);
