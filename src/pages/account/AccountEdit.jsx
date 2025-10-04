@@ -10,12 +10,9 @@ const AccountEdit = ({ label, field, value, type }) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newValue = formData.get(field);
-    try {
-      await updateUser({ [field]: newValue });
-      setEditing(false);
-    } catch (error) {
-      updateError(error.message);
-    }
+
+    await updateUser({ [field]: newValue });
+    setEditing(false);
   };
 
   return (
@@ -36,11 +33,11 @@ const AccountEdit = ({ label, field, value, type }) => {
             defaultValue={value}
             required={field === "name" || field === "email"}
           />
+          {updateError && <output>{updateError}</output>}
           <button type="submit">Save changes</button>
           <button type="button" onClick={() => setEditing(false)}>
             Cancel
           </button>
-          {updateError && <output>{updateError}</output>}
         </form>
       )}
     </div>
