@@ -90,12 +90,12 @@
 .quantity-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .qty-btn {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border: 1px solid #d1d5db;
   background-color: #fff;
   border-radius: 6px;
@@ -107,6 +107,7 @@
   justify-content: center;
   transition: all 0.2s;
   color: #374151;
+  flex-shrink: 0;
 }
 
 .qty-btn:hover {
@@ -125,8 +126,13 @@
 }
 
 .quantity {
-  min-width: 24px;
+  min-width: 32px;
   text-align: center;
   font-weight: 600;
   color: #1f2937;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
 }
