@@ -23,27 +23,29 @@ const AccountEdit = ({ label, field, value, type }) => {
   return (
     <div>
       <strong>{label}</strong>
-      {!editing ? (
+      <>
+        <div>{value}</div>
+        <button onClick={() => setEditing(true)}>
+          <RedPencil />
+        </button>
+      </>
+
+      {editing && (
         <>
-          <div>{value}</div>
-          <button onClick={() => setEditing(true)}>
-            <RedPencil />
-          </button>
+          <form onSubmit={onSave}>
+            <input
+              name={field}
+              type={type}
+              defaultValue={value}
+              required={field === "name" || field === "email"}
+            />
+            {updateError && <output>{updateError}</output>}
+            <button type="submit">Save changes</button>
+            <button type="button" onClick={() => setEditing(false)}>
+              Cancel
+            </button>
+          </form>
         </>
-      ) : (
-        <form onSubmit={onSave}>
-          <input
-            name={field}
-            type={type}
-            defaultValue={value}
-            required={field === "name" || field === "email"}
-          />
-          {updateError && <output>{updateError}</output>}
-          <button type="submit">Save changes</button>
-          <button type="button" onClick={() => setEditing(false)}>
-            Cancel
-          </button>
-        </form>
       )}
     </div>
   );
