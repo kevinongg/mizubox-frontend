@@ -23,9 +23,9 @@ const Navbar = () => {
             <NavLink to="/searchbar" className="icon-link">
               <span className="icon-search">🔍</span>
             </NavLink>
-            {/* <NavLink to="/orders" className="icon-link">
+            <NavLink to="/orders" className="icon-link">
               <span className="icon-user">👤</span>
-            </NavLink> */}
+            </NavLink>
             <UserDropdown />
             <NavLink to="/cart" className="icon-link cart-link">
               <span className="icon-cart">🛒</span>
