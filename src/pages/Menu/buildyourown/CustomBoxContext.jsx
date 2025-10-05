@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import useQuery from "../../../api/useQuery";
 import { useApi } from "../../../api/apiContext";
+import useMutation from "../../../api/useMutation";
 
 const CustomBoxContext = createContext();
 
@@ -129,6 +130,14 @@ export const CustomBoxProvider = ({ children }) => {
     invalidateTags(["customBox"]);
   };
 
+  // Clear custom box
+  // const clearCustomBox = async () => {};
+  const { mutate: clearCustomBox } = useMutation(
+    "DELETE",
+    "/user-custom-boxes/active",
+    ["customBox"]
+  );
+
   const value = {
     // custom box query
     customBox,
@@ -152,6 +161,8 @@ export const CustomBoxProvider = ({ children }) => {
     deleteExtraFromCustomBox,
     // cart
     addCustomBoxToCart,
+    // clear custom box
+    clearCustomBox,
     // 14 nigiri rule
     currentTotalNigiri,
   };

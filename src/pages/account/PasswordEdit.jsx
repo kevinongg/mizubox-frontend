@@ -3,37 +3,27 @@ import { useAccount } from "./AccountContext";
 import RedPencil from "../../components/icons/RedPencil";
 
 const PasswordEdit = () => {
-  const { updateUserPassword, updateUserPasswordError } = useAccount();
+  const { updateUserPassword, updateUserPasswordError, toastMessage } =
+    useAccount();
   const [editing, setEditing] = useState(false);
 
   const onSave = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log(formData);
     const currentPassword = formData.get("currentPassword");
     const newPassword = formData.get("newPassword");
 
     try {
-      if (newPassword && newPassword.length >= 8) {
-        const isPasswordUpdated = await updateUserPassword({
-          currentPassword,
-          newPassword,
-        });
-        if (!isPasswordUpdated) return updateUserPasswordError;
-        setEditing(false);
-      } else {
-        updateUserPasswordError("Password must be at least 8 characters");
-      }
+      await updateUserPassword({
+        currentPassword,
+        newPassword,
+      });
+      toastMessage("Password updated successfully!", "success");
+      setEditing(false);
     } catch (error) {
-      updateUserPasswordError("Current password is incorrect", error);
+      toastMessage("Incorrect password", "error");
+      console.error(error);
     }
-
-    //   try {
-    //     await updateUser({ [field]: newValue });
-    //     setEditing(false);
-    //   } catch (error) {
-    //     updateError(error.message);
-    //   }
   };
 
   return (
@@ -67,13 +57,13 @@ const PasswordEdit = () => {
               minLength={8}
             />
           </label>
+          {updateUserPasswordError && (
+            <output>{updateUserPasswordError}</output>
+          )}
           <button type="submit">Save changes</button>
           <button type="button" onClick={() => setEditing(false)}>
             Cancel
           </button>
-          {updateUserPasswordError && (
-            <output>{updateUserPasswordError}</output>
-          )}
         </form>
       )}
     </div>

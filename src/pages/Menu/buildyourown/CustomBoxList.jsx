@@ -16,13 +16,14 @@ const CustomBoxList = () => {
   const noNigiris = !customBox?.contents || customBox.contents.length === 0;
   const noSauces = !customBox?.sauces || customBox.sauces.length === 0;
   const noExtras = !customBox?.extras || customBox.extras.length === 0;
+  const emptyCustomBox = noNigiris && noSauces && noExtras;
 
-  if (!customBox || (noNigiris && noSauces && noExtras))
+  if (!customBox || emptyCustomBox)
     return <p>You have not started creating the box!</p>;
-  if (customBoxError) return <p>Failed to load custom box</p>;
-
+  // if (customBoxError) return <p>Failed to load custom box</p>;
+  console.log(customBox);
   return (
-    <div>
+    <>
       <h3>Current Omakase Box</h3>
 
       {!noNigiris && (

@@ -15,4 +15,3 @@ const formatDate = (isoString) => {
 };
 
 export default formatDate;
-

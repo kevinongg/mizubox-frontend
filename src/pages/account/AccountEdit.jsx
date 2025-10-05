@@ -3,18 +3,20 @@ import { useAccount } from "./AccountContext";
 import RedPencil from "../../components/icons/RedPencil";
 
 const AccountEdit = ({ label, field, value, type }) => {
-  const { updateUser, updateError } = useAccount();
+  const { updateUser, updateError, toastMessage } = useAccount();
   const [editing, setEditing] = useState(false);
 
   const onSave = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newValue = formData.get(field);
+
     try {
       await updateUser({ [field]: newValue });
+      toastMessage(`${label} updated successfully!`, "success");
       setEditing(false);
     } catch (error) {
-      updateError(error.message);
+      console.error(error);
     }
   };
 
@@ -36,11 +38,11 @@ const AccountEdit = ({ label, field, value, type }) => {
             defaultValue={value}
             required={field === "name" || field === "email"}
           />
+          {updateError && <output>{updateError}</output>}
           <button type="submit">Save changes</button>
           <button type="button" onClick={() => setEditing(false)}>
             Cancel
           </button>
-          {updateError && <output>{updateError}</output>}
         </form>
       )}
     </div>

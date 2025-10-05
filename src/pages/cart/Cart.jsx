@@ -8,7 +8,7 @@ const Cart = () => {
     // cart
     cart,
     // loading,
-    error,
+    // error,
     clearCart,
     // cart items
     updateCartItem,
@@ -120,14 +120,14 @@ const Cart = () => {
   //   );
   // }
 
-  if (error) {
-    return (
-      <div>
-        <h1>Your Cart</h1>
-        <p>Failed to load cart...</p>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div>
+  //       <h1>Your Cart</h1>
+  //       <p>Failed to load cart...</p>
+  //     </div>
+  //   );
+  // }
 
   const noBoxes = !cart?.items || cart.items.length === 0;
   const noSauces = !cart?.sauces || cart.sauces.length === 0;
