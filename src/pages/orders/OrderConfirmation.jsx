@@ -17,7 +17,7 @@ const OrderConfirmation = () => {
 
   return (
     <div>
-      <h1>Thank you for your order, {user.name}!</h1>
+      <h1>Thank you for your order, {user?.name}!</h1>
       <p>Your order number is: {order?.order_number}</p>
       <p>Placed on: {formatDate(order?.created_at)}</p>
       <p>Total: {order?.total_price}</p>
