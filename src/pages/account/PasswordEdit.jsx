@@ -9,9 +9,11 @@ const PasswordEdit = () => {
 
   const onSave = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(event.target.value);
+    console.log(formData);
     const currentPassword = formData.get("currentPassword");
     const newPassword = formData.get("newPassword");
+    console.log(formData);
 
     try {
       await updateUserPassword({

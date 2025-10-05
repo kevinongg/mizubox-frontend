@@ -131,7 +131,6 @@ export const CustomBoxProvider = ({ children }) => {
   };
 
   // Clear custom box
-  // const clearCustomBox = async () => {};
   const { mutate: clearCustomBox } = useMutation(
     "DELETE",
     "/user-custom-boxes/active",
