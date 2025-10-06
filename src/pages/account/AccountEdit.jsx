@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAccount } from "./AccountContext";
-import RedPencil from "../../components/icons/RedPencil";
+
 
 const AccountEdit = ({ label, field, value, type }) => {
   const { updateUser, updateError, toastMessage } = useAccount();
@@ -25,8 +25,8 @@ const AccountEdit = ({ label, field, value, type }) => {
       <strong>{label}</strong>
       <>
         <div>{value}</div>
-        <button onClick={() => setEditing(true)}>
-          <RedPencil />
+        <button onClick={() => setEditing(true)} className="icon-button">
+         Edit
         </button>
       </>
 

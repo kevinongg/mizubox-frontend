@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAccount } from "./AccountContext";
-import RedPencil from "../../components/icons/RedPencil";
+// import RedPencil from "../../components/icons/RedPencil";
 
 const PasswordEdit = () => {
   const { updateUserPassword, updateUserPasswordError, toastMessage } =
@@ -30,8 +30,8 @@ const PasswordEdit = () => {
       <strong>Password</strong>
       <>
         <div>*********</div>
-        <button onClick={() => setEditing(true)}>
-          <RedPencil />
+        <button onClick={() => setEditing(true)} className="icon-button">
+         Edit
         </button>
       </>
 

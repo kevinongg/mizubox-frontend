@@ -4,7 +4,7 @@ import { useAuth } from "../../auth/AuthContext";
 
 const UserDropdown = () => {
   const { token, logout } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [userDropdown, setUserDropdown] = useState(false);
   const userDropdownRef = useRef(null);
 

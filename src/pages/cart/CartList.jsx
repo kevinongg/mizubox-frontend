@@ -132,7 +132,7 @@ const CartList = ({
                       </button>
                     )}
 
-                    <div>{quantity}</div>
+                    <div  style = {{ padding: "0 46px" }}>{quantity}</div>
 
                     <button
                       type="button"
@@ -196,7 +196,7 @@ const CartList = ({
                       </button>
                     )}
 
-                    <div>{quantity}</div>
+                    <div  style= {{ padding: "0 46px" }}>{quantity}</div>
 
                     <button
                       type="button"
@@ -253,7 +253,7 @@ const CartList = ({
                       </button>
                     )}
 
-                    <div>{quantity}</div>
+                    <div  style= {{ padding: "0 46px" }}>{quantity}</div>
 
                     <button
                       type="button"
