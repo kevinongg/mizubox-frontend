@@ -5,7 +5,7 @@ import NigiriPicker from "./NigiriPicker";
 import SaucePicker from "./SaucePicker";
 
 const BuildYourOwn = () => {
-  const { customBox, addCustomBoxToCart, currentTotalNigiri } = useCustomBox();
+  const { customBox, currentTotalNigiri } = useCustomBox();
 
   return (
     <div className="build-your-own">
@@ -24,15 +24,6 @@ const BuildYourOwn = () => {
 
       <h2>Pick Extras</h2>
       <ExtraPicker />
-      <button
-        type="button"
-        disabled={currentTotalNigiri < 14 || !customBox}
-        onClick={() =>
-          addCustomBoxToCart({ customBoxId: customBox.user_custom_box_id })
-        }
-      >
-        Add Box To Cart
-      </button>
     </div>
   );
 };

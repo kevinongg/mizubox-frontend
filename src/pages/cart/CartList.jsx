@@ -1,6 +1,5 @@
 import TrashIcon from "../../components/icons/TrashIcon";
 
-
 const CartList = ({
   cartItems,
   cartItemSauces,
@@ -133,7 +132,7 @@ const CartList = ({
                       </button>
                     )}
 
-                    <div  style = {{ padding: "0 46px" }}>{quantity}</div>
+                    <div style={{ padding: "0 46px" }}>{quantity}</div>
 
                     <button
                       type="button"
@@ -197,7 +196,7 @@ const CartList = ({
                       </button>
                     )}
 
-                    <div  style= {{ padding: "0 46px" }}>{quantity}</div>
+                    <div style={{ padding: "0 46px" }}>{quantity}</div>
 
                     <button
                       type="button"
@@ -241,7 +240,8 @@ const CartList = ({
                             cartItemExtraId,
                             quantity
                           )
-                        } className="button-qty"
+                        }
+                        className="button-qty"
                       >
                         -
                       </button>
@@ -254,13 +254,16 @@ const CartList = ({
                       </button>
                     )}
 
-                    <div  style= {{ padding: "0 46px" }} className="button-qty" >{quantity}</div>
+                    <div style={{ padding: "0 46px" }} className="button-qty">
+                      {quantity}
+                    </div>
 
                     <button
                       type="button"
                       onClick={() =>
                         increaseCartItemExtraQuantity(cartItemExtraId, quantity)
-                      } className="button-qty"
+                      }
+                      className="button-qty"
                     >
                       +
                     </button>
