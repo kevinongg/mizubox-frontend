@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../../auth/AuthContext";
 
@@ -6,20 +6,44 @@ const UserDropdown = () => {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
   const [userDropdown, setUserDropdown] = useState(false);
+  const userDropdownRef = useRef(null);
 
   // const handleLogout = () => {
   //   logout();
   //   navigate("/login");
   // };
 
+  useEffect(() => {
+    const onClickOutside = (event) => {
+      console.log(userDropdownRef.current);
+      if (userDropdownRef && !userDropdownRef.current.contains(event?.target))
+        setUserDropdown(false);
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
+
+  const onLogout = () => {
+    logout();
+    setUserDropdown(false);
+    navigate("/homepage");
+  };
+
   return (
-    <div>
-      <button type="button" onClick={() => setUserDropdown((prev) => !prev)}>
-        <span className="icon-user">👤</span>
-      </button>
+    <div className="user-menu" ref={userDropdownRef}>
+      {/* <button type="button" onClick={() => setUserDropdown((prev) => !prev)}> */}
+      <a
+        className="icon-link"
+        type="button"
+        onClick={() => setUserDropdown(!userDropdown)}
+      >
+        <span className="icon-user">
+          👤<span style={{ fontSize: "10px" }}>▼</span>
+        </span>
+      </a>
 
       {userDropdown && (
-        <div>
+        <div className="user-dropdown">
           <NavLink to="/account" onClick={() => setUserDropdown(false)}>
             Account
           </NavLink>
@@ -31,9 +55,7 @@ const UserDropdown = () => {
               Login
             </NavLink>
           ) : (
-            <NavLink to={"/login"} onClick={() => logout()}>
-              Logout
-            </NavLink>
+            <button onClick={onLogout}>Logout</button>
           )}
         </div>
       )}

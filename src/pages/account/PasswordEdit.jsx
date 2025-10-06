@@ -9,7 +9,7 @@ const PasswordEdit = () => {
 
   const onSave = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target.value);
+    const formData = new FormData(event.currentTarget);
     const currentPassword = formData.get("currentPassword");
     const newPassword = formData.get("newPassword");
 
@@ -21,8 +21,7 @@ const PasswordEdit = () => {
       toastMessage("Password updated successfully!", "success");
       setEditing(false);
     } catch (error) {
-      toastMessage("Incorrect password", "error");
-      console.error(error);
+      toastMessage(error.message, "error");
     }
   };
 

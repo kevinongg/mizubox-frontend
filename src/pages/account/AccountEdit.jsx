@@ -16,7 +16,7 @@ const AccountEdit = ({ label, field, value, type }) => {
       toastMessage(`${label} updated successfully!`, "success");
       setEditing(false);
     } catch (error) {
-      console.error(error);
+      toastMessage(error.message, "error");
     }
   };
 
