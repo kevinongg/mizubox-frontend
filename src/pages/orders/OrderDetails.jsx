@@ -95,7 +95,9 @@ const OrderDetails = () => {
                         {item.box_details.extras.map((extra) => {
                           return (
                             <li key={extra.user_custom_box_extra_id}>
-                              <p>{extra.name}</p>
+                              <p>
+                                {extra.name} (×{extra.quantity})
+                              </p>
                             </li>
                           );
                         })}

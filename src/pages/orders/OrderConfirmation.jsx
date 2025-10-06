@@ -14,14 +14,17 @@ const OrderConfirmation = () => {
   } = useQuery(`/orders/${publicOrderId}`, "");
   console.log(order);
 
-  if (error) return <p className="error-message">Failed to load order confirmation page</p>;
+  if (error)
+    return (
+      <p className="error-message">Failed to load order confirmation page</p>
+    );
 
   return (
     <div className="order-confirmation">
       <div className="order-header">
-        <h1>Thank you for your order, {user.name}!</h1>
+        <h1>Thank you for your order, {user?.name}!</h1>
       </div>
-      
+
       <div className="order-details">
         <p id="detail">Your order number is: {order?.order_number}</p>
         <p>Placed on: {formatDate(order?.created_at)}</p>
@@ -45,8 +48,10 @@ const OrderConfirmation = () => {
 
             return (
               <li key={item.order_item_id}>
-                <p id="order detail">{" "}
-                  {isPreMadeBox? `Pre-Made Box: ${item.box_details.name}`
+                <p id="order detail">
+                  {" "}
+                  {isPreMadeBox
+                    ? `Pre-Made Box: ${item.box_details.name}`
                     : "Custom Omakase Box"}{" "}
                   (× {boxQuantity})
                 </p>
@@ -57,7 +62,9 @@ const OrderConfirmation = () => {
                       <p>
                         Nigiris:{" "}
                         {item.box_details.nigiris
-                          .map((nigiri) => `${nigiri.name} (×${nigiri.quantity})`)
+                          .map(
+                            (nigiri) => `${nigiri.name} (×${nigiri.quantity})`
+                          )
                           .join(`, `)}
                       </p>
                     )}
@@ -67,8 +74,11 @@ const OrderConfirmation = () => {
                 {isCustomBox && (
                   <div className="box-details">
                     <p>
-                      {" "}Nigiris:{" "}
-                      {nigiriLength > 0 ? item.box_details.nigiris.map(
+                      {" "}
+                      Nigiris:{" "}
+                      {nigiriLength > 0
+                        ? item.box_details.nigiris
+                            .map(
                               (nigiri) => `${nigiri.name} (×${nigiri.quantity})`
                             )
                             .join(`, `)
@@ -79,7 +89,9 @@ const OrderConfirmation = () => {
                       Sauces:{" "}
                       {sauceLength > 0
                         ? item.box_details.sauces
-                            .map((sauce) => `${sauce.name} (×${sauce.quantity})`)
+                            .map(
+                              (sauce) => `${sauce.name} (×${sauce.quantity})`
+                            )
                             .join(`, `)
                         : "None"}
                     </p>
@@ -88,7 +100,9 @@ const OrderConfirmation = () => {
                       Extras:{" "}
                       {extraLength > 0
                         ? item.box_details.extras
-                            .map((extra) => `${extra.name} (×${extra.quantity})`)
+                            .map(
+                              (extra) => `${extra.name} (×${extra.quantity})`
+                            )
                             .join(`, `)
                         : "None"}
                     </p>
