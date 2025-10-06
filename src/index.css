@@ -179,6 +179,12 @@ form {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
 label {
   display: block;
   margin-bottom: 1rem;
@@ -212,6 +218,11 @@ button:hover {
 main a {
   color: #285fa7;
   font-weight: 500;
+  text-align: center;
+  padding-left: 400px;
+
+
+ 
 }
 
 main a:hover {
