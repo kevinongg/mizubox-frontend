@@ -18,6 +18,7 @@ export default function Register() {
       await register({ name, email, password });
       navigate("/");
     } catch (e) {
+      console.log(e);
       setError(e.message);
     }
   };
@@ -38,8 +39,8 @@ export default function Register() {
           Password
           <input type="password" name="password" required />
         </label>
-        <button>Register</button>
         {error && <output>{error}</output>}
+        <button>Register</button>
       </form>
       <Link to="/login">Already have an account? Log in here.</Link>
     </>

@@ -3,11 +3,10 @@ import AccountEdit from "./AccountEdit";
 import PasswordEdit from "./PasswordEdit";
 
 const Account = () => {
-  const { user, userError } = useAccount();
-  console.log(user);
+  const { user } = useAccount();
 
   // if (userLoading) return <p>Loading your account...</p>;
-  if (userError) return <p>Failed to load your account</p>;
+  // if (userError) return <p>Failed to load your account</p>;
   // if (!user) return <p>No user found</p>;
 
   return (

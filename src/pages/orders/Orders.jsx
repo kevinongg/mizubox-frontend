@@ -3,11 +3,11 @@ import useQuery from "../../api/useQuery";
 import formatDate from "../../utils/formatDate";
 
 const Orders = () => {
-  const { data: orders, loading, error } = useQuery("/orders", "orders");
+  const { data: orders } = useQuery("/orders", "orders");
   // console.log(orders);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Failed to load orders</p>;
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Failed to load orders</p>;
 
   const emptyOrder = !orders || orders.length === 0;
   if (emptyOrder) {
