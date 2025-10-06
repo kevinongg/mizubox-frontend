@@ -11,6 +11,7 @@ const NigiriPicker = () => {
         return (
           <div key={nigiri.id} className="picker-item">
             <img src={nigiri.image_url} alt={nigiri.name}></img>
+            <p>{nigiri.description}</p>
             <button
               type="button"
               onClick={() =>

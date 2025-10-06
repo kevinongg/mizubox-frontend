@@ -8,12 +8,11 @@ const HomePage = () => {
   return (
     <div className="home-wrapper">
       <div className=" hero-section">
-        <img src="/nigiris.png" alt="Sushi prepration" className="hero-gif" />
+        <img src="/home.jpg" alt="Sushi prepration" className="hero-gif" />
         <div className="hero-overlay">
           <div className="hero-content">
             <h1 className="hero-title">
-              FRESS SUSHI <br />
-              DELIVERED
+              A Taste of Japan <br /> One Box at a Time
             </h1>
             <p className="hero-subtitle">
               Experience the art of Omakase at home <br />
