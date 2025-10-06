@@ -218,8 +218,6 @@ button:hover {
 main a {
   color: #285fa7;
   font-weight: 500;
-  text-align: center;
-  padding-left: 400px;
 }
 
 main a:hover {
@@ -657,8 +655,6 @@ main a:hover {
   margin: 5px 0;
 }
 
-
-
 .cart-container button {
   background: #28a745;
   color: white;
@@ -669,7 +665,6 @@ main a:hover {
   cursor: pointer;
   width: 100px;
 }
-
 
 .cart-container button:hover {
   background: #218838;
@@ -717,6 +712,14 @@ main a:hover {
   padding: 40px;
   background: #f8f9fa;
   border-radius: 10px;
+}
+
+.register-link {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  color: #0066cc;
+  text-decoration: none;
 }
 
 /* ============================================== ORDERS PAGE STYLES ===================================== */
@@ -819,16 +822,14 @@ main a:hover {
 
 .account-container > div:hover {
   border-color: #8ba99d;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
-
 
 .account-container strong {
   display: block;
   font-size: 20px;
   color: #745c5c;
   text-transform: uppercase;
-  
 }
 
 /* Value and Button Row */
@@ -854,7 +855,6 @@ main a:hover {
   cursor: pointer;
   transition: all 0.2s;
   width: 100px;
-
 }
 
 .icon-button:hover {
@@ -949,7 +949,6 @@ main a:hover {
   color: #666;
   font-size: 16px;
   margin: 5px 0;
-
 }
 .build-your-own h2 {
   color: #333;
