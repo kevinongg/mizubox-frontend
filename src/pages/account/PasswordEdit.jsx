@@ -29,10 +29,15 @@ const PasswordEdit = () => {
     <div>
       <strong>Password</strong>
       <>
+      
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
         <div>*********</div>
         <button onClick={() => setEditing(true)} className="icon-button">
          Edit
         </button>
+        </div>
       </>
 
       {editing && (

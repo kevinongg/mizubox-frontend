@@ -21,13 +21,16 @@ const AccountEdit = ({ label, field, value, type }) => {
   };
 
   return (
+
     <div>
       <strong>{label}</strong>
       <>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>{value}</div>
         <button onClick={() => setEditing(true)} className="icon-button">
          Edit
         </button>
+        </div>
       </>
 
       {editing && (
@@ -48,6 +51,7 @@ const AccountEdit = ({ label, field, value, type }) => {
         </>
       )}
     </div>
+
   );
 };
 

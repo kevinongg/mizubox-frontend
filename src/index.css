@@ -787,22 +787,137 @@ main a:hover {
 }
 
 /* ===================================ACCOUNT PAGE STYLES ========================= */
+
 .account-container {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 650px;
+  margin: 40px auto;
   padding: 20px;
 }
 
 .account-container h1 {
   text-align: center;
+  font-size: 28px;
+  color: #1a1a1a;
   margin-bottom: 30px;
 }
 
-.icon-button{
-  width: 100px;
-  text-align: center;
-  margin-bottom: 25px;
+.account-container > div {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 15px;
+}
 
+.account-container > div:hover {
+  border-color: #8ba99d;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+
+.account-container strong {
+  display: block;
+  font-size: 20px;
+  color: #745c5c;
+  text-transform: uppercase;
+  
+}
+
+/* Value and Button Row */
+.account-container > div > div:first-of-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account-container > div > div > div {
+  font-size: 18px;
+  color: #1a1a1a;
+}
+
+/* Edit Button */
+.icon-button {
+  background: #68c07a;
+  color: rgb(33, 32, 32);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100px;
+
+}
+
+.icon-button:hover {
+  background: #c6ee67;
+  transform: translateY(-1px);
+}
+
+/* Form */
+.account-container form {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.account-container label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  margin: 12px 0 6px;
+}
+
+/* Inputs */
+.account-container input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.account-container input:focus {
+  outline: none;
+  border-color: #575b54;
+}
+
+/* Error */
+.account-container output {
+  display: block;
+  color: #e53e3e;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* -----------Form Buttons---------- */
+.account-container form > button {
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.account-container button[type="submit"] {
+  background: #68c07a;
+}
+
+.account-container button[type="submit"]:hover {
+  background: #89d962;
+}
+
+.account-container button[type="button"] {
+  background: #e26161;
+  color: #333;
+}
+
+.account-container button[type="button"]:hover {
+  background: #ed0505;
 }
 
 /* ----------------------------------Build Your Own, Pick Nigiris,Pick Sauces,Pick Extras---------------------------------------- */
