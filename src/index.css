@@ -1162,65 +1162,7 @@ main a:hover {
 }
 
 /* --------------------------------------------------Account Dropdown -------------------------------------------------------- */
-/* .user-menu {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-menu {
-  position: absolute;
-  right: 0;
-  top: 45px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  min-width: 160px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  animation: fadeIn 0.2s ease-in-out;
-}
-
-.dropdown-menu a,
-.dropdown-menu button {
-  text-align: left;
-  padding: 10px 15px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #333;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.dropdown-menu a:hover,
-.dropdown-menu button:hover {
-  background-color: #f4f4f4;
-  color: #000;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.dropdown-menu button {
-  background: none;
-  border: none;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  padding: 10px;
-  cursor: pointer;
-  width: 100%;
-} */
+/* used code from AI to style, did not have time -kevin */
 
 .user-menu {
   position: relative;
