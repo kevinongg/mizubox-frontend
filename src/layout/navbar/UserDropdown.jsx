@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { useAuth } from "../../auth/AuthContext";
 
 const UserDropdown = () => {
@@ -26,7 +26,6 @@ const UserDropdown = () => {
   const onLogout = () => {
     logout();
     setUserDropdown(false);
-    navigate("/homepage");
   };
 
   return (
