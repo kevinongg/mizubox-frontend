@@ -220,9 +220,6 @@ main a {
   font-weight: 500;
   text-align: center;
   padding-left: 400px;
-
-
- 
 }
 
 main a:hover {
@@ -952,8 +949,8 @@ main a:hover {
   color: #666;
   font-size: 16px;
   margin: 5px 0;
-}
 
+}
 .build-your-own h2 {
   color: #333;
   margin-top: 40px;
@@ -1080,6 +1077,13 @@ main a:hover {
   object-fit: contain;
   border-radius: 5px;
   margin-bottom: 12px;
+}
+
+.picker-item p {
+  font-size: 14px;
+  color: #333;
+  margin: 8px 0;
+  flex-grow: 1;
 }
 
 .picker-item button {
