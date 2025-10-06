@@ -17,8 +17,6 @@ const HomePage = () => {
             <p className="hero-subtitle">
               Experience the art of Omakase at home <br />
               Try it with
-              <br />
-              $0 Delivery Fee.
             </p>
             <button
               className="hero-button"
