@@ -1167,6 +1167,7 @@ main a:hover {
 .user-menu {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .user-dropdown {
