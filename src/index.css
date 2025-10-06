@@ -649,6 +649,8 @@ main a:hover {
   margin: 5px 0;
 }
 
+
+
 .cart-container button {
   background: #28a745;
   color: white;
@@ -657,7 +659,9 @@ main a:hover {
   margin: 0 5px;
   border-radius: 5px;
   cursor: pointer;
+  width: 100px;
 }
+
 
 .cart-container button:hover {
   background: #218838;
@@ -707,7 +711,7 @@ main a:hover {
   border-radius: 10px;
 }
 
-/* ========== ORDERS PAGE STYLES ========== */
+/* ============================================== ORDERS PAGE STYLES ===================================== */
 .orders-container {
   max-width: 800px;
   margin: 0 auto;
@@ -782,7 +786,7 @@ main a:hover {
   color: #666;
 }
 
-/* ========== ACCOUNT PAGE STYLES ========== */
+/* ===================================ACCOUNT PAGE STYLES ========================= */
 .account-container {
   max-width: 600px;
   margin: 0 auto;
@@ -793,6 +797,14 @@ main a:hover {
   text-align: center;
   margin-bottom: 30px;
 }
+
+.icon-button{
+  width: 100px;
+  text-align: center;
+  margin-bottom: 25px;
+
+}
+
 /* ----------------------------------Build Your Own, Pick Nigiris,Pick Sauces,Pick Extras---------------------------------------- */
 
 /* Build Your Own Container */
