@@ -15,9 +15,6 @@ const Orders = () => {
       <div>
         <h1>Orders</h1>
         <p>You have not placed any orders yet!</p>
-        <p>
-          <Link to="/account">Click here</Link> to edit your account profile
-        </p>
       </div>
     );
   }
@@ -27,9 +24,7 @@ const Orders = () => {
       <h1>Orders</h1>
       <ul className="orders-list">
         <p>Welcome to your dashboard! Here are your current orders:</p>
-        <p>
-          <Link to="/account">Click here</Link> to edit your account profile
-        </p>
+
         {emptyOrder ? (
           <p>You do not have any orders placed yet.</p>
         ) : (
