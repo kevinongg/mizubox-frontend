@@ -12,6 +12,8 @@ const CustomBoxList = () => {
     deleteSauceFromCustomBox,
     updateExtraQuantity,
     deleteExtraFromCustomBox,
+    addCustomBoxToCart,
+    currentTotalNigiri,
   } = useCustomBox();
 
   const noNigiris = !customBox?.contents || customBox.contents.length === 0;
@@ -20,17 +22,32 @@ const CustomBoxList = () => {
   const emptyCustomBox = noNigiris && noSauces && noExtras;
 
   if (!customBox || emptyCustomBox)
-    return <p className="empty-message">You have not started creating the box!</p>;
-  
-  console.log(customBox);
+    return (
+      <p className="empty-message">You have not started creating the box!</p>
+    );
+
   return (
     <div className="custom-box-list">
       <h3 className="box-title">Current Omakase Box</h3>
 
       {!emptyCustomBox && (
         <div className="box-content">
-          <button type="button" className="clear-btn" onClick={() => clearCustomBox()}>
+          <button
+            type="button"
+            className="clear-btn"
+            onClick={() => clearCustomBox()}
+          >
             Clear Box
+          </button>
+
+          <button
+            type="button"
+            disabled={currentTotalNigiri < 14 || !customBox}
+            onClick={() =>
+              addCustomBoxToCart({ customBoxId: customBox.user_custom_box_id })
+            }
+          >
+            Add Box To Cart
           </button>
 
           {!noNigiris && (
@@ -42,9 +59,14 @@ const CustomBoxList = () => {
                   const quantity = nigiri.quantity;
 
                   return (
-                    <li key={nigiri.user_custom_box_content_id} className="item">
+                    <li
+                      key={nigiri.user_custom_box_content_id}
+                      className="item"
+                    >
                       <div className="item-content">
-                        <span className="item-name">{nigiri.name} (×{quantity})</span>
+                        <span className="item-name">
+                          {nigiri.name} (×{quantity})
+                        </span>
                         <div className="quantity-controls">
                           <button
                             type="button"
@@ -99,7 +121,9 @@ const CustomBoxList = () => {
                   return (
                     <li key={sauce.user_custom_box_sauce_id} className="item">
                       <div className="item-content">
-                        <span className="item-name">{sauce.name} (×{quantity})</span>
+                        <span className="item-name">
+                          {sauce.name} (×{quantity})
+                        </span>
                         <div className="quantity-controls">
                           <button
                             type="button"
@@ -152,7 +176,9 @@ const CustomBoxList = () => {
                   return (
                     <li key={extra.user_custom_box_extra_id} className="item">
                       <div className="item-content">
-                        <span className="item-name">{extra.name} (×{quantity})</span>
+                        <span className="item-name">
+                          {extra.name} (×{quantity})
+                        </span>
                         <div className="quantity-controls">
                           <button
                             type="button"
