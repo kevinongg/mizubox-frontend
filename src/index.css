@@ -642,6 +642,10 @@ main a:hover {
   padding: 0;
 }
 
+.empty-cart{
+  text-align: center;
+}
+
 .cart-container li {
   background: white;
   border: 1px solid #ddd;
@@ -739,6 +743,10 @@ main a:hover {
 .orders-container h1 {
   text-align: center;
   margin-bottom: 30px;
+}
+
+.para1{
+  text-align: center;
 }
 
 .orders-container p {

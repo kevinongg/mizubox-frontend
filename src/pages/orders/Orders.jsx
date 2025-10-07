@@ -13,7 +13,7 @@ const Orders = () => {
     return (
       <div>
         <h1>Orders</h1>
-        <p>You have not placed any orders yet!</p>
+        <p className="para1">You have not placed any orders yet!</p>
       </div>
     );
   }
