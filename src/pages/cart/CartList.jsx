@@ -261,7 +261,7 @@ const CartList = ({ cartItems, cartItemSauces, cartItemExtras }) => {
                       </button>
                     )}
 
-                    <div style={{ padding: "0 46px" }} className="button-qty">
+                    <div className="button-qty">
                       {quantity}
                     </div>
 

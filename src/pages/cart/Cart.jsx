@@ -29,7 +29,7 @@ const Cart = () => {
     return (
       <div>
         <h1>Your Cart</h1>
-        <p>Your cart is empty</p>
+        <p className="empty-cart"> Your cart is empty</p>
       </div>
     );
   }
@@ -39,11 +39,13 @@ const Cart = () => {
       <div className="cart-container">
         <h1>Your Cart</h1>
 
-        <CartList
+        {/* <CartList
           cartItems={cart?.items}
           cartItemSauces={cart?.sauces}
           cartItemExtras={cart?.extras}
-        />
+        /> */}
+           <div className="cart-summary-wrapper">
+          <div className="cart-summary">
         <div className="cart-total">Cart total: ${cart?.cart_total}</div>
         <div className="cart-actions">
           <button
@@ -61,6 +63,13 @@ const Cart = () => {
             {isCheckingOut ? "Placing order" : "Check Out"}
           </button>
         </div>
+      </div>
+      </div>
+        <CartList
+          cartItems={cart?.items}
+          cartItemSauces={cart?.sauces}
+          cartItemExtras={cart?.extras}
+        />
       </div>
     </>
   );

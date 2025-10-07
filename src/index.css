@@ -686,13 +686,15 @@ main a:hover {
 .clear-cart-btn:hover {
   background: #c82333 !important;
 }
+.cart-summary-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
 
-/* Cart Total */
 .cart-summary {
   background: white;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
   margin-top: 20px;
 }
 
