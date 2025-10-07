@@ -1,7 +1,10 @@
 import { NavLink } from "react-router";
+import { useCart } from "../../pages/cart/CartContext";
 import UserDropdown from "./UserDropdown";
 
 const Navbar = () => {
+  const { cartTotalCount } = useCart();
+  console.log(cartTotalCount);
   return (
     <header>
       <nav>
@@ -29,6 +32,9 @@ const Navbar = () => {
             <UserDropdown />
             <NavLink to="/cart" className="icon-link cart-link">
               <span className="icon-cart">🛒</span>
+              {cartTotalCount > 0 && (
+                <span className="cart-badge">{cartTotalCount}</span>
+              )}
             </NavLink>
           </div>
         </div>

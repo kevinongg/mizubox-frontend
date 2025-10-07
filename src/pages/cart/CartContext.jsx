@@ -17,12 +17,25 @@ export const CartProvider = ({ children }) => {
     error,
     query: refreshCart,
   } = useQuery("/cart", "cart");
+  console.log(cart);
 
   // UseEffect to load cart w/o relying on invalidateTags
   useEffect(() => {
     if (!token) return;
     refreshCart();
   }, [token]);
+
+  // Cart item count
+  const cartBoxCount = cart?.items.reduce((sum, box) => {
+    return sum + box.quantity;
+  }, 0);
+  const cartSauceCount = cart?.sauces.reduce((sum, sauce) => {
+    return sum + sauce.quantity;
+  }, 0);
+  const cartExtraCount = cart?.extras.reduce((sum, extra) => {
+    return sum + extra.quantity;
+  }, 0);
+  const cartTotalCount = cartBoxCount + cartSauceCount + cartExtraCount;
 
   // ------------- MUTATIONS -------------
 
@@ -146,6 +159,8 @@ export const CartProvider = ({ children }) => {
     // clear & checkout cart
     clearCart,
     checkout,
+    //cart count
+    cartTotalCount,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
