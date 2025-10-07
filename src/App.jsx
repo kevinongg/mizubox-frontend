@@ -21,7 +21,7 @@ import Account from "./pages/account/Account";
 import Cart from "./pages/cart/Cart";
 import BuildYourOwn from "./pages/Menu/buildyourown/BuildYourOwn";
 import OrderDetails from "./pages/orders/OrderDetails";
-import Orders from "./pages/Orders/Orders";
+import Orders from "./pages/orders/Orders";
 import OrderConfirmation from "./pages/orders/OrderConfirmation";
 
 export default function App() {
