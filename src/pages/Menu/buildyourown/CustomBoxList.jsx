@@ -1,8 +1,11 @@
+import { useState } from "react";
 import TrashIcon from "../../../components/icons/TrashIcon";
+import { showMessage } from "../../../utils/menuHelpers";
 import { useCustomBox } from "./CustomBoxContext";
 import "./CustomBoxList.css";
 
 const CustomBoxList = () => {
+  const [message, setMessage] = useState("");
   const {
     customBox,
     clearCustomBox,
@@ -21,13 +24,22 @@ const CustomBoxList = () => {
   const noExtras = !customBox?.extras || customBox.extras.length === 0;
   const emptyCustomBox = noNigiris && noSauces && noExtras;
 
-  if (!customBox || emptyCustomBox)
+  const handleAddCustomBoxToCart = async (customBoxId) => {
+    await addCustomBoxToCart({ customBoxId });
+    showMessage(setMessage, "Custom Box added to cart!");
+  };
+
+  if ((!customBox || emptyCustomBox) && !message)
     return (
-      <p className="empty-message">You have not started creating the box!</p>
+      <p className="empty-message">
+        <strong>You have not started creating the box!</strong>
+      </p>
     );
 
   return (
     <div className="custom-box-list">
+      {message && <div className="success-message">{message}</div>}
+
       <h3 className="box-title">Current Omakase Box</h3>
 
       {!emptyCustomBox && (
@@ -45,7 +57,7 @@ const CustomBoxList = () => {
             disabled={currentTotalNigiri < 14 || !customBox}
             className="add-btn"
             onClick={() =>
-              addCustomBoxToCart({ customBoxId: customBox.user_custom_box_id })
+              handleAddCustomBoxToCart(customBox.user_custom_box_id)
             }
           >
             Add Box To Cart

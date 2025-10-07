@@ -20,7 +20,7 @@ const NigiriPicker = () => {
                 })
               }
             >
-              {nigiri.name}
+              {nigiri.name} (${nigiri.price})
             </button>
           </div>
         );

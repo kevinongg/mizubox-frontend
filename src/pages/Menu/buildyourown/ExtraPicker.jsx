@@ -15,7 +15,7 @@ const ExtraPicker = () => {
               type="button"
               onClick={() => addExtraToCustomBox({ extraId: extra.id })}
             >
-              {extra.name}
+              {extra.name} (${extra.price})
             </button>
           </div>
         );

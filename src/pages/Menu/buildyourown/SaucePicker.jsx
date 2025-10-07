@@ -15,7 +15,7 @@ const SaucePicker = () => {
               type="button"
               onClick={() => addSauceToCustomBox({ sauceId: sauce.id })}
             >
-              {sauce.name}
+              {sauce.name} (${sauce.price})
             </button>
           </div>
         );

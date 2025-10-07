@@ -5,8 +5,6 @@ import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router";
 import { checkAuth, showMessage } from "../../utils/menuHelpers";
 
-
-
 const OmakaseBox = () => {
   const {
     data: preMadeBoxes,
@@ -21,7 +19,7 @@ const OmakaseBox = () => {
 
   const handleAddToCart = async (boxId) => {
     try {
-       if (!checkAuth(token, navigate)) return;
+      if (!checkAuth(token, navigate)) return;
       setIsAdding(true);
       await addCartItemToCart({ boxType: "pre-made", boxId });
       showMessage(setMessage, "Added to cart!");
