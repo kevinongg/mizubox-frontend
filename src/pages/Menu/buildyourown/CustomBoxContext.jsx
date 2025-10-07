@@ -1,11 +1,12 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import useQuery from "../../../api/useQuery";
 import { useApi } from "../../../api/apiContext";
-import useMutation from "../../../api/useMutation";
+import { useAuth } from "../../../auth/AuthContext";
 
 const CustomBoxContext = createContext();
 
 export const CustomBoxProvider = ({ children }) => {
+  const { token } = useAuth();
   const { request, invalidateTags } = useApi();
 
   // Query an "active" custom box (most recently created)
@@ -21,6 +22,14 @@ export const CustomBoxProvider = ({ children }) => {
   const { data: sauces } = useQuery("/sauces", "sauces");
   const { data: extras } = useQuery("/extras", "extras");
 
+  //   if (customBoxLoading) return <p>Loading your box...</p>;
+  // if (customBoxError) return <p>Failed to load your custom box.</p>;
+
+  useEffect(() => {
+    if (!token) return;
+    customBoxRefetch();
+  }, [token]);
+
   /////***** Mutations *****/////
   // Nigiri mutations
   const addNigiriToCustomBox = async ({ nigiriId }) => {
@@ -32,6 +41,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
+    await customBoxRefetch();
   };
   const updateNigiriQuantity = async ({ nigiriId, quantity }) => {
     await request(
@@ -42,6 +52,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
+    await customBoxRefetch();
   };
   const deleteNigiriFromCustomBox = async ({ nigiriId }) => {
     await request(
@@ -51,6 +62,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
+    await customBoxRefetch();
   };
 
   // Sauce mutations
@@ -60,6 +72,7 @@ export const CustomBoxProvider = ({ children }) => {
       body: JSON.stringify({ sauceId }),
     });
     invalidateTags(["customBox"]);
+    await customBoxRefetch();
   };
   const updateSauceQuantity = async ({ sauceId, quantity }) => {
     await request(
@@ -70,6 +83,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
+    await customBoxRefetch();
   };
   const deleteSauceFromCustomBox = async ({ sauceId }) => {
     await request(
@@ -79,6 +93,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
+    await customBoxRefetch();
   };
 
   // Extra mutations
@@ -88,6 +103,7 @@ export const CustomBoxProvider = ({ children }) => {
       body: JSON.stringify({ extraId }),
     });
     invalidateTags(["customBox"]);
+    await customBoxRefetch();
   };
   const updateExtraQuantity = async ({ extraId, quantity }) => {
     await request(
@@ -98,6 +114,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
+    await customBoxRefetch();
   };
   const deleteExtraFromCustomBox = async ({ extraId }) => {
     await request(
@@ -128,14 +145,17 @@ export const CustomBoxProvider = ({ children }) => {
     });
     // refetch BYO ui using custombox so it re-renders
     invalidateTags(["customBox"]);
+    await customBoxRefetch();
   };
 
   // Clear custom box
-  const { mutate: clearCustomBox } = useMutation(
-    "DELETE",
-    "/user-custom-boxes/active",
-    ["customBox"]
-  );
+  const clearCustomBox = async () => {
+    await request("/user-custom-boxes/active", {
+      method: "DELETE",
+    });
+    invalidateTags(["customBox"]);
+    await customBoxRefetch();
+  };
 
   const value = {
     // custom box query
