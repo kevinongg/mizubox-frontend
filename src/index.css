@@ -721,7 +721,7 @@ main a:hover {
   text-decoration: none;
 }
 
-.login-link{
+.login-link {
   display: block;
   margin-top: 15px;
   text-align: center;
@@ -1110,7 +1110,7 @@ main a:hover {
 }
 
 /* Add Box to Cart Button */
-.build-your-own > button {
+/* .build-your-own > button {
   width: 100%;
   max-width: 500px;
   display: block;
@@ -1133,7 +1133,7 @@ main a:hover {
   background: #ccc;
   cursor: not-allowed;
   opacity: 0.6;
-}
+} */
 
 /* Not in stock message */
 .picker-container > p {

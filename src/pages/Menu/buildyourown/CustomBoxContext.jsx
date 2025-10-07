@@ -25,6 +25,7 @@ export const CustomBoxProvider = ({ children }) => {
   //   if (customBoxLoading) return <p>Loading your box...</p>;
   // if (customBoxError) return <p>Failed to load your custom box.</p>;
 
+  // UseEffect to load custom box on user registering
   useEffect(() => {
     if (!token) return;
     customBoxRefetch();

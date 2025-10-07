@@ -43,6 +43,7 @@ const CustomBoxList = () => {
           <button
             type="button"
             disabled={currentTotalNigiri < 14 || !customBox}
+            className="add-btn"
             onClick={() =>
               addCustomBoxToCart({ customBoxId: customBox.user_custom_box_id })
             }

@@ -1,14 +1,16 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useApi } from "../../api/apiContext";
 import useQuery from "../../api/useQuery";
-import useMutation from "../../api/useMutation";
+// import useMutation from "../../api/useMutation";
+import { useAuth } from "../../auth/AuthContext";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const { request, invalidateTags } = useApi();
+  const { token } = useAuth();
 
-  // 1. load cart with usequery
+  // load cart with usequery
   const {
     data: cart,
     loading,
@@ -16,42 +18,105 @@ export const CartProvider = ({ children }) => {
     query: refreshCart,
   } = useQuery("/cart", "cart");
 
-  // provideTag("cart", refreshCart);
+  // UseEffect to load cart w/o relying on invalidateTags
+  useEffect(() => {
+    if (!token) return;
+    refreshCart();
+  }, [token]);
 
-  // ------------- Box items -------------
-  // 2. add to cart -> usemutation invalidatetag
-  const {
-    mutate: addCartItemToCart,
-    loading: addingCartItem,
-    error: addingCartItemError,
-  } = useMutation("POST", "/cart/items", ["cart"]);
+  // ------------- MUTATIONS -------------
 
-  // 3 create function to update item updateCartItem
+  // ---- Box Mutations ----
+  const addCartItemToCart = async ({ boxType, boxId }) => {
+    await request("/cart/items", {
+      method: "POST",
+      body: JSON.stringify({ boxType, boxId }),
+    });
+    invalidateTags(["cart"]);
+    await refreshCart();
+  };
+
   const updateCartItem = async ({ cartItemId, quantity }) => {
     await request(`/cart/items/${cartItemId}`, {
       method: "PUT",
       body: JSON.stringify({ quantity }),
     });
     invalidateTags(["cart"]);
+    await refreshCart();
   };
 
-  // 4. create function to removeFromCart
   const removeCartItemFromCart = async (cartItemId) => {
     await request(`/cart/items/${cartItemId}`, {
       method: "DELETE",
     });
     invalidateTags(["cart"]);
+    await refreshCart();
   };
 
-  //5. clear cart
+  // ---- Sauce Cart Mutations ----
+  const addCartItemSauceToCart = async ({ sauceId }) => {
+    await request("/cart/sauces", {
+      method: "POST",
+      body: JSON.stringify({ sauceId }),
+    });
+    invalidateTags(["cart"]);
+    await refreshCart();
+  };
+
+  const updateCartItemSauce = async ({ cartItemSauceId, quantity }) => {
+    await request(`/cart/sauces/${cartItemSauceId}`, {
+      method: "PUT",
+      body: JSON.stringify({ quantity }),
+    });
+    invalidateTags(["cart"]);
+    await refreshCart();
+  };
+
+  const removeCartItemSauceFromCart = async (cartItemSauceId) => {
+    await request(`/cart/sauces/${cartItemSauceId}`, {
+      method: "DELETE",
+    });
+    invalidateTags(["cart"]);
+    await refreshCart();
+  };
+
+  // ---- Extra Cart Mutations ----
+  const addCartItemExtraToCart = async ({ extraId }) => {
+    await request("/cart/extras", {
+      method: "POST",
+      body: JSON.stringify({ extraId }),
+    });
+    invalidateTags(["cart"]);
+    await refreshCart();
+  };
+
+  const updateCartItemExtra = async ({ cartItemExtraId, quantity }) => {
+    await request(`/cart/extras/${cartItemExtraId}`, {
+      method: "PUT",
+      body: JSON.stringify({ quantity }),
+    });
+    invalidateTags(["cart"]);
+    await refreshCart();
+  };
+
+  const removeCartItemExtraFromCart = async (cartItemExtraId) => {
+    await request(`/cart/extras/${cartItemExtraId}`, {
+      method: "DELETE",
+    });
+    invalidateTags(["cart"]);
+    await refreshCart();
+  };
+
+  // ---- Clear & Checkout Cart Mutations ----
+
   const clearCart = async () => {
     await request("/cart", {
       method: "DELETE",
     });
     invalidateTags(["cart"]);
+    await refreshCart();
   };
 
-  //6. checkout
   const checkout = async () => {
     const order = await request("/orders/checkout", {
       method: "POST",
@@ -60,79 +125,26 @@ export const CartProvider = ({ children }) => {
     // invalidateTags(["cart"]);
   };
 
-  // ------------- Sauces -------------
-
-  const {
-    mutate: addCartItemSauceToCart,
-    loading: addingCartItemSauce,
-    error: addingCartItemSauceError,
-  } = useMutation("POST", "/cart/sauces", ["cart"]);
-
-  const updateCartItemSauce = async ({ cartItemSauceId, quantity }) => {
-    await request(`/cart/sauces/${cartItemSauceId}`, {
-      method: "PUT",
-      body: JSON.stringify({ quantity }),
-    });
-    invalidateTags(["cart"]);
-  };
-
-  const removeCartItemSauceFromCart = async (cartItemSauceId) => {
-    await request(`/cart/sauces/${cartItemSauceId}`, {
-      method: "DELETE",
-    });
-    invalidateTags(["cart"]);
-  };
-
-  // ------------- Extras -------------
-
-  const {
-    mutate: addCartItemExtraToCart,
-    loading: addingCartItemExtra,
-    error: addingCartItemExtraError,
-  } = useMutation("POST", "/cart/extras", ["cart"]);
-
-  const updateCartItemExtra = async ({ cartItemExtraId, quantity }) => {
-    await request(`/cart/extras/${cartItemExtraId}`, {
-      method: "PUT",
-      body: JSON.stringify({ quantity }),
-    });
-    invalidateTags(["cart"]);
-  };
-
-  const removeCartItemExtraFromCart = async (cartItemExtraId) => {
-    await request(`/cart/extras/${cartItemExtraId}`, {
-      method: "DELETE",
-    });
-    invalidateTags(["cart"]);
-  };
-
   const value = {
-    // cart state and mutation to clear cart
+    // cart useQuery
     cart,
     loading,
     error,
-    clearCart,
     refreshCart,
     // boxes mutation and loading/error check state
     addCartItemToCart,
     updateCartItem,
     removeCartItemFromCart,
-    addingCartItem,
-    addingCartItemError,
     // sauces mutation and loading/error check state
     addCartItemSauceToCart,
     updateCartItemSauce,
     removeCartItemSauceFromCart,
-    addingCartItemSauce,
-    addingCartItemSauceError,
     // extras mutation and loading/error check state
     addCartItemExtraToCart,
     updateCartItemExtra,
     removeCartItemExtraFromCart,
-    addingCartItemExtra,
-    addingCartItemExtraError,
-
-    // checkout
+    // clear & checkout cart
+    clearCart,
     checkout,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

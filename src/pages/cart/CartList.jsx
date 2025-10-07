@@ -1,22 +1,16 @@
 import TrashIcon from "../../components/icons/TrashIcon";
+import { useCart } from "./CartContext";
 
-const CartList = ({
-  cartItems,
-  cartItemSauces,
-  cartItemExtras,
-  // cart item handlers
-  increaseCartItemQuantity,
-  decreaseCartItemQuantity,
-  removeCartItem,
-  // sauce item handlers
-  increaseCartItemSauceQuantity,
-  decreaseCartItemSauceQuantity,
-  removeCartItemSauce,
-  // extra item handlers
-  increaseCartItemExtraQuantity,
-  decreaseCartItemExtraQuantity,
-  removeCartItemExtra,
-}) => {
+const CartList = ({ cartItems, cartItemSauces, cartItemExtras }) => {
+  const {
+    updateCartItem,
+    removeCartItemFromCart,
+    updateCartItemSauce,
+    removeCartItemSauceFromCart,
+    updateCartItemExtra,
+    removeCartItemExtraFromCart,
+  } = useCart();
+  console.log(cartItems);
   return (
     <div>
       {cartItems.length > 0 && (
@@ -118,7 +112,10 @@ const CartList = ({
                       <button
                         type="button"
                         onClick={() =>
-                          decreaseCartItemQuantity(cartItemId, quantity)
+                          updateCartItem({
+                            cartItemId: cartItemId,
+                            quantity: Math.max(1, quantity - 1),
+                          })
                         }
                       >
                         -
@@ -126,7 +123,7 @@ const CartList = ({
                     ) : (
                       <button
                         type="button"
-                        onClick={() => removeCartItem(cartItemId)}
+                        onClick={() => removeCartItemFromCart(cartItemId)}
                       >
                         <TrashIcon size={20} color="black" />
                       </button>
@@ -137,7 +134,10 @@ const CartList = ({
                     <button
                       type="button"
                       onClick={() =>
-                        increaseCartItemQuantity(cartItemId, quantity)
+                        updateCartItem({
+                          cartItemId: cartItemId,
+                          quantity: quantity + 1,
+                        })
                       }
                     >
                       +
@@ -145,7 +145,7 @@ const CartList = ({
 
                     <button
                       type="button"
-                      onClick={() => removeCartItem(cartItemId)}
+                      onClick={() => removeCartItemFromCart(cartItemId)}
                     >
                       Delete
                     </button>
@@ -179,10 +179,10 @@ const CartList = ({
                       <button
                         type="button"
                         onClick={() =>
-                          decreaseCartItemSauceQuantity(
-                            cartItemSauceId,
-                            quantity
-                          )
+                          updateCartItemSauce({
+                            cartItemSauceId: cartItemSauceId,
+                            quantity: Math.max(1, quantity - 1),
+                          })
                         }
                       >
                         -
@@ -190,7 +190,9 @@ const CartList = ({
                     ) : (
                       <button
                         type="button"
-                        onClick={() => removeCartItemSauce(cartItemSauceId)}
+                        onClick={() =>
+                          removeCartItemSauceFromCart(cartItemSauceId)
+                        }
                       >
                         <TrashIcon size={20} color="black" />
                       </button>
@@ -201,7 +203,10 @@ const CartList = ({
                     <button
                       type="button"
                       onClick={() =>
-                        increaseCartItemSauceQuantity(cartItemSauceId, quantity)
+                        updateCartItemSauce({
+                          cartItemSauceId: cartItemSauceId,
+                          quantity: quantity + 1,
+                        })
                       }
                     >
                       +
@@ -236,10 +241,10 @@ const CartList = ({
                       <button
                         type="button"
                         onClick={() =>
-                          decreaseCartItemExtraQuantity(
-                            cartItemExtraId,
-                            quantity
-                          )
+                          updateCartItemExtra({
+                            cartItemExtraId: cartItemExtraId,
+                            quantity: Math.max(1, quantity - 1),
+                          })
                         }
                         className="button-qty"
                       >
@@ -248,7 +253,9 @@ const CartList = ({
                     ) : (
                       <button
                         type="button"
-                        onClick={() => removeCartItemExtra(cartItemExtraId)}
+                        onClick={() =>
+                          removeCartItemExtraFromCart(cartItemExtraId)
+                        }
                       >
                         <TrashIcon size={20} color="black" />
                       </button>
@@ -261,7 +268,10 @@ const CartList = ({
                     <button
                       type="button"
                       onClick={() =>
-                        increaseCartItemExtraQuantity(cartItemExtraId, quantity)
+                        updateCartItemExtra({
+                          cartItemExtraId: cartItemExtraId,
+                          quantity: quantity + 1,
+                        })
                       }
                       className="button-qty"
                     >
