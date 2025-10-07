@@ -10,7 +10,7 @@ const CartList = ({ cartItems, cartItemSauces, cartItemExtras }) => {
     updateCartItemExtra,
     removeCartItemExtraFromCart,
   } = useCart();
-  console.log(cartItems);
+
   return (
     <div>
       {cartItems.length > 0 && (

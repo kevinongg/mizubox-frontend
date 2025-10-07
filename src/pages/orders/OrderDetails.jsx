@@ -5,7 +5,6 @@ import formatDate from "../../utils/formatDate";
 const OrderDetails = () => {
   const { publicOrderId } = useParams();
   const { data: order, error } = useQuery(`/orders/${publicOrderId}`, "order");
-  console.log(order);
 
   if (error) return <p>Failed to load order details</p>;
 

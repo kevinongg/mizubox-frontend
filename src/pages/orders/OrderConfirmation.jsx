@@ -12,7 +12,6 @@ const OrderConfirmation = () => {
     // loading,
     error,
   } = useQuery(`/orders/${publicOrderId}`, "");
-  console.log(order);
 
   if (error)
     return (
