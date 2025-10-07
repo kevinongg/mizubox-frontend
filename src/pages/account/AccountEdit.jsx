@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useAccount } from "./AccountContext";
 
-
 const AccountEdit = ({ label, field, value, type }) => {
-  const { updateUser, updateError, toastMessage } = useAccount();
+  const { updateUser, updateError, toastMessage, userRefetch } = useAccount();
   const [editing, setEditing] = useState(false);
 
   const onSave = async (event) => {
@@ -13,6 +12,7 @@ const AccountEdit = ({ label, field, value, type }) => {
 
     try {
       await updateUser({ [field]: newValue });
+      await userRefetch();
       toastMessage(`${label} updated successfully!`, "success");
       setEditing(false);
     } catch (error) {
@@ -21,15 +21,20 @@ const AccountEdit = ({ label, field, value, type }) => {
   };
 
   return (
-
     <div>
       <strong>{label}</strong>
       <>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>{value}</div>
-        <button onClick={() => setEditing(true)} className="icon-button">
-         Edit
-        </button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>{value}</div>
+          <button onClick={() => setEditing(true)} className="icon-button">
+            Edit
+          </button>
         </div>
       </>
 
@@ -51,7 +56,6 @@ const AccountEdit = ({ label, field, value, type }) => {
         </>
       )}
     </div>
-
   );
 };
 

@@ -3,8 +3,12 @@ import { useAccount } from "./AccountContext";
 // import RedPencil from "../../components/icons/RedPencil";
 
 const PasswordEdit = () => {
-  const { updateUserPassword, updateUserPasswordError, toastMessage } =
-    useAccount();
+  const {
+    updateUserPassword,
+    updateUserPasswordError,
+    toastMessage,
+    userRefetch,
+  } = useAccount();
   const [editing, setEditing] = useState(false);
 
   const onSave = async (event) => {
@@ -18,6 +22,7 @@ const PasswordEdit = () => {
         currentPassword,
         newPassword,
       });
+      await userRefetch();
       toastMessage("Password updated successfully!", "success");
       setEditing(false);
     } catch (error) {
@@ -29,14 +34,17 @@ const PasswordEdit = () => {
     <div>
       <strong>Password</strong>
       <>
-      
-
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-
-        <div>*********</div>
-        <button onClick={() => setEditing(true)} className="icon-button">
-         Edit
-        </button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>*********</div>
+          <button onClick={() => setEditing(true)} className="icon-button">
+            Edit
+          </button>
         </div>
       </>
 

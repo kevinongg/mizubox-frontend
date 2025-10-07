@@ -1,16 +1,19 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "../../auth/AuthContext";
 import useQuery from "../../api/useQuery";
 import useMutation from "../../api/useMutation";
 
 const AccountContext = createContext();
 
 export const AccountProvider = ({ children }) => {
+  const { token } = useAuth();
   const [toast, setToast] = useState({ message: "", result: "" });
 
   const {
     data: user,
     loading: userLoading,
     error: userError,
+    query: userRefetch,
   } = useQuery("/users/me", "user");
 
   const {
@@ -30,11 +33,17 @@ export const AccountProvider = ({ children }) => {
     setTimeout(() => setToast({ message: "", result: "" }), 3000);
   };
 
+  useEffect(() => {
+    if (!token) return;
+    userRefetch();
+  }, [token]);
+
   const value = {
     // query user
     user,
     userLoading,
     userError,
+    userRefetch,
     // update user details mutation
     updateUser,
     updateLoading,
