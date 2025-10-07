@@ -241,22 +241,6 @@ main a:hover {
   }
 }
 
-/*---------------------------- Home Page Styles ------------------------------------------- */
-.home-container {
-  text-align: center;
-  padding: 40px;
-}
-
-.home-container h1 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.home-container p {
-  color: #666;
-  margin: 10px 0;
-}
-
 /*----------------------- Menu Pages (OmakaseBox, Sauce, Extra) Common Styles -------------------*/
 .menu-container {
   max-width: 1000px;
@@ -504,6 +488,21 @@ main a:hover {
   font-weight: bold;
   font-size: 16px;
 }
+/*---------------------------- Home Page Styles ------------------------------------------- */
+.home-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.home-container h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.home-container p {
+  color: #666;
+  margin: 10px 0;
+}
 
 /*--------------------------- Home Page Wrapper -----------------------*/
 .home-wrapper {
@@ -717,6 +716,14 @@ main a:hover {
 .register-link {
   display: block;
   margin-top: 20px;
+  text-align: center;
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.login-link{
+  display: block;
+  margin-top: 15px;
   text-align: center;
   color: #0066cc;
   text-decoration: none;

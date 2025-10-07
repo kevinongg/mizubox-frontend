@@ -42,7 +42,7 @@ export default function Register() {
         {error && <output>{error}</output>}
         <button>Register</button>
       </form>
-      <Link to="/login">Already have an account? Log in here.</Link>
+      <Link to="/login" className="login-link">Already have an account? Log in here.</Link>
     </>
   );
 }
