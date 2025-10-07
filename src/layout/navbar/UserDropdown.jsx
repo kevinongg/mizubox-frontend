@@ -8,14 +8,8 @@ const UserDropdown = () => {
   const [userDropdown, setUserDropdown] = useState(false);
   const userDropdownRef = useRef(null);
 
-  // const handleLogout = () => {
-  //   logout();
-  //   navigate("/login");
-  // };
-
   useEffect(() => {
     const onClickOutside = (event) => {
-      console.log(userDropdownRef.current);
       if (userDropdownRef && !userDropdownRef.current.contains(event?.target))
         setUserDropdown(false);
     };
