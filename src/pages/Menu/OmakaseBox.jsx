@@ -6,27 +6,27 @@ import { useNavigate } from "react-router";
 import { checkAuth, showMessage } from "../../utils/menuHelpers";
 
 const OmakaseBox = () => {
+  const { addCartItemToCart } = useCart();
+  const { token } = useAuth();
+  const navigate = useNavigate();
+  const [message, setMessage] = useState("");
+  const [isAddingBoxId, setIsAddingBoxId] = useState(null);
+
   const {
     data: preMadeBoxes,
     loading,
     error,
   } = useQuery("/pre-made-boxes", "pre-made-boxes");
-  const { addCartItemToCart } = useCart();
-  const { token } = useAuth();
-  const navigate = useNavigate();
-  const [message, setMessage] = useState("");
-  const [isAdding, setIsAdding] = useState(false);
 
   const handleAddToCart = async (boxId) => {
     try {
       if (!checkAuth(token, navigate)) return;
-      setIsAdding(true);
+      setIsAddingBoxId(boxId);
       await addCartItemToCart({ boxType: "pre-made", boxId });
       showMessage(setMessage, "Added to cart!");
+      setTimeout(() => setIsAddingBoxId(null), 1500);
     } catch (error) {
       console.error("error adding to cart", error);
-    } finally {
-      setIsAdding(false);
     }
   };
 
@@ -47,7 +47,7 @@ const OmakaseBox = () => {
             <p>{box.description}</p>
             <span className="price">${box.price}</span>
             <button onClick={() => handleAddToCart(box.id)}>
-              {isAdding ? "Adding to cart!" : "Add To Cart"}
+              {isAddingBoxId === box.id ? "Added to cart!" : "Add To Cart"}
             </button>
           </div>
         ))}

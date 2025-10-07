@@ -642,7 +642,7 @@ main a:hover {
   padding: 0;
 }
 
-.empty-cart{
+.empty-cart {
   text-align: center;
 }
 
@@ -744,7 +744,7 @@ main a:hover {
   margin-bottom: 30px;
 }
 
-.para1{
+.para1 {
   text-align: center;
 }
 
@@ -1397,7 +1397,7 @@ nav .user-dropdown button:hover {
 
 .cart-badge {
   position: absolute;
-  top: -6px;
+  top: -5px;
   right: -10px;
   min-width: 18px;
   height: 18px;

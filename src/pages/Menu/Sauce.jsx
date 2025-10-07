@@ -3,7 +3,7 @@ import useQuery from "../../api/useQuery";
 import { useCart } from "../cart/CartContext";
 import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router";
-import { checkAuth, showMessage} from "../../utils/menuHelpers";
+import { checkAuth, showMessage } from "../../utils/menuHelpers";
 
 const Sauce = () => {
   const { data: sauces, loading, error } = useQuery("/sauces", "sauces");
@@ -19,10 +19,9 @@ const Sauce = () => {
       setAddingSauceId(sauceId);
       await addCartItemSauceToCart({ sauceId });
       showMessage(setMessage, "Sauce added to cart!");
+      setTimeout(() => setAddingSauceId(null), 1500);
     } catch (error) {
       console.error("error adding sauce to cart", error);
-    } finally {
-      setAddingSauceId(null);
     }
   };
 
@@ -43,11 +42,8 @@ const Sauce = () => {
             <h2>{sauce.name}</h2>
             <p>{sauce.description}</p>
             <span className="price">${sauce.price}</span>
-            <button
-              onClick={() => handleAddSauce(sauce.id)}
-              disabled={addingSauceId === sauce.id}
-            >
-              {addingSauceId === sauce.id ? "Adding..." : "Add Sauce"}
+            <button onClick={() => handleAddSauce(sauce.id)}>
+              {addingSauceId === sauce.id ? "Added to cart!" : "Add Sauce"}
             </button>
           </div>
         ))}

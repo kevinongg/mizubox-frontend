@@ -19,10 +19,9 @@ const Extra = () => {
       setAddingExtraId(extraId);
       await addCartItemExtraToCart({ extraId });
       showMessage(setMessage, "Extra added to cart!");
+      setTimeout(() => setAddingExtraId(null), 1500);
     } catch (error) {
       console.error("error adding extra to cart", error);
-    } finally {
-      setAddingExtraId(null);
     }
   };
 
@@ -43,10 +42,7 @@ const Extra = () => {
             <h2>{extra.name}</h2>
             <p>{extra.description}</p>
             <span className="price">${extra.price}</span>
-            <button
-              onClick={() => handleAddExtra(extra.id)}
-              disabled={addingExtraId === extra.id}
-            >
+            <button onClick={() => handleAddExtra(extra.id)}>
               {addingExtraId === extra.id ? "Adding..." : "Add Extra"}
             </button>
           </div>

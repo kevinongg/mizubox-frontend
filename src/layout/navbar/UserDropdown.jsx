@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../../auth/AuthContext";
 
 const UserDropdown = () => {
   const { token, logout } = useAuth();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [userDropdown, setUserDropdown] = useState(false);
   const userDropdownRef = useRef(null);
 
@@ -20,6 +20,7 @@ const UserDropdown = () => {
   const onLogout = () => {
     logout();
     setUserDropdown(false);
+    navigate("/login");
   };
 
   return (

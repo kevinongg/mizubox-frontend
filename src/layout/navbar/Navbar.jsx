@@ -4,7 +4,7 @@ import UserDropdown from "./UserDropdown";
 
 const Navbar = () => {
   const { cartTotalCount } = useCart();
-  console.log(cartTotalCount);
+
   return (
     <header>
       <nav>

@@ -17,7 +17,6 @@ export const CartProvider = ({ children }) => {
     error,
     query: refreshCart,
   } = useQuery("/cart", "cart");
-  console.log(cart);
 
   // UseEffect to load cart w/o relying on invalidateTags
   useEffect(() => {
