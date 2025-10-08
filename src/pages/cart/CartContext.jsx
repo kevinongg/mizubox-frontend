@@ -13,8 +13,8 @@ export const CartProvider = ({ children }) => {
   // load cart with usequery
   const {
     data: cart,
-    loading,
-    error,
+    loading: cartLoading,
+    error: cartError,
     query: refreshCart,
   } = useQuery("/cart", "cart");
 

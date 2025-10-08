@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import CartList from "./CartList";
 
 const Cart = () => {
-  const { cart, clearCart, checkout } = useCart();
+  const { cart, cartLoading, clearCart, checkout } = useCart();
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const navigate = useNavigate();
@@ -34,6 +34,8 @@ const Cart = () => {
     );
   }
 
+  if (cartLoading) return <p>Your cart is loading...</p>;
+
   return (
     <>
       <div className="cart-container">
@@ -44,27 +46,27 @@ const Cart = () => {
           cartItemSauces={cart?.sauces}
           cartItemExtras={cart?.extras}
         /> */}
-           <div className="cart-summary-wrapper">
+        <div className="cart-summary-wrapper">
           <div className="cart-summary">
-        <div className="cart-total">Cart total: ${cart?.cart_total}</div>
-        <div className="cart-actions">
-          <button
-            type="button"
-            className="clear-cart-btn"
-            onClick={() => clearCart()}
-          >
-            Clear Cart
-          </button>
-          <button
-            type="button"
-            onClick={handleCheckout}
-            disabled={isCheckingOut}
-          >
-            {isCheckingOut ? "Placing order" : "Check Out"}
-          </button>
+            <div className="cart-total">Cart total: ${cart?.cart_total}</div>
+            <div className="cart-actions">
+              <button
+                type="button"
+                className="clear-cart-btn"
+                onClick={() => clearCart()}
+              >
+                Clear Cart
+              </button>
+              <button
+                type="button"
+                onClick={handleCheckout}
+                disabled={isCheckingOut}
+              >
+                {isCheckingOut ? "Placing order" : "Check Out"}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
         <CartList
           cartItems={cart?.items}
           cartItemSauces={cart?.sauces}
