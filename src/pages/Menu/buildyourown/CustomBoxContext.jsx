@@ -2,12 +2,14 @@ import { createContext, useContext, useEffect } from "react";
 import useQuery from "../../../api/useQuery";
 import { useApi } from "../../../api/apiContext";
 import { useAuth } from "../../../auth/AuthContext";
+import { useCart } from "../../cart/CartContext";
 
 const CustomBoxContext = createContext();
 
 export const CustomBoxProvider = ({ children }) => {
   const { token } = useAuth();
   const { request, invalidateTags } = useApi();
+  const { refreshCart } = useCart();
 
   // Query an "active" custom box (most recently created)
   const {
@@ -139,14 +141,14 @@ export const CustomBoxProvider = ({ children }) => {
       body: JSON.stringify({ boxType: "custom", boxId: customBoxId }),
     });
     // refetch BYO ui using cart
-    invalidateTags(["cart"]);
+    await refreshCart();
     // create a new BYO empty box
     await request("/user-custom-boxes/active/new", {
       method: "POST",
     });
     // refetch BYO ui using custombox so it re-renders
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
 
   // Clear custom box
@@ -155,7 +157,7 @@ export const CustomBoxProvider = ({ children }) => {
       method: "DELETE",
     });
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
 
   const value = {
