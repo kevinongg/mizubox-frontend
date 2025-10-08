@@ -53,7 +53,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
   const deleteNigiriFromCustomBox = async ({ nigiriId }) => {
     await request(
@@ -63,7 +63,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
 
   // Sauce mutations
@@ -73,7 +73,7 @@ export const CustomBoxProvider = ({ children }) => {
       body: JSON.stringify({ sauceId }),
     });
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
   const updateSauceQuantity = async ({ sauceId, quantity }) => {
     await request(
@@ -84,7 +84,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
   const deleteSauceFromCustomBox = async ({ sauceId }) => {
     await request(
@@ -94,7 +94,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
 
   // Extra mutations
@@ -104,7 +104,7 @@ export const CustomBoxProvider = ({ children }) => {
       body: JSON.stringify({ extraId }),
     });
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
   const updateExtraQuantity = async ({ extraId, quantity }) => {
     await request(
@@ -115,7 +115,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
   const deleteExtraFromCustomBox = async ({ extraId }) => {
     await request(
