@@ -142,6 +142,7 @@ export const CustomBoxProvider = ({ children }) => {
     });
     // refetch BYO ui using cart
     await refreshCart();
+    invalidateTags(["cart"]);
     // create a new BYO empty box
     await request("/user-custom-boxes/active/new", {
       method: "POST",
