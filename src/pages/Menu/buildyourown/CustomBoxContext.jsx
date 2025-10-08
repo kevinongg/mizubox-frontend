@@ -42,7 +42,7 @@ export const CustomBoxProvider = ({ children }) => {
       }
     );
     invalidateTags(["customBox"]);
-    await customBoxRefetch();
+    // await customBoxRefetch();
   };
   const updateNigiriQuantity = async ({ nigiriId, quantity }) => {
     await request(
