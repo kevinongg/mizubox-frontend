@@ -137,12 +137,7 @@ export const CustomBoxProvider = ({ children }) => {
   // Add custom box to cart
   const addCustomBoxToCart = async ({ customBoxId }) => {
     await addCartItemToCart({ boxType: "custom", boxId: customBoxId });
-    // await request("/cart/items", {
-    //   method: "POST",
-    //   body: JSON.stringify({ boxType: "custom", boxId: customBoxId }),
-    // });
     // refetch BYO ui using cart
-    invalidateTags(["cart"]);
     await refreshCart();
     // create a new BYO empty box
     await request("/user-custom-boxes/active/new", {
